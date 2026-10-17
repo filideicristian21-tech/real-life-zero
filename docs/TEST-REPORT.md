@@ -175,7 +175,7 @@ Note:
 | 20 | Save corrotto + 30 FPS su telefono medio | Save: ESEGUITO (T10). FPS: **PIANIFICATO, NON MISURATO** | Nessun telefono disponibile nel box. Gli screenshot sono fatti con un renderer software (llvmpipe), che non dice niente sugli FPS reali |
 
 ## 3. Altre verifiche ESEGUITE
-- Export Web (single-thread, senza SharedArrayBuffer): caricato in Chromium headless (WebGL2 via SwiftShader). Console: «Godot Engine v4.7.2.stable.official», «OpenGL ES 3.0 (WebGL 2.0) - Compatibility», «single-threaded», città costruita (3930 istanze MultiMesh); il menu principale compare. Vedi la sezione URL nel README.
+- Export Web (single-thread, senza SharedArrayBuffer): caricato in Chromium headless (WebGL2 via SwiftShader). Console: «Godot Engine v4.7.2.stable.official», «OpenGL ES 3.0 (WebGL 2.0) - Compatibility», «single-threaded», città costruita (3930 istanze MultiMesh); il menu principale compare. Verificato anche l'URL pubblico https://filideicristian21-tech.github.io/real-life-zero/ (HTTP 200, wasm 39,5 MB `application/wasm`): con un clic su «Nuova partita» parte la partita e con W il personaggio cammina fino al prompt «Letto · Dormi». Screenshot: `reallife-shots/16_web_pages_menu.png`, `17_web_pages_gioco.png`.
 - APK Android di debug: export riuscito, `aapt dump permissions` non mostra **nessun** `uses-permission`. Firma debug verificata con `apksigner verify` (CN=Android Debug). arm64-v8a, minSdk 24, package `it.reallifezero.buildtest`.
 - Screenshot reali del gioco: `/workspace/reallife-shots/` (16 immagini, renderer opengl3 su Xvfb).
 
