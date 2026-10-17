@@ -26,6 +26,7 @@ func _ready() -> void:
 		["08_fermata_bus", Vector3(-21.0, 0.12, -1.0), PI + 0.2, "07:20", -0.2],
 		["09_via_roma_tramonto", Vector3(-60.0, 0.12, 5.6), -PI / 2.0, "19:30", -0.15],
 		["10_piazza_notte", Vector3(10.0, 0.12, -10.0), PI, "22:30", -0.2],
+		["10b_parcheggio", Vector3(-16.0, 0.12, -41.0), PI - 0.5, "16:00", -0.4],
 	]
 	Game.skip_tutorial()
 	for s in shots:
@@ -40,6 +41,7 @@ func _ready() -> void:
 		await RenderingServer.frame_post_draw
 		var img := get_viewport().get_texture().get_image()
 		img.save_png("%s/%s.png" % [out_dir, s[0]])
+		print("[stats] ", s[0], " draw_calls=", Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME), " objects=", Performance.get_monitor(Performance.RENDER_TOTAL_OBJECTS_IN_FRAME), " primitives=", Performance.get_monitor(Performance.RENDER_TOTAL_PRIMITIVES_IN_FRAME))
 		print("shot ", s[0])
 	# UI: telefono e negozio
 	GameTime.total_minutes = float(Data.hhmm_to_min("11:30"))

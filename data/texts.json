@@ -2,7 +2,7 @@
   "tutorial": [
     {
       "id": "benvenuto",
-      "text": "Benvenuto a San Vito al Colle. Hai 20 anni, 500 € e una stanza in affitto. Da oggi te la cavi da solo.",
+      "text": "Benvenuto a San Vito al Colle. Hai 20 anni e una stanza in affitto. Sei arrivato con {iniziale}: oggi hai già pagato la prima settimana d'affitto ({affitto}) e la ricarica del telefono ({telefono}), quindi ti restano {saldo}. Lo vedi nel Telefono, app Conto.",
       "done": "tap"
     },
     {
@@ -65,7 +65,8 @@
     "rent_paid": "Affitto pagato: −{affitto} €. Prossima scadenza: giorno {giorno}.",
     "rent_unpaid": "Non hai abbastanza soldi per l'affitto ({affitto} €). Ti mancano {mancanti} €.",
     "closed": "Chiuso. Riapre alle {apertura}.",
-    "too_tired_run": "Sei troppo stanco per correre. Riposati o mangia qualcosa."
+    "too_tired_run": "Sei troppo stanco per correre. Riposati o mangia qualcosa.",
+    "first_day_bills": "Primo giorno: pagati affitto settimana 1 ({affitto}) e ricarica telefono ({telefono}). Da {iniziale} ti restano {saldo}."
   },
   "save": {
     "saving": "Salvataggio in corso…",

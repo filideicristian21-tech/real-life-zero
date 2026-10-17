@@ -31,6 +31,8 @@ var shift_ui: Dictionary = {}
 var _pending_summary = null
 var _buy_lock_ms := 0
 var _toasts: Array = []
+var _toast_queue: Array = []
+const HUD_BTN := Color(0.102, 0.102, 0.102, 0.6)
 var build_lbl: Label
 
 func _ready() -> void:
@@ -80,18 +82,21 @@ func _build_hud() -> void:
 	tl.add_child(v)
 	var h := HBoxContainer.new()
 	v.add_child(h)
-	clock_lbl = UIKit.label("Lun 07:00", 30)
+	tl.add_theme_stylebox_override("panel", UIKit.sb(Color(0.08, 0.08, 0.08, 0.55), 12, 10))
+	clock_lbl = UIKit.label("Lun 07:00", 24)
 	h.add_child(clock_lbl)
-	day_lbl = UIKit.label("Giorno 1", 18, UIKit.MUTED)
+	day_lbl = UIKit.label("Giorno 1", 15, UIKit.MUTED)
 	day_lbl.size_flags_vertical = Control.SIZE_SHRINK_END
 	h.add_child(day_lbl)
 	for k in [["fame", "Fame", Color("#F2A65A")], ["energia", "Energia", Color("#5BC17A")], ["sonno", "Sonno", Color("#7BA7E0")]]:
 		var row := HBoxContainer.new()
-		var l := UIKit.label(k[1], 16, UIKit.MUTED)
-		l.custom_minimum_size = Vector2(72, 0)
+		var l := UIKit.label(k[1], 13, UIKit.MUTED)
+		l.custom_minimum_size = Vector2(58, 0)
 		row.add_child(l)
 		var b := UIKit.bar(50, k[2])
-		b.custom_minimum_size = Vector2(150, 12)
+		b.add_theme_stylebox_override("fill", UIKit.sb(k[2], 2, 0))
+		b.add_theme_stylebox_override("background", UIKit.sb(Color(1, 1, 1, 0.14), 2, 0))
+		b.custom_minimum_size = Vector2(118, 4)
 		b.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		row.add_child(b)
 		v.add_child(row)
@@ -101,9 +106,10 @@ func _build_hud() -> void:
 	tr.name = "MoneyPanel"
 	tr.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	hud.add_child(tr)
-	money_lbl = UIKit.label("€ 500,00", 30)
+	tr.add_theme_stylebox_override("panel", UIKit.sb(Color(0.08, 0.08, 0.08, 0.55), 12, 10))
+	money_lbl = UIKit.label("€ 500,00", 24)
 	tr.add_child(money_lbl)
-	btn_pause = _touch_btn("II", 64, Color(0.1, 0.1, 0.1, 0.8))
+	btn_pause = _touch_btn("II", 64, HUD_BTN)
 	btn_pause.activated.connect(open_pause)
 	hud.add_child(btn_pause)
 	# prompt di interazione
@@ -128,13 +134,24 @@ func _build_hud() -> void:
 	joystick = TouchJoystick.new()
 	joystick.changed.connect(func(val): if main and main.player: main.player.move_input = val)
 	hud.add_child(joystick)
-	btn_interact = _touch_btn("Interagisci", 150, UIKit.CORAL)
+	btn_interact = _touch_btn("", 136, HUD_BTN)
+	btn_interact.tooltip_text = "Interagisci"
+	btn_interact.icon = load("res://assets/ui/icon_interact.png")
+	btn_interact.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	btn_interact.vertical_icon_alignment = VERTICAL_ALIGNMENT_TOP
+	btn_interact.expand_icon = false
 	btn_interact.activated.connect(func(): if main and main.player and not is_modal_open(): main.player.try_interact())
 	hud.add_child(btn_interact)
-	btn_run = _touch_btn("Corri", 104, UIKit.CORAL)
+	btn_run = _touch_btn("", 92, HUD_BTN)
+	btn_run.icon = load("res://assets/ui/icon_run.png")
+	btn_run.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	btn_run.tooltip_text = "Corri"
 	btn_run.activated.connect(_toggle_run)
 	hud.add_child(btn_run)
-	btn_phone = _touch_btn("Telefono", 104, UIKit.CORAL)
+	btn_phone = _touch_btn("", 92, HUD_BTN)
+	btn_phone.icon = load("res://assets/ui/icon_phone.png")
+	btn_phone.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	btn_phone.tooltip_text = "Telefono"
 	btn_phone.activated.connect(toggle_phone)
 	hud.add_child(btn_phone)
 	build_lbl = UIKit.label("%s · v%s" % [Data.t("build_label"), Game.VERSION], 13, Color(1, 1, 1, 0.5))
@@ -148,9 +165,18 @@ func _touch_btn(text: String, size: int, col: Color) -> TouchButton:
 	b.add_theme_stylebox_override("normal", UIKit.sb(col, size / 2, 4))
 	b.add_theme_stylebox_override("hover", UIKit.sb(col.lightened(0.1), size / 2, 4))
 	b.add_theme_stylebox_override("pressed", UIKit.sb(col.darkened(0.25), size / 2, 4))
-	b.add_theme_stylebox_override("disabled", UIKit.sb(Color(0.4, 0.4, 0.4, 0.7), size / 2, 4))
-	b.add_theme_font_size_override("font_size", 18 if size < 130 else 22)
+	b.add_theme_stylebox_override("disabled", UIKit.sb(Color(0.1, 0.1, 0.1, 0.4), size / 2, 4))
+	b.add_theme_font_size_override("font_size", 16 if size < 130 else 17)
 	return b
+
+## Interagisci diventa corallo solo quando c'è qualcosa vicino; Corri si accende quando è attiva.
+func _set_btn_color(b: TouchButton, col: Color) -> void:
+	if b.has_meta("col") and b.get_meta("col") == col:
+		return
+	b.set_meta("col", col)
+	var r := int(b.custom_minimum_size.x / 2)
+	b.add_theme_stylebox_override("normal", UIKit.sb(col, r, 4))
+	b.add_theme_stylebox_override("hover", UIKit.sb(col.lightened(0.1), r, 4))
 
 ## Posiziona gli elementi in base alla dimensione reale del viewport (UI adattiva).
 func layout() -> void:
@@ -158,12 +184,12 @@ func layout() -> void:
 		return
 	var s := root.get_viewport_rect().size
 	var m := 22.0
-	btn_interact.position = Vector2(s.x - 150 - m - 10, s.y - 150 - m - 10)
-	btn_run.position = Vector2(s.x - 104 - m, btn_interact.position.y - 104 - 18)
-	btn_phone.position = Vector2(btn_interact.position.x - 104 - 22, s.y - 104 - m)
+	btn_interact.position = Vector2(s.x - 136 - m - 10, s.y - 136 - m - 10)
+	btn_run.position = Vector2(s.x - 92 - m - 6, btn_interact.position.y - 92 - 18)
+	btn_phone.position = Vector2(btn_interact.position.x - 92 - 22, s.y - 92 - m)
 	btn_pause.position = Vector2(s.x - 64 - 16, 14)
 	var mp: Control = hud.get_node("MoneyPanel")
-	mp.position = Vector2(s.x - 64 - 16 - 14 - max(mp.size.x, 190), 14)
+	mp.position = Vector2(s.x - 64 - 16 - 12 - max(mp.size.x, 160), 14)
 	build_lbl.position = Vector2(16, s.y - 24)
 	tut_panel.size = Vector2(0, 0)
 	tut_panel.position = Vector2(s.x / 2.0 - 340, s.y * 0.0 + 14)
@@ -191,7 +217,6 @@ func _process(_dt: float) -> void:
 	btn_interact.disabled = txt == ""
 	var can_run := Needs.can_run()
 	btn_run.disabled = not can_run
-	btn_run.text = ("Cammina" if (p and p.run_toggle) else "Corri")
 	var controls_on := not is_modal_open()
 	for b in [btn_interact, btn_run, btn_phone, joystick]:
 		b.visible = controls_on
@@ -199,8 +224,29 @@ func _process(_dt: float) -> void:
 	if p:
 		p.input_enabled = controls_on and not Jobs.in_shift
 	var mp: Control = hud.get_node("MoneyPanel")
-	mp.position.x = s.x - 64 - 16 - 14 - mp.size.x
+	mp.position.x = s.x - 64 - 16 - 12 - mp.size.x
+	tut_panel.visible = Game.playing and not is_modal_open() and tut_lbl.text != ""
+	_set_btn_color(btn_interact, UIKit.CORAL if (p and p.current_target) else HUD_BTN)
+	_set_btn_color(btn_run, UIKit.CORAL.darkened(0.15) if (p and p.run_toggle) else HUD_BTN)
 	_update_toasts(_dt)
+	_check_shop_closing()
+
+## Caso 21: se il negozio chiude mentre il pannello è aperto, il pannello si chiude con un avviso chiaro.
+func _check_shop_closing() -> void:
+	if modal == null:
+		return
+	var hours: Dictionary = {}
+	var name := ""
+	if modal_kind == "shop":
+		hours = Data.economy["minimarket"]["hours"]
+		name = "Il Market"
+	elif modal_kind == "bar" and not Jobs.in_shift:
+		hours = Data.economy["bar"]["hours"]
+		name = "Il Bar Centrale"
+	if hours.is_empty() or GameTime.is_open(hours):
+		return
+	close_modal()
+	show_toast("%s sta chiudendo: per oggi niente acquisti. %s" % [name, Data.t("feedback.closed", {"apertura": GameTime.next_open_text(hours)})], "warn")
 
 func _refresh_hud() -> void:
 	money_lbl.text = "€ " + Data.euro(Economy.money_cents)
@@ -233,38 +279,56 @@ func show_toast(text: String, kind: String = "info") -> void:
 		Sfx.play("error", Vector3.INF, -6)
 	elif kind == "ok":
 		Sfx.play("confirm", Vector3.INF, -6)
-	var p := PanelContainer.new()
-	var col := Color(0.1, 0.1, 0.1, 0.88)
-	if kind == "warn":
-		col = Color(0.45, 0.14, 0.1, 0.92)
-	elif kind == "ok":
-		col = Color(0.12, 0.35, 0.2, 0.92)
-	p.add_theme_stylebox_override("panel", UIKit.sb(col, 12, 12))
-	p.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	var l := UIKit.label(text, 20, Color.WHITE, true)
-	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	l.custom_minimum_size = Vector2(620, 0)
-	p.add_child(l)
-	toast_box.add_child(p)
-	_toasts.append({"node": p, "t": 4.0 + text.length() * 0.02})
-	while _toasts.size() > 3:
-		_toasts.pop_front()["node"].queue_free()
 	print("[toast] ", text)
+	# un messaggio alla volta: gli altri aspettano in coda (max 4, si scartano i più vecchi)
+	_toast_queue.append({"text": text, "kind": kind})
+	while _toast_queue.size() > 4:
+		_toast_queue.pop_front()
+	if _toasts.is_empty():
+		_next_toast()
+
+func _next_toast() -> void:
+	if _toast_queue.is_empty():
+		return
+	var q: Dictionary = _toast_queue.pop_front()
+	var p := PanelContainer.new()
+	var col := Color(0.08, 0.08, 0.08, 0.72)
+	if q["kind"] == "warn":
+		col = Color(0.42, 0.13, 0.09, 0.82)
+	elif q["kind"] == "ok":
+		col = Color(0.1, 0.3, 0.17, 0.8)
+	p.add_theme_stylebox_override("panel", UIKit.sb(col, 10, 10))
+	p.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var l := UIKit.label(q["text"], 18, Color.WHITE, true)
+	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	l.custom_minimum_size = Vector2(560, 0)
+	p.add_child(l)
+	p.modulate.a = 0.0
+	toast_box.add_child(p)
+	var dur: float = clampf(3.0 + q["text"].length() * 0.015, 3.0, 5.0)
+	_toasts.append({"node": p, "t": dur, "dur": dur})
 
 func _update_toasts(dt: float) -> void:
-	# con un pannello aperto i messaggi vanno in basso, sopra il pannello, per non coprirne il testo
 	var vs := root.get_viewport_rect().size
 	if modal != null and is_instance_valid(modal):
+		# con un pannello aperto il messaggio va in basso per non coprirne il testo
 		if toast_box.get_index() < modal.get_index():
 			toast_box.move_to_front()
-		toast_box.position = Vector2(vs.x / 2.0 - 330, vs.y - 16 - toast_box.size.y)
+		toast_box.position = Vector2(vs.x / 2.0 - 290, vs.y - 16 - toast_box.size.y)
 	else:
-		toast_box.position = Vector2(vs.x / 2.0 - 330, 150)
+		var y := 14.0
+		if tut_panel.visible:
+			y = tut_panel.position.y + tut_panel.size.y + 10.0
+		toast_box.position = Vector2(vs.x / 2.0 - 290, y)
 	for t in _toasts.duplicate():
 		t["t"] -= dt
+		var node: Control = t["node"]
+		var age: float = t["dur"] - t["t"]
+		node.modulate.a = clampf(minf(age / 0.25, t["t"] / 0.6), 0.0, 1.0)
 		if t["t"] <= 0.0:
-			t["node"].queue_free()
+			node.queue_free()
 			_toasts.erase(t)
+			_next_toast()
 
 # =====================================================================  MODALI
 func is_modal_open() -> bool:
@@ -398,6 +462,7 @@ func buy(id: String, ids: Array = []) -> Dictionary:
 	match r["reason"]:
 		"":
 			Sfx.play("coins")
+			Game.save_after_purchase()
 			show_toast(Data.t("feedback.bought", {"prodotto": p["name"], "prezzo": Data.euro(int(p["price_cents"])), "saldo": Data.euro(Economy.money_cents)}), "ok")
 			Game.tutorial_event("bought")
 		"money":
@@ -493,6 +558,7 @@ func bar_buy(id: String) -> bool:
 		show_toast(Data.t("feedback.no_money", {"prezzo": Data.euro(price), "saldo": Data.euro(Economy.money_cents)}), "warn")
 		return false
 	Needs.eat(float(it["hunger"]), float(it["energy"]))
+	Game.save_after_purchase()
 	Sfx.play("cup")
 	show_toast("%s servito. −€ %s · Saldo: € %s" % [it["name"], Data.euro(price), Data.euro(Economy.money_cents)], "ok")
 	if modal and modal_kind == "bar":
@@ -735,6 +801,9 @@ func show_dialogue(who: String, lines: Array, npc: NPC) -> void:
 func toggle_phone() -> void:
 	if modal_kind == "phone":
 		close_modal()
+		return
+	if Jobs.in_shift:
+		show_toast("Durante il turno il telefono resta in tasca. Usa la pausa (II) se ti serve fermarti.", "info")
 		return
 	if is_modal_open():
 		return

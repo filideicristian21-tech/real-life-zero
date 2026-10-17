@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://db7tqdq1udodx"
-path="res://.godot/imported/luca.glb-9f02ed789ed4fd76eb10b151db719351.scn"
+uid="uid://ch3pxagdejh8b"
+path="res://.godot/imported/casual.glb-2d752af67e3baf9f5f2071aeba9bb9c7.scn"
 
 [deps]
 
-source_file="res://assets/characters/luca.glb"
-dest_files=["res://.godot/imported/luca.glb-9f02ed789ed4fd76eb10b151db719351.scn"]
+source_file="res://assets/characters/casual.glb"
+dest_files=["res://.godot/imported/casual.glb-2d752af67e3baf9f5f2071aeba9bb9c7.scn"]
 
 [params]
 

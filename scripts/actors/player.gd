@@ -36,8 +36,8 @@ func _ready() -> void:
 	add_child(cs)
 	model = CharacterModel.new()
 	add_child(model)
-	# Spark: felpa grigia, jeans blu scuro, sneakers bianche
-	model.load_model("res://assets/characters/luca.glb", {"Purple": Color("#6E6F72"), "LightBlue": Color("#2B3A55")})
+	# Spark: maglia grigia, jeans blu scuro, sneakers bianche (modello Quaternius «Casual Character», CC0)
+	model.load_model("res://assets/characters/casual.glb", {"LightBrown": Color("#6E6F72"), "LightBlue": Color("#2B3A55"), "Red_Dark": Color("#EDEDE8"), "White": Color("#D8D8D4"), "Hair": Color("#2A1E16")}, 1.78)
 	# camera
 	cam_yaw_node = Node3D.new()
 	cam_yaw_node.top_level = true
@@ -56,7 +56,7 @@ func _ready() -> void:
 	camera = Camera3D.new()
 	camera.fov = 65
 	camera.near = 0.08
-	camera.far = 260
+	camera.far = 150
 	spring.add_child(camera)
 	cam_pitch_node.rotation.x = deg_to_rad(-16)
 

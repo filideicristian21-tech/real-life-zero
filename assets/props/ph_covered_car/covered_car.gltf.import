@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bqyem1g76f8ve"
-path="res://.godot/imported/runner.glb-832af8931ec1ea83efc04f8e5fcf726c.scn"
+uid="uid://cqodg6bv6meng"
+path="res://.godot/imported/covered_car.gltf-9d7c4944e441cd8f4f291dc8128ab0bc.scn"
 
 [deps]
 
-source_file="res://assets/characters/runner.glb"
-dest_files=["res://.godot/imported/runner.glb-832af8931ec1ea83efc04f8e5fcf726c.scn"]
+source_file="res://assets/props/ph_covered_car/covered_car.gltf"
+dest_files=["res://.godot/imported/covered_car.gltf-9d7c4944e441cd8f4f291dc8128ab0bc.scn"]
 
 [params]
 

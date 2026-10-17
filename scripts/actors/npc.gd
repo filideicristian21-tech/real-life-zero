@@ -19,7 +19,7 @@ var _gravity := 9.8
 var home_pos := Vector3.ZERO
 var face_player_t := 0.0
 
-func setup(p_id: String, model_path: String, p_schedule: Array, recolor: Dictionary = {}) -> void:
+func setup(p_id: String, model_path: String, p_schedule: Array, recolor: Dictionary = {}, target_height: float = 1.75) -> void:
 	npc_id = p_id
 	display_name = Data.places["npcs"].get(p_id, p_id)
 	name = "NPC_" + p_id
@@ -35,7 +35,7 @@ func setup(p_id: String, model_path: String, p_schedule: Array, recolor: Diction
 	add_child(_cs)
 	model = CharacterModel.new()
 	add_child(model)
-	model.load_model(model_path, recolor)
+	model.load_model(model_path, recolor, target_height)
 	talk_point = Interactable.make(self, Vector3(0, 1.2, 0), "npc_" + p_id, func(): return "Parla con " + display_name, _talk, 1.8)
 	_update_schedule(true)
 

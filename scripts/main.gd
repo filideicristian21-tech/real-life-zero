@@ -63,27 +63,27 @@ func _spawn_npcs() -> void:
 	var bar_h: Dictionary = Data.economy["bar"]["hours"]
 	var mm_h: Dictionary = Data.economy["minimarket"]["hours"]
 	var defs := [
-		["barista_titolare", "res://assets/characters/mimmo.glb", [
-			{"open_hours": bar_h, "path": [Vector3(1.5, y, -51.6), Vector3(8.5, y, -51.6)], "speed": 0.9}], {"LightBrown": Color("#2E4A38")}],
+		["barista_titolare", "res://assets/characters/casual.glb", [
+			{"open_hours": bar_h, "path": [Vector3(1.5, y, -51.6), Vector3(8.5, y, -51.6)], "speed": 0.9}], {"LightBrown": Color("#F1EEE6"), "LightBlue": Color("#1E1E22"), "Red_Dark": Color("#4A3426"), "Hair": Color("#3A3A3A")}, 1.74],
 		["cassiera_minimarket", "res://assets/characters/cassiera.glb", [
-			{"open_hours": mm_h, "path": [Vector3(10.0, y, 11.5)], "stand_yaw": PI / 2.0}], {}],
+			{"open_hours": mm_h, "path": [Vector3(10.0, y, 11.5)], "stand_yaw": PI / 2.0}], {"Orange": Color("#2F4F6A")}, 1.66],
 		["padrone_di_casa", "res://assets/characters/padrone.glb", [
 			{"from": "08:00", "to": "10:00", "path": [Vector3(-45.6, y, -24.0)], "stand_yaw": -PI / 2.0},
-			{"from": "18:00", "to": "19:30", "path": [Vector3(-45.6, y, -24.0)], "stand_yaw": -PI / 2.0}], {}],
+			{"from": "18:00", "to": "19:30", "path": [Vector3(-45.6, y, -24.0)], "stand_yaw": -PI / 2.0}], {}, 1.75],
 		["passante_anziana", "res://assets/characters/anziana.glb", [
 			{"from": "08:00", "to": "12:00", "path": [Vector3(-30, y, -5.6), Vector3(-9, y, -8.5), Vector3(4, y, -18), Vector3(16, y, -18), Vector3(26, y, -8.5), Vector3(18, y, -5.4), Vector3(14, y, -0.5), Vector3(18, y, 5.6), Vector3(26, y, 5.6), Vector3(18, y, 5.6), Vector3(14, y, 0.5), Vector3(10, y, -5.6)], "speed": 0.9},
-			{"from": "15:00", "to": "18:30", "path": [Vector3(-9, y, -8.5), Vector3(3, y, -30), Vector3(17, y, -30), Vector3(26, y, -10), Vector3(-9, y, -8.5)], "speed": 0.9}], {}],
-		["passante_runner", "res://assets/characters/runner.glb", [
+			{"from": "15:00", "to": "18:30", "path": [Vector3(-9, y, -8.5), Vector3(3, y, -30), Vector3(17, y, -30), Vector3(26, y, -10), Vector3(-9, y, -8.5)], "speed": 0.9}], {"Hair": Color("#C9C6C0"), "HairBase": Color("#B9B6B0"), "Shirt": Color("#8A6F8E"), "Pants": Color("#4A4440")}, 1.6],
+		["passante_runner", "res://assets/characters/hoodie.glb", [
 			{"from": "06:00", "to": "09:00", "path": [Vector3(-90, y, -5.5), Vector3(90, y, -5.5), Vector3(92, 0.05, 0), Vector3(90, y, 5.5), Vector3(-90, y, 5.5), Vector3(-92, 0.05, 0)], "speed": 3.4},
-			{"from": "18:00", "to": "20:30", "path": [Vector3(-90, y, -5.5), Vector3(90, y, -5.5), Vector3(92, 0.05, 0), Vector3(90, y, 5.5), Vector3(-90, y, 5.5), Vector3(-92, 0.05, 0)], "speed": 3.4}], {}],
+			{"from": "18:00", "to": "20:30", "path": [Vector3(-90, y, -5.5), Vector3(90, y, -5.5), Vector3(92, 0.05, 0), Vector3(90, y, 5.5), Vector3(-90, y, 5.5), Vector3(-92, 0.05, 0)], "speed": 3.4}], {"Purple": Color("#B23A3A"), "LightBlue": Color("#222428"), "Hair": Color("#1C1712")}, 1.78],
 		["persona_fermata_bus", "res://assets/characters/pendolare.glb", [
 			{"from": "06:40", "to": "09:10", "path": [Vector3(-20.0, y, -5.2)], "stand_yaw": 0.0},
-			{"from": "17:00", "to": "19:30", "path": [Vector3(-20.0, y, -5.2)], "stand_yaw": 0.0}], {}],
+			{"from": "17:00", "to": "19:30", "path": [Vector3(-20.0, y, -5.2)], "stand_yaw": 0.0}], {}, 1.72],
 	]
 	for d in defs:
 		var n := NPC.new()
 		add_child(n)
-		n.setup(d[0], d[1], d[2], d[3])
+		n.setup(d[0], d[1], d[2], d[3], d[4])
 		npcs.append(n)
 
 func _unhandled_input(event: InputEvent) -> void:

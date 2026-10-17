@@ -5,11 +5,10 @@ Tutto e' stato scaricato gratuitamente dalle fonti ufficiali indicate (i file Ke
 
 | File | Asset | Autore | Fonte | Licenza | Modifiche |
 |---|---|---|---|---|---|
-| assets/characters/luca.glb | Hoodie Character | Quaternius (via Poly Pizza) | https://poly.pizza/m/gKLBoRsyKe | CC0 1.0 | colori dei materiali cambiati a runtime (non nel file) |
-| assets/characters/mimmo.glb | Casual Character | Quaternius (via Poly Pizza) | https://poly.pizza/m/kZ3DmIoGip | CC0 1.0 | colori dei materiali cambiati a runtime (non nel file) |
+| assets/characters/hoodie.glb | Hoodie Character | Quaternius (via Poly Pizza) | https://poly.pizza/m/gKLBoRsyKe | CC0 1.0 | colori dei materiali cambiati a runtime (non nel file) |
+| assets/characters/casual.glb | Casual Character | Quaternius (via Poly Pizza) | https://poly.pizza/m/kZ3DmIoGip | CC0 1.0 | colori dei materiali cambiati a runtime (non nel file) |
 | assets/characters/pendolare.glb | Business Man | Quaternius (via Poly Pizza) | https://poly.pizza/m/JFrLIKqvCH | CC0 1.0 | colori dei materiali cambiati a runtime (non nel file) |
 | assets/characters/anziana.glb | Woman Casual | Quaternius (via Poly Pizza) | https://poly.pizza/m/jpKRgGDxhk | CC0 1.0 | colori dei materiali cambiati a runtime (non nel file) |
-| assets/characters/runner.glb | Man | Quaternius (via Poly Pizza) | https://poly.pizza/m/HMnuH5geEG | CC0 1.0 | colori dei materiali cambiati a runtime (non nel file) |
 | assets/characters/padrone.glb | Man in Long Sleeves | Quaternius (via Poly Pizza) | https://poly.pizza/m/DLptRuewTn | CC0 1.0 | colori dei materiali cambiati a runtime (non nel file) |
 | assets/characters/cassiera.glb | Animated Woman | Quaternius (via Poly Pizza) | https://poly.pizza/m/qJ2gsTUBHL | CC0 1.0 | colori dei materiali cambiati a runtime (non nel file) |
 | assets/props/bedSingle.glb | Furniture Kit: bedSingle | Kenney | https://kenney.nl/assets/furniture-kit | CC0 1.0 | nessuna (scala x2 in gioco) - PLACEHOLDER stile toy |
@@ -70,6 +69,17 @@ Tutto e' stato scaricato gratuitamente dalle fonti ufficiali indicate (i file Ke
 | assets/textures/plaster_albedo.jpg, plaster_normal.jpg | Plastered Wall 02 | Poly Haven | https://polyhaven.com/a/plastered_wall_02 | CC0 1.0 | ridotte a 512px, ricompresse JPG |
 | assets/textures/roof_albedo.jpg, roof_normal.jpg | Clay Roof Tiles 02 | Poly Haven | https://polyhaven.com/a/clay_roof_tiles_02 | CC0 1.0 | ridotte a 512px, ricompresse JPG |
 | assets/textures/cobble_albedo.jpg, cobble_normal.jpg | Cobblestone Floor 08 | Poly Haven | https://polyhaven.com/a/cobblestone_floor_08 | CC0 1.0 | ridotte a 512px, ricompresse JPG |
+| assets/textures/facade_albedo.jpg, facade_normal.jpg | Painted Plaster Wall | Poly Haven | https://polyhaven.com/a/painted_plaster_wall | CC0 1.0 | ridotte a 512px, ricompresse JPG |
+| assets/textures/floor_market_albedo.jpg, floor_market_normal.jpg | Floor Tiles 06 | Poly Haven | https://polyhaven.com/a/floor_tiles_06 | CC0 1.0 | ridotte a 512px, ricompresse JPG |
+| assets/textures/walltiles_albedo.jpg, walltiles_normal.jpg | Interior Tiles | Poly Haven | https://polyhaven.com/a/interior_tiles | CC0 1.0 | ridotte a 512px, ricompresse JPG |
+| assets/textures/stonebase_albedo.jpg, stonebase_normal.jpg | Large Sandstone Blocks | Poly Haven | https://polyhaven.com/a/large_sandstone_blocks | CC0 1.0 | ridotte a 512px, ricompresse JPG |
+| assets/textures/floor_bar_albedo.jpg, floor_bar_normal.jpg | Terrazzo 013 | ambientCG | https://ambientcg.com/view?id=Terrazzo013 | CC0 1.0 | ridotte a 512px, ricompresse JPG |
+| assets/textures/sky_kloofendal_1k.hdr | Kloofendal 48d Partly Cloudy (Pure Sky) | Poly Haven | https://polyhaven.com/a/kloofendal_48d_partly_cloudy_puresky | CC0 1.0 | versione 1K (scelta 1K invece di 2K per peso web/mobile) |
+| assets/props/ph_potted_plant_04/ (gltf + bin + 3 jpg) | Potted Plant 04 | Poly Haven (James Ray Cock) | https://polyhaven.com/a/potted_plant_04 | CC0 1.0 | texture ridotte a 512px |
+| assets/props/ph_covered_car/ (gltf + bin + 3 jpg) | Covered Car | Poly Haven (MP) | https://polyhaven.com/a/covered_car | CC0 1.0 | texture ridotte a 512px |
+| assets/ui/icon_run.png, icon_phone.png, icon_interact.png | icone HUD | create per questo progetto (Pillow) | - | CC0 1.0 (opera propria) | - |
+| assets/shaders/sky.gdshader | shader cielo HDRI + notte | scritto per questo progetto | - | CC0 1.0 (opera propria) | - |
+| (nessun file) macchina espresso, bancone, bottiglie, scaffali del market | geometria procedurale in scripts/world/town.gd | opera propria | - | - | il modello CC-BY «Modern Coffee Machine» (visthetique) suggerito da Scout NON è stato usato: nessun credito TASL necessario |
 | assets/audio/click.ogg | Interface Sounds: click_001.ogg | Kenney | https://kenney.nl/assets/interface-sounds | CC0 1.0 | solo rinominato |
 | assets/audio/confirm.ogg | Interface Sounds: confirmation_001.ogg | Kenney | https://kenney.nl/assets/interface-sounds | CC0 1.0 | solo rinominato |
 | assets/audio/error.ogg | Interface Sounds: error_001.ogg | Kenney | https://kenney.nl/assets/interface-sounds | CC0 1.0 | solo rinominato |

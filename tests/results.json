@@ -207,6 +207,148 @@
   },
   {
     "checks": [
+      "OK  saldo dopo la nuova partita € 405,00 (500 − 90 − 5)",
+      "OK  avviso unico: «Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (5,00 €). Da 500,00 € ti restano 405,00 €.»",
+      "OK  primo passo del tutorial: «Benvenuto a San Vito al Colle. Hai 20 anni e una stanza in affitto. Sei arrivato con 500,00 €: oggi hai già pagato la prima settimana d'affitto (90,00 €) e la ricarica del telefono (5,00 €), quindi ti restano 405,00 €. Lo vedi nel Telefono, app Conto.»",
+      "OK  nello storico: 2 voci (affitto settimana 1, ricarica telefono)"
+    ],
+    "id": "X05",
+    "pass": true,
+    "title": "Primo avvio: addebito di affitto e telefono spiegato (caso Hook 1)"
+  },
+  {
+    "checks": [
+      "OK  pannello del Market aperto alle 19:58",
+      "OK  alle 20:00 il pannello si chiude da solo con l'avviso «sta chiudendo»",
+      "OK  acquisto alle 20:00 rifiutato (closed), saldo e inventario invariati"
+    ],
+    "id": "X06",
+    "pass": true,
+    "title": "Il negozio chiude con il pannello aperto (caso Hook 21)"
+  },
+  {
+    "checks": [
+      "OK  salvataggio ricaricato dal disco",
+      "OK  saldo dopo la riapertura € 403,50 (= dopo l'acquisto)",
+      "OK  il latte è nell'inventario dopo la riapertura (4 porzioni)",
+      "OK  saldo coerente con lo storico"
+    ],
+    "id": "X07",
+    "pass": true,
+    "title": "Acquisto e chiusura forzata subito dopo (caso Hook 22)"
+  },
+  {
+    "checks": [
+      "OK  sveglia alle 13:00 (05:00 + 8 h)",
+      "OK  turno non più disponibile: Troppo tardi: oltre 45 minuti di ritardo il turno di oggi è perso.",
+      "OK  nessuna paga per martedì"
+    ],
+    "id": "X08",
+    "pass": true,
+    "title": "Dormire oltre l'inizio del turno (caso Hook 23)"
+  },
+  {
+    "checks": [
+      "OK  il telefono non si apre: resta il pannello del turno (avviso «resta in tasca»)",
+      "OK  il tempo non salta in avanti"
+    ],
+    "id": "X09",
+    "pass": true,
+    "title": "Telefono durante il turno (caso Hook 24)"
+  },
+  {
+    "checks": [
+      "OK  comprate 8 confezioni su 8 a scaffale",
+      "OK  acquisto successivo rifiutato (stock)",
+      "OK  addebiti solo per le confezioni prese",
+      "OK  il pulsante mostra «Esaurito» ed è disattivato",
+      "OK  il giorno dopo lo scaffale è rifornito (8)"
+    ],
+    "id": "X10",
+    "pass": true,
+    "title": "Comprare tutte le scorte (caso Hook 26)"
+  },
+  {
+    "checks": [
+      "OK  svenimento registrato una volta",
+      "OK  risveglio a casa (distanza dal letto 0.00 m)",
+      "OK  passano 6.0 ore (dati: 6)",
+      "OK  turno annullato senza paga, energia risalita a 72",
+      "OK  partita salvata dopo lo svenimento"
+    ],
+    "id": "X11",
+    "pass": true,
+    "title": "Svenimento lontano da casa (caso Hook 25, B1)"
+  },
+  {
+    "checks": [
+      "OK  la fame resta a 0, non va sotto",
+      "OK  a stomaco vuoto l'energia scende più in fretta: −6.0/h (dati 6.0)",
+      "OK  lasciando la fame a 0 l'energia arriva a 0 e scatta lo svenimento (risveglio a casa), nessuna morte o malattia"
+    ],
+    "id": "X12",
+    "pass": true,
+    "title": "Fame a 0 (B2)"
+  },
+  {
+    "checks": [
+      "OK  alle 07:00 il prossimo bus è alle 07:10 (prima corsa 06:10, ogni 30 min)",
+      "OK  dopo l'ultima corsa (21:10): prossimo domani alle 06:10",
+      "OK  alla fermata ci si siede, non si paga nulla: nella v1 sul bus non si sale (detto nel pannello)"
+    ],
+    "id": "X13",
+    "pass": true,
+    "title": "Fermata del bus (B5)"
+  },
+  {
+    "checks": [
+      "OK  primo bicchiere: energia +2",
+      "OK  subito dopo: nessun effetto (attesa 60 min)",
+      "OK  dopo 61 minuti di nuovo +2"
+    ],
+    "id": "X14",
+    "pass": true,
+    "title": "Acqua del rubinetto (B5)"
+  },
+  {
+    "checks": [
+      "OK  pasta cucinata: Hai consumato: Pasta «Molino Antico» 500 g con Sugo al pomodoro 400 g. Fame +40, Energia +5.",
+      "OK  una porzione di pasta e una di sugo consumate",
+      "OK  fame 20 → 60 (pasta + sugo + bonus dai dati)",
+      "OK  pizza surgelata nel forno di casa: ok"
+    ],
+    "id": "X15",
+    "pass": true,
+    "title": "Cucinare a casa (B4)"
+  },
+  {
+    "checks": [
+      "OK  giorno 8 senza soldi: affitto in arretrato",
+      "OK  turno con saldo 0: stipendio entrato (€ 45,00)",
+      "OK  con € 45 il saldo non basta: pagamento rifiutato, saldo mai negativo",
+      "OK  dopo 3 turni l'arretrato (€ 100,00, con mora) si salda dal telefono",
+      "OK  nessuno sfratto se si salda, storico coerente",
+      "OK  senza mai pagare: «sfratto» leggero (schermata di ripartenza) il giorno 15, l'arretrato non cresce all'infinito",
+      "OK  saldo mai negativo e coerente con lo storico"
+    ],
+    "id": "X16",
+    "pass": true,
+    "title": "Arretrato lungo e stipendio con saldo a 0 (B6, caso Hook 28)"
+  },
+  {
+    "checks": [
+      "OK  saldo coerente con lo storico dopo 21 giorni (€ 670,80, 95 voci)",
+      "OK  affitti dei giorni 8, 15 e 22 addebitati una volta ciascuno (3, oggi è il giorno 22) + giorno 1 alla nuova partita",
+      "OK  mai saldo negativo, nessuno sfratto con una routine normale",
+      "OK  bisogni sempre tra 0 e 100",
+      "OK  turni pagati: 15 (mar-sab)"
+    ],
+    "id": "X17",
+    "pass": true,
+    "title": "Sessione automatica di 21 giorni (review Hook: 3 affitti)"
+  },
+  {
+    "checks": [
       "OK  salvato in /home/box/.local/share/godot/app_userdata/REAL LIFE- ZERO/test_save.json"
     ],
     "id": "T10a",

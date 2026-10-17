@@ -185,3 +185,9 @@ Note:
 - Background e ritorno dall'app con il sistema operativo vero (nei test la notifica è simulata).
 - Prova sul browser di un telefono (iOS Safari / Chrome Android) della versione web.
 - iOS: impossibile qui (serve macOS e un account Apple Developer a pagamento).
+
+## v0.2.0 (passata di realismo), 17 ott 2026
+- `tests/run_tests.sh`: 31 + 1 test, 0 falliti, 0 errori nel log (T01-T12, BAL, X01-X17, T10b in un secondo processo).
+- Draw call misurate con `tests/shots.gd` (Compatibility, 1280x720, xvfb + llvmpipe): da 120 a 338 per inquadratura (in v0.2 prima dell'ottimizzazione: 465-765). Ridotte con batching statico (box, cilindri e sfere in MultiMesh), LOD a distanza automatico per gli oggetti piccoli, ombre solo per gli oggetti sopra 0,9 m e luci dei lampioni spente di giorno.
+- FPS su un telefono reale: NON MISURATO (non c'è un dispositivo). Le draw call sono un indicatore, non una misura di FPS.
+- APK debug 0.2.0-test (versionCode 2): nessun permesso dichiarato (aapt dump permissions), package it.reallifezero.buildtest.

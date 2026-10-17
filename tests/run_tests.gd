@@ -8,7 +8,10 @@ var main
 var phase := "all"
 var out_json := "res://tests/results.json"
 
+var _toasts_seen: Array = []
+
 func _ready() -> void:
+	Game.toast_requested.connect(func(t, _k = ""): _toasts_seen.append(str(t)))
 	for a in OS.get_cmdline_user_args():
 		if a.begins_with("--phase="):
 			phase = a.substr(8)
@@ -92,6 +95,19 @@ func run_all() -> void:
 	x_npcs()
 	x_eat()
 	await x_background_shift()
+	x_first_day_notice()
+	await x_shop_closing()
+	x_purchase_then_kill()
+	x_sleep_over_shift()
+	await x_phone_in_shift()
+	await x_stock_out()
+	await x_faint()
+	x_hunger_zero()
+	x_bus()
+	x_tap_water()
+	x_cooking()
+	x_long_arrears()
+	x_21_days()
 	t10b_prepare_reopen()
 
 # ------------------------------------------------------------------ 1
@@ -798,6 +814,329 @@ func x_background_shift() -> void:
 		[Economy.is_consistent(), "saldo coerente con lo storico"],
 	])
 	GameTime.speed_mult = 1.0
+
+# ------------------------------------------------------------------ X05 caso Hook 1: 95 € spiegati al primo avvio
+func x_first_day_notice() -> void:
+	_toasts_seen.clear()
+	fresh()
+	var t := Game.tutorial_text()
+	var notice := ""
+	for m in _toasts_seen:
+		if m.begins_with("Primo giorno"):
+			notice = m
+	record("X05", "Primo avvio: addebito di affitto e telefono spiegato (caso Hook 1)", [
+		[Economy.money_cents == 40500, "saldo dopo la nuova partita € %s (500 − 90 − 5)" % Data.euro(Economy.money_cents)],
+		[notice.contains("90,00") and notice.contains("5,00") and notice.contains("405,00"), "avviso unico: «%s»" % notice],
+		[t.contains("500,00") and t.contains("405,00") and t.contains("90,00"), "primo passo del tutorial: «%s»" % t],
+		[Economy.history.size() == 2, "nello storico: 2 voci (affitto settimana 1, ricarica telefono)"],
+	])
+
+# ------------------------------------------------------------------ X06 caso 21
+func x_shop_closing() -> void:
+	fresh(1, "19:58")
+	var ui = main.ui
+	ui.open_shop_panel("Test", ["pane_500g"])
+	await frames(2)
+	var was_open: bool = ui.modal_kind == "shop"
+	var m0 := Economy.money_cents
+	set_time(1, "20:00")
+	await get_tree().process_frame
+	await get_tree().process_frame
+	var closed_panel: bool = ui.modal_kind != "shop"
+	var r: Dictionary = ui.buy("pane_500g")
+	record("X06", "Il negozio chiude con il pannello aperto (caso Hook 21)", [
+		[was_open, "pannello del Market aperto alle 19:58"],
+		[closed_panel, "alle 20:00 il pannello si chiude da solo con l'avviso «sta chiudendo»"],
+		[r["reason"] == "closed" and Economy.money_cents == m0 and Inventory.count("pane_500g") == 0, "acquisto alle 20:00 rifiutato (closed), saldo e inventario invariati"],
+	])
+
+# ------------------------------------------------------------------ X07 caso 22
+func x_purchase_then_kill() -> void:
+	fresh(1, "09:00")
+	var ui = main.ui
+	var m0 := Economy.money_cents
+	ui._buy_lock_ms = 0
+	ui.buy("latte_1l")
+	var after_buy := Economy.money_cents
+	# chiusura forzata simulata: nessun salvataggio esplicito, si ricarica dal disco
+	var loaded := SaveSystem.load_game()
+	var price: int = int(Data.products_by_id["latte_1l"]["price_cents"])
+	record("X07", "Acquisto e chiusura forzata subito dopo (caso Hook 22)", [
+		[loaded, "salvataggio ricaricato dal disco"],
+		[Economy.money_cents == after_buy and after_buy == m0 - price, "saldo dopo la riapertura € %s (= dopo l'acquisto)" % Data.euro(Economy.money_cents)],
+		[Inventory.count("latte_1l") > 0, "il latte è nell'inventario dopo la riapertura (%d porzioni)" % Inventory.count("latte_1l")],
+		[Economy.is_consistent(), "saldo coerente con lo storico"],
+	])
+
+# ------------------------------------------------------------------ X08 caso 23
+func x_sleep_over_shift() -> void:
+	fresh(2, "05:00")
+	Jobs.hire()
+	var m0 := Economy.money_cents
+	Game.sleep_hours(8.0, false)
+	var st := Jobs.check_in_status()
+	record("X08", "Dormire oltre l'inizio del turno (caso Hook 23)", [
+		[GameTime.clock_text() == "13:00", "sveglia alle %s (05:00 + 8 h)" % GameTime.clock_text()],
+		[not st["ok"], "turno non più disponibile: " + str(st["reason"])],
+		[Economy.money_cents == m0 and not Jobs.paid_days.has("2"), "nessuna paga per martedì"],
+	])
+
+# ------------------------------------------------------------------ X09 caso 24
+func x_phone_in_shift() -> void:
+	fresh(2, "06:30")
+	Jobs.hire()
+	Needs.energy = 90.0
+	var ui = main.ui
+	await ui.start_shift_ui()
+	await frames(2)
+	var t0 := GameTime.total_minutes
+	ui.toggle_phone()
+	await frames(2)
+	var kind: String = ui.modal_kind
+	var shift_ok := Jobs.in_shift
+	Jobs.abandon_shift("test")
+	ui.close_shift()
+	record("X09", "Telefono durante il turno (caso Hook 24)", [
+		[shift_ok and kind == "shift", "il telefono non si apre: resta il pannello del turno (avviso «resta in tasca»)"],
+		[GameTime.total_minutes - t0 < 1.0, "il tempo non salta in avanti"],
+	])
+
+# ------------------------------------------------------------------ X10 caso 26
+func x_stock_out() -> void:
+	fresh(1, "09:00")
+	Economy.earn(100000, "test", "entrata")
+	var ui = main.ui
+	var stock: int = int(Inventory.shop_stock["tonno_3x80"])
+	var m0 := Economy.money_cents
+	var ok_n := 0
+	for i in stock + 2:
+		ui._buy_lock_ms = 0
+		if ui.buy("tonno_3x80")["ok"]:
+			ok_n += 1
+	ui._buy_lock_ms = 0
+	var last: Dictionary = ui.buy("tonno_3x80")
+	ui.open_shop_panel("Test", ["tonno_3x80"])
+	await frames(2)
+	var btn_txt := ""
+	for b in ui.modal.find_children("*", "Button", true, false):
+		if b.text == "Esaurito":
+			btn_txt = b.text + (" (disattivato)" if b.disabled else "")
+	ui.close_modal()
+	set_time(2, "09:00")
+	var restocked: int = int(Inventory.shop_stock["tonno_3x80"])
+	record("X10", "Comprare tutte le scorte (caso Hook 26)", [
+		[ok_n == stock, "comprate %d confezioni su %d a scaffale" % [ok_n, stock]],
+		[last["reason"] == "stock", "acquisto successivo rifiutato (stock)"],
+		[m0 - Economy.money_cents == stock * int(Data.products_by_id["tonno_3x80"]["price_cents"]), "addebiti solo per le confezioni prese"],
+		[btn_txt == "Esaurito (disattivato)", "il pulsante mostra «Esaurito» ed è disattivato"],
+		[restocked > 0, "il giorno dopo lo scaffale è rifornito (%d)" % restocked],
+	])
+
+# ------------------------------------------------------------------ X11 casi 25 + B1 svenimento
+func x_faint() -> void:
+	fresh(2, "06:30")
+	Jobs.hire()
+	Needs.energy = 25.0
+	Jobs.start_shift()
+	main.player.teleport(Vector3(10, 0.2, -12), 0.0)
+	await frames(2)
+	var t0 := GameTime.total_minutes
+	var m0 := Economy.money_cents
+	var f0: int = Game.fainted_count
+	Needs.energy = 0.3
+	Needs.apply_awake_hours(0.2, "work")
+	await frames(3)
+	var home_d: float = main.player.global_position.distance_to(main.town.spawn_home)
+	var dt_h := (GameTime.total_minutes - t0) / 60.0
+	var st := SaveSystem.inspect(SaveSystem.save_path)
+	record("X11", "Svenimento lontano da casa (caso Hook 25, B1)", [
+		[Game.fainted_count == f0 + 1, "svenimento registrato una volta"],
+		[home_d < 1.5, "risveglio a casa (distanza dal letto %.2f m)" % home_d],
+		[absf(dt_h - float(Data.balance["faint"]["sleep_hours"])) < 0.05, "passano %.1f ore (dati: %d)" % [dt_h, int(Data.balance["faint"]["sleep_hours"])]],
+		[Needs.energy > 0.0 and not Jobs.in_shift and Economy.money_cents == m0, "turno annullato senza paga, energia risalita a %.0f" % Needs.energy],
+		[st.get("status", "") == "ok", "partita salvata dopo lo svenimento"],
+	])
+
+# ------------------------------------------------------------------ X12 B2 fame a 0
+func x_hunger_zero() -> void:
+	fresh(1, "09:00")
+	Needs.hunger = 0.0
+	Needs.energy = 60.0
+	var e0 := Needs.energy
+	Needs.apply_awake_hours(1.0, "idle")
+	var dec: Dictionary = Data.economy["needs_decay_per_game_hour"]
+	var thr: Dictionary = Data.economy["needs_thresholds"]
+	var expect := float(dec["energy_awake"]) + float(thr["hunger_penalty_energy_per_hour"])
+	record("X12", "Fame a 0 (B2)", [
+		[Needs.hunger == 0.0, "la fame resta a 0, non va sotto"],
+		[absf((e0 - Needs.energy) - expect) < 0.01, "a stomaco vuoto l'energia scende più in fretta: −%.1f/h (dati %.1f)" % [e0 - Needs.energy, expect]],
+		[_faint_from_hunger(), "lasciando la fame a 0 l'energia arriva a 0 e scatta lo svenimento (risveglio a casa), nessuna morte o malattia"],
+	])
+
+func _faint_from_hunger() -> bool:
+	var f0: int = Game.fainted_count
+	for i in 40:
+		Needs.hunger = 0.0
+		Needs.apply_awake_hours(1.0, "idle")
+		if Game.fainted_count > f0:
+			return true
+	return false
+
+# ------------------------------------------------------------------ X13 B5 bus
+func x_bus() -> void:
+	fresh(1, "07:00")
+	var ui = main.ui
+	var nb: int = ui.next_bus_min()
+	set_time(1, "21:30")
+	var nb2: int = ui.next_bus_min()
+	var m0 := Economy.money_cents
+	ui.open_bus_panel()
+	var has_btn := false
+	for b in ui.modal.find_children("*", "Button", true, false):
+		if b.text.begins_with("Siediti"):
+			has_btn = true
+	ui.close_modal()
+	record("X13", "Fermata del bus (B5)", [
+		[Data.min_to_hhmm(nb) == "07:10", "alle 07:00 il prossimo bus è alle %s (prima corsa 06:10, ogni 30 min)" % Data.min_to_hhmm(nb)],
+		[nb2 >= 1440 and Data.min_to_hhmm(nb2) == "06:10", "dopo l'ultima corsa (21:10): prossimo domani alle 06:10"],
+		[has_btn and Economy.money_cents == m0, "alla fermata ci si siede, non si paga nulla: nella v1 sul bus non si sale (detto nel pannello)"],
+	])
+
+# ------------------------------------------------------------------ X14 B5 acqua
+func x_tap_water() -> void:
+	fresh(1, "09:00")
+	Needs.energy = 50.0
+	main.town._drink_tap()
+	var e1 := Needs.energy
+	main.town._drink_tap()
+	var e2 := Needs.energy
+	Needs.paused_decay = true
+	GameTime.advance(61.0)
+	Needs.paused_decay = false
+	main.town._drink_tap()
+	var gain := float(Data.balance["tap_water"]["energy"])
+	record("X14", "Acqua del rubinetto (B5)", [
+		[absf(e1 - 50.0 - gain) < 0.01, "primo bicchiere: energia +%d" % int(gain)],
+		[e2 == e1, "subito dopo: nessun effetto (attesa %d min)" % int(Data.balance["tap_water"]["cooldown_game_min"])],
+		[absf(Needs.energy - e2 - gain) < 0.01, "dopo 61 minuti di nuovo +%d" % int(gain)],
+	])
+
+# ------------------------------------------------------------------ X15 B4 cucina
+func x_cooking() -> void:
+	fresh(1, "09:00")
+	Needs.hunger = 20.0
+	Inventory.add_product("pasta_500g")
+	Inventory.add_product("sugo_pronto")
+	var p0 := Inventory.count("pasta_500g")
+	var s0 := Inventory.count("sugo_pronto")
+	var r := Inventory.consume("pasta_500g", true)
+	var pa: Dictionary = Data.products_by_id["pasta_500g"]
+	var su: Dictionary = Data.products_by_id["sugo_pronto"]
+	var expect: float = minf(100.0, 20.0 + float(pa["hunger"]) + float(su["hunger"]) + float(su.get("bonus_hunger", 0)))
+	var h_after := Needs.hunger
+	Inventory.add_product("pizza_surgelata")
+	var rz := Inventory.consume("pizza_surgelata", true)
+	record("X15", "Cucinare a casa (B4)", [
+		[r["ok"], "pasta cucinata: " + str(r.get("text", ""))],
+		[Inventory.count("pasta_500g") == p0 - 1 and Inventory.count("sugo_pronto") == s0 - 1, "una porzione di pasta e una di sugo consumate"],
+		[absf(h_after - expect) < 0.01, "fame 20 → %.0f (pasta + sugo + bonus dai dati)" % h_after],
+		[rz["ok"], "pizza surgelata nel forno di casa: ok"],
+	])
+
+# ------------------------------------------------------------------ X16 B6 + caso 28 arretrato lungo
+func _shift_full(day: int) -> void:
+	set_time(day, "06:30")
+	Needs.energy = 90.0
+	Jobs.start_shift()
+	for i in 10:
+		Jobs.complete_order()
+	Jobs.finish_shift()
+
+func _rent_pending_idx() -> int:
+	for i in Economy.pending_bills.size():
+		if Economy.pending_bills[i]["is_rent"]:
+			return i
+	return -1
+
+func x_long_arrears() -> void:
+	# parte A (caso 28): saldo 0, affitto non pagato, si lavora e si salda dal telefono
+	fresh(1, "09:00")
+	Jobs.hire()
+	Economy.spend(Economy.money_cents, "test: azzero il saldo", "spesa")
+	set_time(8, "09:00")
+	var pend1 := _rent_pending_idx() >= 0
+	_shift_full(9)
+	var after1 := Economy.money_cents
+	var early_pay := Economy.pay_pending(_rent_pending_idx())
+	_shift_full(10)
+	_shift_full(11)
+	var idx := _rent_pending_idx()
+	var due: int = int(Economy.pending_bills[idx]["amount"]) if idx >= 0 else 0
+	var paid := Economy.pay_pending(idx) if idx >= 0 else false
+	var ok_a := Economy.is_consistent() and Economy.money_cents >= 0 and not Economy.evicted
+	# parte B (B6): nessun pagamento per settimane
+	fresh(1, "09:00")
+	Economy.spend(Economy.money_cents, "test: azzero il saldo", "spesa")
+	var neg := false
+	var evict_day := -1
+	for d in range(2, 30):
+		set_time(d, "09:00")
+		if Economy.money_cents < 0:
+			neg = true
+		if Economy.evicted and evict_day < 0:
+			evict_day = d
+	record("X16", "Arretrato lungo e stipendio con saldo a 0 (B6, caso Hook 28)", [
+		[pend1, "giorno 8 senza soldi: affitto in arretrato"],
+		[after1 == int(Data.economy["job_barista"]["pay_cents_per_shift"]), "turno con saldo 0: stipendio entrato (€ %s)" % Data.euro(after1)],
+		[not early_pay and Economy.money_cents >= 0, "con € 45 il saldo non basta: pagamento rifiutato, saldo mai negativo"],
+		[paid and due > 0, "dopo 3 turni l'arretrato (€ %s, con mora) si salda dal telefono" % Data.euro(due)],
+		[ok_a, "nessuno sfratto se si salda, storico coerente"],
+		[evict_day > 0, "senza mai pagare: «sfratto» leggero (schermata di ripartenza) il giorno %d, l'arretrato non cresce all'infinito" % evict_day],
+		[not neg and Economy.is_consistent(), "saldo mai negativo e coerente con lo storico"],
+	])
+	main.ui.close_modal()
+
+# ------------------------------------------------------------------ X17 sessione di 21 giorni (review Hook, A/T12)
+func x_21_days() -> void:
+	fresh(1, "07:00")
+	Jobs.hire()
+	Game.skip_tutorial()
+	var ui = main.ui
+	var bad_needs := 0
+	var start_rents := _rent_tx()
+	for d in range(1, 22):
+		# mattina: turno se è giorno lavorativo
+		set_time(d, "06:30")
+		if Jobs.check_in_status()["ok"]:
+			Jobs.start_shift()
+			for i in 10:
+				Jobs.complete_order()
+			Needs.apply_awake_hours(6.0, "work")
+			set_time(d, "12:30")
+			Jobs.finish_shift()
+		set_time(d, "13:00")
+		# spesa e pasti (Market aperto lun-sab)
+		for id in ["pasta_500g", "sugo_pronto", "banane_1kg", "pane_500g"]:
+			ui._buy_lock_ms = 0
+			ui.buy(id)
+		for id in ["banane_1kg", "pane_500g"]:
+			Inventory.consume(id, false)
+		Inventory.consume("pasta_500g", true)
+		Needs.apply_awake_hours(8.0, "walk")
+		set_time(d, "22:30")
+		Game.sleep_hours(Game.hours_until("06:00"), false)
+		for v in [Needs.hunger, Needs.energy, Needs.sonno]:
+			if v < 0.0 or v > 100.0:
+				bad_needs += 1
+		Economy.pay_pending(0) if not Economy.pending_bills.is_empty() else null
+	var rents := _rent_tx() - start_rents
+	record("X17", "Sessione automatica di 21 giorni (review Hook: 3 affitti)", [
+		[Economy.is_consistent(), "saldo coerente con lo storico dopo 21 giorni (€ %s, %d voci)" % [Data.euro(Economy.money_cents), Economy.history.size()]],
+		[rents == 3 and GameTime.day() == 22, "affitti dei giorni 8, 15 e 22 addebitati una volta ciascuno (%d, oggi è il giorno %d) + giorno 1 alla nuova partita" % [rents, GameTime.day()]],
+		[Economy.money_cents >= 0 and not Economy.evicted, "mai saldo negativo, nessuno sfratto con una routine normale"],
+		[bad_needs == 0, "bisogni sempre tra 0 e 100"],
+		[Jobs.shifts_completed >= 15, "turni pagati: %d (mar-sab)" % Jobs.shifts_completed],
+	])
 
 func await_frames_sync() -> void:
 	pass

@@ -8,7 +8,7 @@ signal day_summary(info: Dictionary)
 signal evicted()
 signal request_fade(on: bool)
 
-const VERSION := "0.1.0"
+const VERSION := "0.2.0"
 var playing := false
 var player: Node3D = null
 var world: Node = null
@@ -23,6 +23,9 @@ var day_expense := 0
 var _autosave_acc := 0.0
 var sleeping := false
 var headless_test := false
+
+var _quiet_bills := false
+var fainted_count := 0
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -70,8 +73,11 @@ func new_game() -> void:
 	saved_player_yaw = 0.0
 	day_income = 0
 	day_expense = 0
-	Economy.process_bills()   # giorno 1 è lunedì: affitto + telefono
+	_quiet_bills = true
+	Economy.process_bills()   # giorno 1 è lunedì: affitto + telefono, spiegati con un solo avviso chiaro
+	_quiet_bills = false
 	_start()
+	toast(Data.t("feedback.first_day_bills", first_day_vars()), "info")
 	SaveSystem.save_game()
 
 func continue_game(from_backup: bool = false) -> bool:
@@ -130,7 +136,15 @@ func tutorial_text() -> String:
 	if tutorial_done or tutorial_step >= tutorial_steps().size():
 		return ""
 	var r: Dictionary = Data.economy["rent"]
-	return Data.fmt(tutorial_steps()[tutorial_step]["text"], {"giorni_affitto": r["period_days"], "affitto": euro(int(r["amount_cents"])), "turno_inizio": Data.economy["job_barista"]["shift"]["start"]})
+	var vars := first_day_vars()
+	vars["giorni_affitto"] = r["period_days"]
+	vars["turno_inizio"] = Data.economy["job_barista"]["shift"]["start"]
+	if tutorial_step == 0:
+		var tel := 0
+		for bl in Data.economy["recurring_bills"]:
+			tel += int(bl["amount_cents"])
+		vars["saldo"] = euro(int(Data.economy["start"]["money_cents"]) - int(r["amount_cents"]) - tel) + " €"
+	return Data.fmt(tutorial_steps()[tutorial_step]["text"], vars)
 
 func tutorial_event(ev: String) -> void:
 	if tutorial_done:
@@ -153,7 +167,16 @@ func _on_tx(tx: Dictionary) -> void:
 	else:
 		day_expense += -int(tx["amount"])
 
+func first_day_vars() -> Dictionary:
+	var tel := 0
+	for b in Data.economy["recurring_bills"]:
+		tel += int(b["amount_cents"])
+	return {"iniziale": euro(int(Data.economy["start"]["money_cents"])) + " €", "affitto": euro(int(Data.economy["rent"]["amount_cents"])) + " €",
+		"telefono": euro(tel) + " €", "saldo": euro(Economy.money_cents) + " €"}
+
 func _on_bill(kind: String, info: Dictionary) -> void:
+	if _quiet_bills and kind == "paid":
+		return
 	match kind:
 		"paid":
 			if info.get("is_rent", false):
@@ -194,6 +217,8 @@ func _on_fainted() -> void:
 	if world and world.has_method("send_player_home"):
 		world.send_player_home()
 	sleep_hours(float(Data.balance["faint"]["sleep_hours"]), false)
+	fainted_count += 1
+	SaveSystem.save_game()
 
 ## Sonno: fa passare il tempo un'ora alla volta (bollette e cambi giorno compresi), poi autosave.
 func sleep_hours(h: float, autosave: bool = true) -> void:
@@ -234,6 +259,11 @@ func _process(delta: float) -> void:
 		_autosave_acc = 0.0
 		if not Jobs.in_shift:
 			SaveSystem.save_game()
+
+## Caso 22: dopo ogni acquisto si salva subito, così una chiusura forzata non separa soldi e inventario.
+func save_after_purchase() -> void:
+	if playing and not Jobs.in_shift:
+		SaveSystem.save_game()
 
 func autosave_now(reason: String) -> void:
 	if playing and not headless_test:

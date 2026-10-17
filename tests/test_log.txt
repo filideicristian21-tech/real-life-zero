@@ -1,8 +1,8 @@
 Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
 
-[town] elementi in MultiMesh: 3930
-[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 8.
-[toast] Addebitato: Ricarica telefono settimana 1 −5,00 €.
+[town] LOD automatico su 184 oggetti
+[town] elementi in MultiMesh: 7333 · box/cilindri statici uniti: 448
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (5,00 €). Da 500,00 € ti restano 405,00 €.
 [toast] Sei troppo stanco per correre. Riposati o mangia qualcosa.
 [PASS] T01 Il personaggio si muove e si ferma correttamente
       OK  camminata 1 s: 2.20 m (atteso ~2.4 m), animazione 'walk'
@@ -13,8 +13,7 @@ Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
 [PASS] T02 La telecamera non attraversa pareti o pavimenti
       OK  216 pose camera (6 punti, 12 direzioni, 3 inclinazioni): 0 con un muro tra personaggio e camera 
       OK  camera sotto il pavimento: 0 casi
-[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 8.
-[toast] Addebitato: Ricarica telefono settimana 1 −5,00 €.
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (5,00 €). Da 500,00 € ti restano 405,00 €.
 [toast] Chiuso. Riapre alle domani alle 08:00.
 [toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 15.
 [toast] Addebitato: Ricarica telefono settimana 2 −5,00 €.
@@ -27,8 +26,7 @@ Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
       OK  Interagisci richiude la porta
       OK  Market: porta bloccata la domenica e lunedì alle 07:30 (apre alle 08:00), aperta lunedì alle 09:00
       OK  Bar Centrale: porta bloccata il lunedì (giorno di chiusura)
-[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 8.
-[toast] Addebitato: Ricarica telefono settimana 1 −5,00 €.
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (5,00 €). Da 500,00 € ti restano 405,00 €.
 [toast] Non hai abbastanza soldi. Ti servono 1,20 €, ne hai 1,00.
 [toast] Non hai abbastanza soldi. Ti servono 3,50 €, ne hai 1,00.
 [toast] Non hai abbastanza soldi. Ti servono 4,50 €, ne hai 1,00.
@@ -39,8 +37,7 @@ Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
       OK  inventario invariato
       OK  anche al bar l'ordine senza soldi è rifiutato
       OK  saldo == iniziale + somma storico
-[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 8.
-[toast] Addebitato: Ricarica telefono settimana 1 −5,00 €.
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (5,00 €). Da 500,00 € ti restano 405,00 €.
 [toast] Hai comprato Pane casereccio 500 g per 1,80 €. Saldo: 403,20 €.
 [toast] Hai comprato Latte «Valcolle» 1 L per 1,50 €. Saldo: 401,70 €.
 [toast] Chiuso. Riapre alle domani alle 08:00.
@@ -53,8 +50,7 @@ Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
       OK  doppio tocco su Compra: 1 addebito, 1 confezione (secondo tocco: debounce)
       OK  Market chiuso alle 21:00: acquisto bloccato, saldo invariato
       OK  saldo coerente con lo storico
-[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 8.
-[toast] Addebitato: Ricarica telefono settimana 1 −5,00 €.
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (5,00 €). Da 500,00 € ti restano 405,00 €.
 [toast] Stipendio arrivato: +45,00 € per il turno al Bar Centrale. Saldo: 450,00 €.
 [toast] Stipendio arrivato: +35,00 € per il turno al Bar Centrale. Saldo: 485,00 €.
 [toast] Turno non completato: niente paga per oggi. Ordini serviti: 6 su 10 richiesti.
@@ -69,27 +65,23 @@ Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
       OK  oltre 45 min di ritardo: turno perso (Troppo tardi: oltre 45 minuti di ritardo il turno di oggi è perso.)
       OK  domenica: nessun turno
       OK  saldo coerente con lo storico
-[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 8.
-[toast] Addebitato: Ricarica telefono settimana 1 −5,00 €.
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (5,00 €). Da 500,00 € ti restano 405,00 €.
 [PASS] T07 I bisogni cambiano nel tempo
       OK  1 ora di gioco: fame −4.00 (dati: 4.0)
       OK  energia −3.00 da fermo (dati: 3.0)
       OK  sonno −5.00
       OK  correndo l'energia scende di più: −9.00/h
       OK  giornata = 20 minuti reali (1.20 min di gioco al secondo)
-[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 8.
-[toast] Addebitato: Ricarica telefono settimana 1 −5,00 €.
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (5,00 €). Da 500,00 € ti restano 405,00 €.
 [PASS] T08 Dormire recupera energia
       OK  8 ore: energia 20 → 100.0 (atteso 100.0)
       OK  sonno 15 → 100.0
       OK  la fame scende più piano dormendo: −16.0 in 8 h
       OK  l'ora avanza: giorno 2, 06:00
-[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 8.
-[toast] Addebitato: Ricarica telefono settimana 1 −5,00 €.
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (5,00 €). Da 500,00 € ti restano 405,00 €.
 [toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 15.
 [toast] Addebitato: Ricarica telefono settimana 2 −5,00 €.
-[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 8.
-[toast] Addebitato: Ricarica telefono settimana 1 −5,00 €.
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (5,00 €). Da 500,00 € ti restano 405,00 €.
 [toast] Non hai abbastanza soldi per l'affitto (90,00 €). Ti mancano 80,00 €. Puoi saldarlo dal telefono (Conto).
 [toast] Addebitato: Ricarica telefono settimana 2 −5,00 €.
 [toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 15.
@@ -102,8 +94,7 @@ Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
       OK  senza soldi: affitto in arretrato (1), saldo mai negativo (€ 115,00)
       OK  l'arretrato si salda dal telefono quando arrivano i soldi
       OK  saldo coerente con lo storico
-[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 8.
-[toast] Addebitato: Ricarica telefono settimana 1 −5,00 €.
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (5,00 €). Da 500,00 € ti restano 405,00 €.
 [toast] Hai comprato Pane casereccio 500 g per 1,80 €. Saldo: 403,20 €.
 [toast] Hai comprato Uova (6) per 2,50 €. Saldo: 400,70 €.
 [PASS] T10 Il salvataggio ripristina correttamente la partita (stesso processo)
@@ -118,8 +109,7 @@ Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
       OK  21:9 (2560x1080) → logico 1707x720: comandi dentro lo schermo=true, sovrapposizioni=false, joystick ok=true, telefono dentro=true, pulsante minimo 64 px
       OK  4:3 tablet (2048x1536) → logico 1280x960: comandi dentro lo schermo=true, sovrapposizioni=false, joystick ok=true, telefono dentro=true, pulsante minimo 64 px
       OK  3:2 (2160x1440) → logico 1280x853: comandi dentro lo schermo=true, sovrapposizioni=false, joystick ok=true, telefono dentro=true, pulsante minimo 64 px
-[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 8.
-[toast] Addebitato: Ricarica telefono settimana 1 −5,00 €.
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (5,00 €). Da 500,00 € ti restano 405,00 €.
 [toast] Hai comprato Panino confezionato per 3,50 €. Saldo: 401,50 €.
 [toast] Hai comprato Pasta «Molino Antico» 500 g per 1,20 €. Saldo: 400,30 €.
 [toast] Hai consumato: Panino confezionato. Fame +35, Energia +5.
@@ -134,8 +124,7 @@ Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
       OK  salva/carica a fine sessione
       OK  denaro coerente dopo 4 giorni (saldo € 535,30)
       OK  errori di script/motore: verificati dal runner shell sul log (vedi TEST-REPORT)
-[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 8.
-[toast] Addebitato: Ricarica telefono settimana 1 −5,00 €.
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (5,00 €). Da 500,00 € ti restano 405,00 €.
 [toast] Hai comprato Bevanda energetica 250 ml per 1,60 €. Saldo: 403,40 €.
 [toast] Hai comprato Pizza surgelata per 3,00 €. Saldo: 400,40 €.
 [toast] Hai comprato Latte «Valcolle» 1 L per 1,50 €. Saldo: 398,90 €.
@@ -633,8 +622,7 @@ Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
 [toast] Non hai abbastanza soldi. Ti servono 1,50 €, ne hai 0,20.
 [toast] Non hai abbastanza soldi. Ti servono 1,20 €, ne hai 0,20.
 [toast] Non hai abbastanza soldi. Ti servono 2,50 €, ne hai 0,20.
-[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 8.
-[toast] Addebitato: Ricarica telefono settimana 1 −5,00 €.
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (5,00 €). Da 500,00 € ti restano 405,00 €.
 [toast] Hai fame. Mangia qualcosa (Zaino o Market).
 [toast] Hai sonno. Torna a casa a dormire.
 [toast] Sei a corto di energia: sotto 20 non puoi iniziare il turno.
@@ -644,25 +632,21 @@ Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
       OK  B1: 1500 azioni casuali (acquisti, tempo, bollette): saldo mai negativo, coerente (finale € 0,20)
       OK  B4: senza pasti l'energia va sotto 20 dopo 16 ore di gioco (entro 48)
       OK  valori letti da data/economy.json (affitto € 90, paga € 45)
-[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 8.
-[toast] Addebitato: Ricarica telefono settimana 1 −5,00 €.
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (5,00 €). Da 500,00 € ti restano 405,00 €.
 [PASS] X01 Nessun pulsante finto (telefono, pannelli, HUD)
       OK  64 pulsanti controllati, senza azione: []
-[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 8.
-[toast] Addebitato: Ricarica telefono settimana 1 −5,00 €.
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (5,00 €). Da 500,00 € ti restano 405,00 €.
 [PASS] X02 NPC con orari e dialoghi collegati ai dati
       OK  martedì 08:30 in giro: Mimmo, Rosa, Sig. Bianchi, Signora Ada, Dario, Marta
       OK  alle 02:00 tutti a casa (0 visibili)
       OK  32 blocchi di dialogo: segnaposto non risolti = 0
-[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 8.
-[toast] Addebitato: Ricarica telefono settimana 1 −5,00 €.
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (5,00 €). Da 500,00 € ti restano 405,00 €.
 [PASS] X03 Mangiare dall'inventario (caso Hook 10)
       OK  pane: fame 40 → 55 (effetto dai dati +15)
       OK  porzioni 3 → 2
       OK  a 0 porzioni non si mangia (fame invariata)
       OK  la pasta senza cucina è rifiutata: Serve la cucina di casa: cucinala a casa.
-[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 8.
-[toast] Addebitato: Ricarica telefono settimana 1 −5,00 €.
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (5,00 €). Da 500,00 € ti restano 405,00 €.
 [PASS] X04 App in background/chiusa durante il turno (caso Hook 13)
       OK  turno iniziato martedì 06:30
       OK  background: compare la pausa del turno, il turno resta sospeso
@@ -670,21 +654,256 @@ Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
       OK  nessuno stipendio senza aver lavorato (voci storico 2 → 2)
       OK  non si ripete il turno lo stesso giorno: Il turno di oggi è stato interrotto e non si può ripetere. Prossimo: domani 06:30–12:30.
       OK  saldo coerente con lo storico
-[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 8.
-[toast] Addebitato: Ricarica telefono settimana 1 −5,00 €.
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (5,00 €). Da 500,00 € ti restano 405,00 €.
+[PASS] X05 Primo avvio: addebito di affitto e telefono spiegato (caso Hook 1)
+      OK  saldo dopo la nuova partita € 405,00 (500 − 90 − 5)
+      OK  avviso unico: «Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (5,00 €). Da 500,00 € ti restano 405,00 €.»
+      OK  primo passo del tutorial: «Benvenuto a San Vito al Colle. Hai 20 anni e una stanza in affitto. Sei arrivato con 500,00 €: oggi hai già pagato la prima settimana d'affitto (90,00 €) e la ricarica del telefono (5,00 €), quindi ti restano 405,00 €. Lo vedi nel Telefono, app Conto.»
+      OK  nello storico: 2 voci (affitto settimana 1, ricarica telefono)
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (5,00 €). Da 500,00 € ti restano 405,00 €.
+[toast] Il turno interrotto (app chiusa) è stato annullato: niente paga per oggi.
+[toast] Il Market sta chiudendo: per oggi niente acquisti. Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[PASS] X06 Il negozio chiude con il pannello aperto (caso Hook 21)
+      OK  pannello del Market aperto alle 19:58
+      OK  alle 20:00 il pannello si chiude da solo con l'avviso «sta chiudendo»
+      OK  acquisto alle 20:00 rifiutato (closed), saldo e inventario invariati
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (5,00 €). Da 500,00 € ti restano 405,00 €.
+[toast] Hai comprato Latte «Valcolle» 1 L per 1,50 €. Saldo: 403,50 €.
+[PASS] X07 Acquisto e chiusura forzata subito dopo (caso Hook 22)
+      OK  salvataggio ricaricato dal disco
+      OK  saldo dopo la riapertura € 403,50 (= dopo l'acquisto)
+      OK  il latte è nell'inventario dopo la riapertura (4 porzioni)
+      OK  saldo coerente con lo storico
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (5,00 €). Da 500,00 € ti restano 405,00 €.
+[PASS] X08 Dormire oltre l'inizio del turno (caso Hook 23)
+      OK  sveglia alle 13:00 (05:00 + 8 h)
+      OK  turno non più disponibile: Troppo tardi: oltre 45 minuti di ritardo il turno di oggi è perso.
+      OK  nessuna paga per martedì
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (5,00 €). Da 500,00 € ti restano 405,00 €.
+[toast] Durante il turno il telefono resta in tasca. Usa la pausa (II) se ti serve fermarti.
+[toast] Turno non completato: niente paga per oggi. test
+[PASS] X09 Telefono durante il turno (caso Hook 24)
+      OK  il telefono non si apre: resta il pannello del turno (avviso «resta in tasca»)
+      OK  il tempo non salta in avanti
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (5,00 €). Da 500,00 € ti restano 405,00 €.
+[toast] Hai comprato Tonno in scatola 3×80 g per 3,80 €. Saldo: 1.401,20 €.
+[toast] Hai comprato Tonno in scatola 3×80 g per 3,80 €. Saldo: 1.397,40 €.
+[toast] Hai comprato Tonno in scatola 3×80 g per 3,80 €. Saldo: 1.393,60 €.
+[toast] Hai comprato Tonno in scatola 3×80 g per 3,80 €. Saldo: 1.389,80 €.
+[toast] Hai comprato Tonno in scatola 3×80 g per 3,80 €. Saldo: 1.386,00 €.
+[toast] Hai comprato Tonno in scatola 3×80 g per 3,80 €. Saldo: 1.382,20 €.
+[toast] Hai comprato Tonno in scatola 3×80 g per 3,80 €. Saldo: 1.378,40 €.
+[toast] Hai comprato Tonno in scatola 3×80 g per 3,80 €. Saldo: 1.374,60 €.
+[toast] Prodotto esaurito per oggi. Torna domani.
+[toast] Prodotto esaurito per oggi. Torna domani.
+[toast] Prodotto esaurito per oggi. Torna domani.
+[PASS] X10 Comprare tutte le scorte (caso Hook 26)
+      OK  comprate 8 confezioni su 8 a scaffale
+      OK  acquisto successivo rifiutato (stock)
+      OK  addebiti solo per le confezioni prese
+      OK  il pulsante mostra «Esaurito» ed è disattivato
+      OK  il giorno dopo lo scaffale è rifornito (8)
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (5,00 €). Da 500,00 € ti restano 405,00 €.
+[toast] Sei a corto di energia: sotto 20 non puoi iniziare il turno.
+[toast] Turno non completato: niente paga per oggi. Sei svenuto durante il turno.
+[toast] Sei crollato dalla stanchezza. Ti risvegli a casa.
+[PASS] X11 Svenimento lontano da casa (caso Hook 25, B1)
+      OK  svenimento registrato una volta
+      OK  risveglio a casa (distanza dal letto 0.00 m)
+      OK  passano 6.0 ore (dati: 6)
+      OK  turno annullato senza paga, energia risalita a 72
+      OK  partita salvata dopo lo svenimento
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (5,00 €). Da 500,00 € ti restano 405,00 €.
+[toast] Hai fame. Mangia qualcosa (Zaino o Market).
+[toast] Sei a corto di energia: sotto 20 non puoi iniziare il turno.
+[toast] Sei crollato dalla stanchezza. Ti risvegli a casa.
+[PASS] X12 Fame a 0 (B2)
+      OK  la fame resta a 0, non va sotto
+      OK  a stomaco vuoto l'energia scende più in fretta: −6.0/h (dati 6.0)
+      OK  lasciando la fame a 0 l'energia arriva a 0 e scatta lo svenimento (risveglio a casa), nessuna morte o malattia
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (5,00 €). Da 500,00 € ti restano 405,00 €.
+[PASS] X13 Fermata del bus (B5)
+      OK  alle 07:00 il prossimo bus è alle 07:10 (prima corsa 06:10, ogni 30 min)
+      OK  dopo l'ultima corsa (21:10): prossimo domani alle 06:10
+      OK  alla fermata ci si siede, non si paga nulla: nella v1 sul bus non si sale (detto nel pannello)
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (5,00 €). Da 500,00 € ti restano 405,00 €.
+[toast] Un bicchiere d'acqua del rubinetto. Energia +2.
+[toast] Hai già bevuto da poco.
+[toast] Un bicchiere d'acqua del rubinetto. Energia +2.
+[PASS] X14 Acqua del rubinetto (B5)
+      OK  primo bicchiere: energia +2
+      OK  subito dopo: nessun effetto (attesa 60 min)
+      OK  dopo 61 minuti di nuovo +2
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (5,00 €). Da 500,00 € ti restano 405,00 €.
+[PASS] X15 Cucinare a casa (B4)
+      OK  pasta cucinata: Hai consumato: Pasta «Molino Antico» 500 g con Sugo al pomodoro 400 g. Fame +40, Energia +5.
+      OK  una porzione di pasta e una di sugo consumate
+      OK  fame 20 → 60 (pasta + sugo + bonus dai dati)
+      OK  pizza surgelata nel forno di casa: ok
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (5,00 €). Da 500,00 € ti restano 405,00 €.
+[toast] Non hai abbastanza soldi per l'affitto (90,00 €). Ti mancano 90,00 €. Puoi saldarlo dal telefono (Conto).
+[toast] Non hai abbastanza soldi per l'affitto (5,00 €). Ti mancano 5,00 €. Puoi saldarlo dal telefono (Conto).
+[toast] Stipendio arrivato: +45,00 € per il turno al Bar Centrale. Saldo: 45,00 €.
+[toast] Stipendio arrivato: +45,00 € per il turno al Bar Centrale. Saldo: 90,00 €.
+[toast] Affitto in ritardo: aggiunta una mora di 10,00 €.
+[toast] Stipendio arrivato: +45,00 € per il turno al Bar Centrale. Saldo: 135,00 €.
+[toast] Affitto pagato: −100,00 €. Prossima scadenza: giorno 15.
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (5,00 €). Da 500,00 € ti restano 405,00 €.
+[toast] Non hai abbastanza soldi per l'affitto (90,00 €). Ti mancano 90,00 €. Puoi saldarlo dal telefono (Conto).
+[toast] Non hai abbastanza soldi per l'affitto (5,00 €). Ti mancano 5,00 €. Puoi saldarlo dal telefono (Conto).
+[toast] Affitto in ritardo: aggiunta una mora di 10,00 €.
+[toast] Non hai abbastanza soldi per l'affitto (90,00 €). Ti mancano 90,00 €. Puoi saldarlo dal telefono (Conto).
+[toast] Non hai abbastanza soldi per l'affitto (5,00 €). Ti mancano 5,00 €. Puoi saldarlo dal telefono (Conto).
+[toast] Affitto in ritardo: aggiunta una mora di 10,00 €.
+[toast] Non hai abbastanza soldi per l'affitto (90,00 €). Ti mancano 90,00 €. Puoi saldarlo dal telefono (Conto).
+[toast] Non hai abbastanza soldi per l'affitto (5,00 €). Ti mancano 5,00 €. Puoi saldarlo dal telefono (Conto).
+[toast] Affitto in ritardo: aggiunta una mora di 10,00 €.
+[toast] Non hai abbastanza soldi per l'affitto (90,00 €). Ti mancano 90,00 €. Puoi saldarlo dal telefono (Conto).
+[toast] Non hai abbastanza soldi per l'affitto (5,00 €). Ti mancano 5,00 €. Puoi saldarlo dal telefono (Conto).
+[PASS] X16 Arretrato lungo e stipendio con saldo a 0 (B6, caso Hook 28)
+      OK  giorno 8 senza soldi: affitto in arretrato
+      OK  turno con saldo 0: stipendio entrato (€ 45,00)
+      OK  con € 45 il saldo non basta: pagamento rifiutato, saldo mai negativo
+      OK  dopo 3 turni l'arretrato (€ 100,00, con mora) si salda dal telefono
+      OK  nessuno sfratto se si salda, storico coerente
+      OK  senza mai pagare: «sfratto» leggero (schermata di ripartenza) il giorno 15, l'arretrato non cresce all'infinito
+      OK  saldo mai negativo e coerente con lo storico
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (5,00 €). Da 500,00 € ti restano 405,00 €.
+[toast] Hai comprato Pasta «Molino Antico» 500 g per 1,20 €. Saldo: 403,80 €.
+[toast] Hai comprato Sugo al pomodoro 400 g per 1,90 €. Saldo: 401,90 €.
+[toast] Hai comprato Banane 1 kg per 2,00 €. Saldo: 399,90 €.
+[toast] Hai comprato Pane casereccio 500 g per 1,80 €. Saldo: 398,10 €.
+[toast] Stipendio arrivato: +45,00 € per il turno al Bar Centrale. Saldo: 443,10 €.
+[toast] Hai comprato Pasta «Molino Antico» 500 g per 1,20 €. Saldo: 441,90 €.
+[toast] Hai comprato Sugo al pomodoro 400 g per 1,90 €. Saldo: 440,00 €.
+[toast] Hai comprato Banane 1 kg per 2,00 €. Saldo: 438,00 €.
+[toast] Hai comprato Pane casereccio 500 g per 1,80 €. Saldo: 436,20 €.
+[toast] Stipendio arrivato: +45,00 € per il turno al Bar Centrale. Saldo: 481,20 €.
+[toast] Hai comprato Pasta «Molino Antico» 500 g per 1,20 €. Saldo: 480,00 €.
+[toast] Hai comprato Sugo al pomodoro 400 g per 1,90 €. Saldo: 478,10 €.
+[toast] Hai comprato Banane 1 kg per 2,00 €. Saldo: 476,10 €.
+[toast] Hai comprato Pane casereccio 500 g per 1,80 €. Saldo: 474,30 €.
+[toast] Hai fame. Mangia qualcosa (Zaino o Market).
+[toast] Stipendio arrivato: +45,00 € per il turno al Bar Centrale. Saldo: 519,30 €.
+[toast] Hai comprato Pasta «Molino Antico» 500 g per 1,20 €. Saldo: 518,10 €.
+[toast] Hai comprato Sugo al pomodoro 400 g per 1,90 €. Saldo: 516,20 €.
+[toast] Hai comprato Banane 1 kg per 2,00 €. Saldo: 514,20 €.
+[toast] Hai comprato Pane casereccio 500 g per 1,80 €. Saldo: 512,40 €.
+[toast] Hai fame. Mangia qualcosa (Zaino o Market).
+[toast] Stipendio arrivato: +45,00 € per il turno al Bar Centrale. Saldo: 557,40 €.
+[toast] Hai comprato Pasta «Molino Antico» 500 g per 1,20 €. Saldo: 556,20 €.
+[toast] Hai comprato Sugo al pomodoro 400 g per 1,90 €. Saldo: 554,30 €.
+[toast] Hai comprato Banane 1 kg per 2,00 €. Saldo: 552,30 €.
+[toast] Hai comprato Pane casereccio 500 g per 1,80 €. Saldo: 550,50 €.
+[toast] Hai fame. Mangia qualcosa (Zaino o Market).
+[toast] Stipendio arrivato: +45,00 € per il turno al Bar Centrale. Saldo: 595,50 €.
+[toast] Hai comprato Pasta «Molino Antico» 500 g per 1,20 €. Saldo: 594,30 €.
+[toast] Hai comprato Sugo al pomodoro 400 g per 1,90 €. Saldo: 592,40 €.
+[toast] Hai comprato Banane 1 kg per 2,00 €. Saldo: 590,40 €.
+[toast] Hai comprato Pane casereccio 500 g per 1,80 €. Saldo: 588,60 €.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 15.
+[toast] Addebitato: Ricarica telefono settimana 2 −5,00 €.
+[toast] Hai comprato Pasta «Molino Antico» 500 g per 1,20 €. Saldo: 492,40 €.
+[toast] Hai comprato Sugo al pomodoro 400 g per 1,90 €. Saldo: 490,50 €.
+[toast] Hai comprato Banane 1 kg per 2,00 €. Saldo: 488,50 €.
+[toast] Hai comprato Pane casereccio 500 g per 1,80 €. Saldo: 486,70 €.
+[toast] Stipendio arrivato: +45,00 € per il turno al Bar Centrale. Saldo: 531,70 €.
+[toast] Hai comprato Pasta «Molino Antico» 500 g per 1,20 €. Saldo: 530,50 €.
+[toast] Hai comprato Sugo al pomodoro 400 g per 1,90 €. Saldo: 528,60 €.
+[toast] Hai comprato Banane 1 kg per 2,00 €. Saldo: 526,60 €.
+[toast] Hai comprato Pane casereccio 500 g per 1,80 €. Saldo: 524,80 €.
+[toast] Stipendio arrivato: +45,00 € per il turno al Bar Centrale. Saldo: 569,80 €.
+[toast] Hai comprato Pasta «Molino Antico» 500 g per 1,20 €. Saldo: 568,60 €.
+[toast] Hai comprato Sugo al pomodoro 400 g per 1,90 €. Saldo: 566,70 €.
+[toast] Hai comprato Banane 1 kg per 2,00 €. Saldo: 564,70 €.
+[toast] Hai comprato Pane casereccio 500 g per 1,80 €. Saldo: 562,90 €.
+[toast] Hai fame. Mangia qualcosa (Zaino o Market).
+[toast] Stipendio arrivato: +45,00 € per il turno al Bar Centrale. Saldo: 607,90 €.
+[toast] Hai comprato Pasta «Molino Antico» 500 g per 1,20 €. Saldo: 606,70 €.
+[toast] Hai comprato Sugo al pomodoro 400 g per 1,90 €. Saldo: 604,80 €.
+[toast] Hai comprato Banane 1 kg per 2,00 €. Saldo: 602,80 €.
+[toast] Hai comprato Pane casereccio 500 g per 1,80 €. Saldo: 601,00 €.
+[toast] Hai fame. Mangia qualcosa (Zaino o Market).
+[toast] Stipendio arrivato: +45,00 € per il turno al Bar Centrale. Saldo: 646,00 €.
+[toast] Hai comprato Pasta «Molino Antico» 500 g per 1,20 €. Saldo: 644,80 €.
+[toast] Hai comprato Sugo al pomodoro 400 g per 1,90 €. Saldo: 642,90 €.
+[toast] Hai comprato Banane 1 kg per 2,00 €. Saldo: 640,90 €.
+[toast] Hai comprato Pane casereccio 500 g per 1,80 €. Saldo: 639,10 €.
+[toast] Hai fame. Mangia qualcosa (Zaino o Market).
+[toast] Stipendio arrivato: +45,00 € per il turno al Bar Centrale. Saldo: 684,10 €.
+[toast] Hai comprato Pasta «Molino Antico» 500 g per 1,20 €. Saldo: 682,90 €.
+[toast] Hai comprato Sugo al pomodoro 400 g per 1,90 €. Saldo: 681,00 €.
+[toast] Hai comprato Banane 1 kg per 2,00 €. Saldo: 679,00 €.
+[toast] Hai comprato Pane casereccio 500 g per 1,80 €. Saldo: 677,20 €.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 22.
+[toast] Addebitato: Ricarica telefono settimana 3 −5,00 €.
+[toast] Hai comprato Pasta «Molino Antico» 500 g per 1,20 €. Saldo: 581,00 €.
+[toast] Hai comprato Sugo al pomodoro 400 g per 1,90 €. Saldo: 579,10 €.
+[toast] Hai comprato Banane 1 kg per 2,00 €. Saldo: 577,10 €.
+[toast] Hai comprato Pane casereccio 500 g per 1,80 €. Saldo: 575,30 €.
+[toast] Stipendio arrivato: +45,00 € per il turno al Bar Centrale. Saldo: 620,30 €.
+[toast] Hai comprato Pasta «Molino Antico» 500 g per 1,20 €. Saldo: 619,10 €.
+[toast] Hai comprato Sugo al pomodoro 400 g per 1,90 €. Saldo: 617,20 €.
+[toast] Hai comprato Banane 1 kg per 2,00 €. Saldo: 615,20 €.
+[toast] Hai comprato Pane casereccio 500 g per 1,80 €. Saldo: 613,40 €.
+[toast] Stipendio arrivato: +45,00 € per il turno al Bar Centrale. Saldo: 658,40 €.
+[toast] Hai comprato Pasta «Molino Antico» 500 g per 1,20 €. Saldo: 657,20 €.
+[toast] Hai comprato Sugo al pomodoro 400 g per 1,90 €. Saldo: 655,30 €.
+[toast] Hai comprato Banane 1 kg per 2,00 €. Saldo: 653,30 €.
+[toast] Hai comprato Pane casereccio 500 g per 1,80 €. Saldo: 651,50 €.
+[toast] Hai fame. Mangia qualcosa (Zaino o Market).
+[toast] Stipendio arrivato: +45,00 € per il turno al Bar Centrale. Saldo: 696,50 €.
+[toast] Hai comprato Pasta «Molino Antico» 500 g per 1,20 €. Saldo: 695,30 €.
+[toast] Hai comprato Sugo al pomodoro 400 g per 1,90 €. Saldo: 693,40 €.
+[toast] Hai comprato Banane 1 kg per 2,00 €. Saldo: 691,40 €.
+[toast] Hai comprato Pane casereccio 500 g per 1,80 €. Saldo: 689,60 €.
+[toast] Hai fame. Mangia qualcosa (Zaino o Market).
+[toast] Stipendio arrivato: +45,00 € per il turno al Bar Centrale. Saldo: 734,60 €.
+[toast] Hai comprato Pasta «Molino Antico» 500 g per 1,20 €. Saldo: 733,40 €.
+[toast] Hai comprato Sugo al pomodoro 400 g per 1,90 €. Saldo: 731,50 €.
+[toast] Hai comprato Banane 1 kg per 2,00 €. Saldo: 729,50 €.
+[toast] Hai comprato Pane casereccio 500 g per 1,80 €. Saldo: 727,70 €.
+[toast] Hai fame. Mangia qualcosa (Zaino o Market).
+[toast] Stipendio arrivato: +45,00 € per il turno al Bar Centrale. Saldo: 772,70 €.
+[toast] Hai comprato Pasta «Molino Antico» 500 g per 1,20 €. Saldo: 771,50 €.
+[toast] Hai comprato Sugo al pomodoro 400 g per 1,90 €. Saldo: 769,60 €.
+[toast] Hai comprato Banane 1 kg per 2,00 €. Saldo: 767,60 €.
+[toast] Hai comprato Pane casereccio 500 g per 1,80 €. Saldo: 765,80 €.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 29.
+[toast] Addebitato: Ricarica telefono settimana 4 −5,00 €.
+[PASS] X17 Sessione automatica di 21 giorni (review Hook: 3 affitti)
+      OK  saldo coerente con lo storico dopo 21 giorni (€ 670,80, 95 voci)
+      OK  affitti dei giorni 8, 15 e 22 addebitati una volta ciascuno (3, oggi è il giorno 22) + giorno 1 alla nuova partita
+      OK  mai saldo negativo, nessuno sfratto con una routine normale
+      OK  bisogni sempre tra 0 e 100
+      OK  turni pagati: 15 (mar-sab)
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (5,00 €). Da 500,00 € ti restano 405,00 €.
 [toast] Hai comprato Pasta «Molino Antico» 500 g per 1,20 €. Saldo: 403,80 €.
 [toast] Hai comprato Sugo al pomodoro 400 g per 1,90 €. Saldo: 401,90 €.
 [PASS] T10a Preparazione chiusura/riapertura: partita salvata, il processo ora si chiude
       OK  salvato in /home/box/.local/share/godot/app_userdata/REAL LIFE- ZERO/test_save.json
-RESULT: 18 test, 0 falliti
-[toast] Il turno interrotto (app chiusa) è stato annullato: niente paga per oggi.
+RESULT: 31 test, 0 falliti
 WARNING: 20 ObjectDB instances were leaked at exit (run with `--verbose` for details).
    at: cleanup (core/object/object.cpp:2536)
 ERROR: 8 resources still in use at exit (run with --verbose for details).
    at: clear (core/io/resource.cpp:822)
 Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
 
-[town] elementi in MultiMesh: 3930
+[town] LOD automatico su 184 oggetti
+[town] elementi in MultiMesh: 7333 · box/cilindri statici uniti: 448
 [toast] Bentornato. È il giorno 3, ore 14:40. Hai 401,90 €.
 [PASS] T10b Chiusura e riapertura del gioco: i dati restano corretti (secondo processo)
       OK  Continua dal menu: caricamento riuscito in un nuovo processo

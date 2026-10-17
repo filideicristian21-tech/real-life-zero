@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://eyfy3alncj8w"
-path="res://.godot/imported/mimmo.glb-88c820ad63e8dfd7f4c6b88f7350e1a8.scn"
+uid="uid://bvwp71w7t8p08"
+path="res://.godot/imported/hoodie.glb-5d7180ed7d85afc43258ea620f2f2c1d.scn"
 
 [deps]
 
-source_file="res://assets/characters/mimmo.glb"
-dest_files=["res://.godot/imported/mimmo.glb-88c820ad63e8dfd7f4c6b88f7350e1a8.scn"]
+source_file="res://assets/characters/hoodie.glb"
+dest_files=["res://.godot/imported/hoodie.glb-5d7180ed7d85afc43258ea620f2f2c1d.scn"]
 
 [params]
 
