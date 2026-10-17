@@ -1,0 +1,89 @@
+{
+  "tutorial": [
+    {
+      "id": "benvenuto",
+      "text": "Benvenuto a San Vito al Colle. Hai 20 anni, 500 € e una stanza in affitto. Da oggi te la cavi da solo.",
+      "done": "tap"
+    },
+    {
+      "id": "muoviti",
+      "text": "Usa il joystick a sinistra per camminare. Trascina a destra per girare la visuale.",
+      "done": "moved"
+    },
+    {
+      "id": "telefono",
+      "text": "Tocca Telefono: qui trovi soldi, ora, bisogni e lavoro.",
+      "done": "phone_opened"
+    },
+    {
+      "id": "bisogni",
+      "text": "Fame, energia e sonno calano con il tempo. Se scendono troppo, fai fatica a fare tutto.",
+      "done": "tap"
+    },
+    {
+      "id": "affitto",
+      "text": "Ogni {giorni_affitto} giorni paghi {affitto} € di affitto (oggi è già stato addebitato). La prossima scadenza è nell'Agenda.",
+      "done": "tap"
+    },
+    {
+      "id": "esci",
+      "text": "Avvicinati alla porta e tocca Interagisci per uscire di casa.",
+      "done": "left_home"
+    },
+    {
+      "id": "spesa",
+      "text": "Vai al Market Il Girasole (Via Roma Vecchia) e compra qualcosa da mangiare. Il prezzo è sempre scritto sullo scaffale.",
+      "done": "bought"
+    },
+    {
+      "id": "lavoro",
+      "text": "Il Bar Centrale da Mimmo cerca qualcuno per i turni. Parla con Mimmo al bancone. Oggi il bar è chiuso: il primo turno è domani alle {turno_inizio}.",
+      "done": "hired"
+    },
+    {
+      "id": "sera",
+      "text": "Torna a casa e dormi nel letto per recuperare sonno e passare al giorno dopo. Imposta la sveglia prima del turno. Buona fortuna!",
+      "done": "slept"
+    }
+  ],
+  "phone": {
+    "conto": "Conto",
+    "zaino": "Zaino",
+    "agenda": "Agenda",
+    "lavoro": "Lavoro",
+    "stato": "Stato",
+    "menu": "Menu",
+    "inv_empty": "Non hai niente con te. Il Market Il Girasole è aperto dalle {apertura} alle {chiusura}.",
+    "hist_empty": "Nessun movimento ancora.",
+    "no_job": "Non hai ancora un lavoro. Prova a chiedere al Bar Centrale da Mimmo."
+  },
+  "feedback": {
+    "bought": "Hai comprato {prodotto} per {prezzo} €. Saldo: {saldo} €.",
+    "no_money": "Non hai abbastanza soldi. Ti servono {prezzo} €, ne hai {saldo}.",
+    "paid": "Stipendio arrivato: +{paga} € per il turno al Bar Centrale. Saldo: {saldo} €.",
+    "not_paid": "Turno non completato: niente paga per oggi. {motivo}",
+    "rent_paid": "Affitto pagato: −{affitto} €. Prossima scadenza: giorno {giorno}.",
+    "rent_unpaid": "Non hai abbastanza soldi per l'affitto ({affitto} €). Ti mancano {mancanti} €.",
+    "closed": "Chiuso. Riapre alle {apertura}.",
+    "too_tired_run": "Sei troppo stanco per correre. Riposati o mangia qualcosa."
+  },
+  "save": {
+    "saving": "Salvataggio in corso…",
+    "saved": "Partita salvata.",
+    "slept": "Hai dormito. Partita salvata.",
+    "error": "Non riesco a salvare. Controlla lo spazio libero sul telefono e riprova.",
+    "continue_sub": "Giorno {giorno}, {ora} · {saldo} €",
+    "confirm_new": "Iniziare una nuova partita? Il salvataggio attuale verrà sovrascritto.",
+    "welcome_back": "Bentornato. È il giorno {giorno}, ore {ora}. Hai {saldo} €.",
+    "missing": "Nessun salvataggio trovato. Inizia una nuova partita.",
+    "corrupt": "Il salvataggio sembra danneggiato e non si può caricare.",
+    "backup_loaded": "Caricato l'ultimo salvataggio valido (giorno {giorno}).",
+    "backup_bad": "Anche il backup è danneggiato. Inizia una nuova partita."
+  },
+  "pause": {
+    "title": "Pausa",
+    "quit_confirm": "Tornare al menu? I progressi non salvati andranno persi."
+  },
+  "privacy": "Il gioco funziona offline e salva i dati solo sul tuo dispositivo. Non raccoglie dati personali.",
+  "build_label": "Build di test, non pubblicata"
+}

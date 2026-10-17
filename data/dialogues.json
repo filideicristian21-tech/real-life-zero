@@ -1,0 +1,292 @@
+[
+ {
+  "npc": "barista_titolare",
+  "contesto": "primo_incontro",
+  "battute": [
+   "Ciao! Cerchi lavoro? Mi serve una mano al bancone.",
+   "Il turno va da {turno_inizio} a {turno_fine}. Puntuale, mi raccomando.",
+   "Paga: {paga_turno} € a turno, se lo finisci per bene.",
+   "Se ti va, ci vediamo domani. Il grembiule è appeso dietro."
+  ]
+ },
+ {
+  "npc": "barista_titolare",
+  "contesto": "mattina",
+  "battute": [
+   "Buongiorno! Caffè pronto, clienti in arrivo.",
+   "Prima le tazzine, poi la cassa. Vai tranquillo.",
+   "La gente di mattina ha fretta: sorriso e velocità."
+  ]
+ },
+ {
+  "npc": "barista_titolare",
+  "contesto": "sera",
+  "battute": [
+   "Ultimi clienti, poi si chiude.",
+   "Pulisci il bancone e siamo a posto.",
+   "Bel lavoro oggi. Vai a riposarti."
+  ]
+ },
+ {
+  "npc": "barista_titolare",
+  "contesto": "soldi_pochi",
+  "battute": [
+   "Sei un po' pallido. Mangiato qualcosa?",
+   "Se fai il turno completo oggi, la paga arriva stasera.",
+   "Tieni duro, all'inizio è dura per tutti."
+  ]
+ },
+ {
+  "npc": "barista_titolare",
+  "contesto": "soldi_tanti",
+  "battute": [
+   "Vedo che te la cavi! Non spendere tutto in una volta.",
+   "Se vuoi fare più turni, dimmelo.",
+   "Un buon lavoratore si vede subito."
+  ]
+ },
+ {
+  "npc": "barista_titolare",
+  "contesto": "turno_non_valido",
+  "battute": [
+   "Sei in ritardo: oggi il turno non vale.",
+   "Senza finire il lavoro non posso pagarti.",
+   "Domani ripartiamo, va bene?"
+  ]
+ },
+ {
+  "npc": "cassiera_minimarket",
+  "contesto": "primo_incontro",
+  "battute": [
+   "Ciao, sei nuovo in zona? Benvenuto!",
+   "Prezzi sugli scaffali, paghi qui alla cassa.",
+   "Siamo aperti dalle {apertura} alle {chiusura}."
+  ]
+ },
+ {
+  "npc": "cassiera_minimarket",
+  "contesto": "mattina",
+  "battute": [
+   "Buongiorno! Il pane è appena arrivato.",
+   "Prendi tutto? Ecco lo scontrino.",
+   "Buona giornata!"
+  ]
+ },
+ {
+  "npc": "cassiera_minimarket",
+  "contesto": "sera",
+  "battute": [
+   "Sbrigati, tra poco chiudiamo.",
+   "Ultimi acquisti della giornata?",
+   "Buona serata, a domani."
+  ]
+ },
+ {
+  "npc": "cassiera_minimarket",
+  "contesto": "soldi_pochi",
+  "battute": [
+   "Mi spiace, il saldo non basta per tutto.",
+   "Vuoi togliere qualcosa?",
+   "Pasta e uova costano poco e saziano."
+  ]
+ },
+ {
+  "npc": "cassiera_minimarket",
+  "contesto": "soldi_tanti",
+  "battute": [
+   "Spesa grande oggi!",
+   "Vuoi una busta in più?",
+   "Grazie, alla prossima!"
+  ]
+ },
+ {
+  "npc": "padrone_di_casa",
+  "contesto": "primo_incontro",
+  "battute": [
+   "Eccoti, la stanza è tua.",
+   "L'affitto è {affitto} € e si paga ogni {giorni_affitto} giorni.",
+   "Niente feste dopo mezzanotte, intesi?",
+   "Per qualsiasi problema, bussa al piano terra."
+  ]
+ },
+ {
+  "npc": "padrone_di_casa",
+  "contesto": "mattina",
+  "battute": [
+   "Buongiorno! Ti ricordo che l'affitto scade il giorno {scadenza}.",
+   "Hai chiuso bene la finestra stanotte? Faceva freddo.",
+   "Buona giornata, ragazzo."
+  ]
+ },
+ {
+  "npc": "padrone_di_casa",
+  "contesto": "sera",
+  "battute": [
+   "Tutto a posto in casa?",
+   "Spegni le luci quando esci, la bolletta la pago io.",
+   "Buonanotte."
+  ]
+ },
+ {
+  "npc": "padrone_di_casa",
+  "contesto": "soldi_pochi",
+  "battute": [
+   "L'affitto scade tra {giorni_mancanti} giorni. Ce la fai?",
+   "Capisco che è dura, ma i conti sono conti.",
+   "Se ti serve, al bar cercano sempre qualcuno."
+  ]
+ },
+ {
+  "npc": "padrone_di_casa",
+  "contesto": "soldi_tanti",
+  "battute": [
+   "Puntuale con l'affitto, mi piace.",
+   "Inquilini così ce ne vorrebbero di più.",
+   "Ci vediamo alla prossima scadenza."
+  ]
+ },
+ {
+  "npc": "padrone_di_casa",
+  "contesto": "affitto_scaduto",
+  "battute": [
+   "L'affitto è scaduto. Devo riceverlo entro {giorni_tolleranza} giorni.",
+   "Non voglio problemi, ma nemmeno ritardi.",
+   "Paga dal telefono appena puoi."
+  ]
+ },
+ {
+  "npc": "passante_anziana",
+  "contesto": "primo_incontro",
+  "battute": [
+   "Ciao giovanotto, non ti ho mai visto qui.",
+   "Io faccio questo giro ogni mattina, da trent'anni.",
+   "Il bar in piazza fa il miglior caffè del paese."
+  ]
+ },
+ {
+  "npc": "passante_anziana",
+  "contesto": "mattina",
+  "battute": [
+   "Vado al minimarket prima che finisca il pane.",
+   "Che bella giornata per camminare.",
+   "Buongiorno, buongiorno!"
+  ]
+ },
+ {
+  "npc": "passante_anziana",
+  "contesto": "sera",
+  "battute": [
+   "A quest'ora io sono già a casa.",
+   "Torno a vedere la tv, ciao!",
+   "Copriti, la sera fa fresco."
+  ]
+ },
+ {
+  "npc": "passante_anziana",
+  "contesto": "soldi_pochi",
+  "battute": [
+   "Hai l'aria stanca. Mangia bene, eh!",
+   "Alla tua età facevo due lavori.",
+   "Coraggio, le cose migliorano."
+  ]
+ },
+ {
+  "npc": "passante_anziana",
+  "contesto": "soldi_tanti",
+  "battute": [
+   "Ti vedo bene oggi!",
+   "Bravo, si vede che lavori.",
+   "Salutami il barista."
+  ]
+ },
+ {
+  "npc": "passante_runner",
+  "contesto": "primo_incontro",
+  "battute": [
+   "Ehi! Corro qui ogni giorno, giro della piazza.",
+   "Tu sei quello nuovo della stanza in affitto?",
+   "Se ti va, la mattina presto la strada è libera."
+  ]
+ },
+ {
+  "npc": "passante_runner",
+  "contesto": "mattina",
+  "battute": [
+   "Terzo giro, ultimo!",
+   "Buongiorno! Non posso fermarmi.",
+   "Alle sette c'è il pieno di gente al bar."
+  ]
+ },
+ {
+  "npc": "passante_runner",
+  "contesto": "sera",
+  "battute": [
+   "Corsetta serale per scaricare la giornata.",
+   "Di sera è più fresco.",
+   "Ciao, alla prossima!"
+  ]
+ },
+ {
+  "npc": "passante_runner",
+  "contesto": "soldi_pochi",
+  "battute": [
+   "Correre è gratis, ti consiglio di provare!",
+   "Giornata dura? Una camminata aiuta.",
+   "Dai, che ce la fai."
+  ]
+ },
+ {
+  "npc": "passante_runner",
+  "contesto": "soldi_tanti",
+  "battute": [
+   "Ti sei comprato le scarpe nuove?",
+   "Bello vederti in forma.",
+   "Ci vediamo in giro!"
+  ]
+ },
+ {
+  "npc": "persona_fermata_bus",
+  "contesto": "primo_incontro",
+  "battute": [
+   "Aspetti anche tu il bus?",
+   "Passa ogni {frequenza_bus} minuti, se va bene.",
+   "Io lo prendo per andare in città a lavorare."
+  ]
+ },
+ {
+  "npc": "persona_fermata_bus",
+  "contesto": "mattina",
+  "battute": [
+   "È sempre in ritardo la mattina.",
+   "Un altro giorno, un altro bus.",
+   "Eccolo, finalmente!"
+  ]
+ },
+ {
+  "npc": "persona_fermata_bus",
+  "contesto": "sera",
+  "battute": [
+   "L'ultimo passa alle {ultimo_bus}. Non perderlo.",
+   "Che giornata lunga.",
+   "Finalmente si torna a casa."
+  ]
+ },
+ {
+  "npc": "persona_fermata_bus",
+  "contesto": "soldi_pochi",
+  "battute": [
+   "Il biglietto costa {prezzo_biglietto} €. Se non serve, vai a piedi.",
+   "Anch'io conto ogni euro.",
+   "Il paese è piccolo, a piedi arrivi ovunque."
+  ]
+ },
+ {
+  "npc": "persona_fermata_bus",
+  "contesto": "soldi_tanti",
+  "battute": [
+   "Oggi gita in città?",
+   "Beato te, io lavoro anche il sabato.",
+   "Buon viaggio!"
+  ]
+ }
+]

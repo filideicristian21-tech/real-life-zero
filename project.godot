@@ -1,0 +1,55 @@
+; Engine configuration file.
+config_version=5
+
+[application]
+
+config/name="REAL LIFE: ZERO"
+config/description="Simulatore di vita a San Vito al Colle (build di test)"
+config/version="0.1.0"
+run/main_scene="res://scenes/main.tscn"
+config/features=PackedStringArray("4.7", "GL Compatibility")
+boot_splash/bg_color=Color(0.1, 0.1, 0.1, 1)
+config/icon="res://icon.png"
+
+[autoload]
+
+Data="*res://scripts/autoload/data.gd"
+GameTime="*res://scripts/autoload/game_time.gd"
+Economy="*res://scripts/autoload/economy.gd"
+Needs="*res://scripts/autoload/needs.gd"
+Inventory="*res://scripts/autoload/inventory.gd"
+Jobs="*res://scripts/autoload/jobs.gd"
+SaveSystem="*res://scripts/autoload/save_system.gd"
+Game="*res://scripts/autoload/game.gd"
+Sfx="*res://scripts/autoload/sfx.gd"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/handheld/orientation=4
+window/energy_saving/keep_screen_on=true
+
+[gui]
+
+theme/custom_font="res://assets/fonts/Inter.ttf"
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
+[physics]
+
+common/physics_ticks_per_second=60
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
+lights_and_shadows/directional_shadow/size=2048
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=1
+anti_aliasing/quality/msaa_3d=0
+environment/defaults/default_clear_color=Color(0.62, 0.76, 0.86, 1)

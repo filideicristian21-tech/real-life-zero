@@ -1,0 +1,23 @@
+{
+  "town": "San Vito al Colle",
+  "main_street": "Via Roma Vecchia",
+  "side_street": "Via dei Tigli",
+  "piazza": "Piazza della Fontana",
+  "bar": "Bar Centrale da Mimmo",
+  "bar_short": "Bar Centrale",
+  "market": "Market Il Girasole",
+  "market_short": "Il Girasole",
+  "bus_stop": "Linea 3, Piazza della Fontana",
+  "home": "Via dei Tigli 12",
+  "protagonist": "Luca Ferraro",
+  "age": 20,
+  "phone": "Zero Phone",
+  "npcs": {
+    "barista_titolare": "Mimmo",
+    "cassiera_minimarket": "Rosa",
+    "padrone_di_casa": "Sig. Bianchi",
+    "passante_anziana": "Signora Ada",
+    "passante_runner": "Dario",
+    "persona_fermata_bus": "Marta"
+  }
+}

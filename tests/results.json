@@ -1,0 +1,231 @@
+[
+  {
+    "checks": [
+      "OK  camminata 1 s: 2.20 m (atteso ~2.4 m), animazione 'walk'",
+      "OK  dopo il rilascio: velocità 0.000 m/s, deriva 0.000 m, animazione 'idle'",
+      "OK  corsa 1 s: 4.77 m (> 1,6× camminata), animazione 'run'",
+      "OK  con energia 5 la corsa non parte (soglia 15)",
+      "OK  animazioni walk/idle/run attive"
+    ],
+    "id": "T01",
+    "pass": true,
+    "title": "Il personaggio si muove e si ferma correttamente"
+  },
+  {
+    "checks": [
+      "OK  216 pose camera (6 punti, 12 direzioni, 3 inclinazioni): 0 con un muro tra personaggio e camera ",
+      "OK  camera sotto il pavimento: 0 casi"
+    ],
+    "id": "T02",
+    "pass": true,
+    "title": "La telecamera non attraversa pareti o pavimenti"
+  },
+  {
+    "checks": [
+      "OK  porta chiusa blocca il passaggio (x massimo raggiunto -47.49, soglia muro -47,0)",
+      "OK  Interagisci apre la porta di casa (rotazione cerniera -1.57 rad)",
+      "OK  con la porta aperta il personaggio esce in strada (x=-42.92)",
+      "OK  Interagisci richiude la porta",
+      "OK  Market: porta bloccata la domenica e lunedì alle 07:30 (apre alle 08:00), aperta lunedì alle 09:00",
+      "OK  Bar Centrale: porta bloccata il lunedì (giorno di chiusura)"
+    ],
+    "id": "T03",
+    "pass": true,
+    "title": "Le porte si aprono e si chiudono"
+  },
+  {
+    "checks": [
+      "OK  Pasta € 1,20 con saldo € 1,00: rifiutato (money)",
+      "OK  Panino € 3,50: rifiutato",
+      "OK  saldo invariato (€ 1,00), mai negativo",
+      "OK  inventario invariato",
+      "OK  anche al bar l'ordine senza soldi è rifiutato",
+      "OK  saldo == iniziale + somma storico"
+    ],
+    "id": "T04",
+    "pass": true,
+    "title": "Non si possono comprare prodotti senza denaro sufficiente"
+  },
+  {
+    "checks": [
+      "OK  acquisto riuscito",
+      "OK  saldo 405,00 → 403,20 (−1,80)",
+      "OK  inventario: 3 porzioni (1 confezione da 3)",
+      "OK  una sola voce nello storico",
+      "OK  scorta scaffale −1",
+      "OK  doppio tocco su Compra: 1 addebito, 1 confezione (secondo tocco: debounce)",
+      "OK  Market chiuso alle 21:00: acquisto bloccato, saldo invariato",
+      "OK  saldo coerente con lo storico"
+    ],
+    "id": "T05",
+    "pass": true,
+    "title": "Un acquisto riduce il saldo e aggiorna l'inventario una sola volta"
+  },
+  {
+    "checks": [
+      "OK  giorno 1 (lunedì, bar chiuso): turno non disponibile → il tutorial manda al primo turno di martedì",
+      "OK  turno puntuale con 10 ordini: +€ 45,00 (atteso € 45,00)",
+      "OK  seconda chiusura: nessun doppio pagamento (voci stipendio: 1)",
+      "OK  ritardo di 20 min: +€ 35,00 (atteso € 35,00)",
+      "OK  solo 6 ordini su 10: niente paga",
+      "OK  turno lasciato a metà: niente paga",
+      "OK  oltre 45 min di ritardo: turno perso (Troppo tardi: oltre 45 minuti di ritardo il turno di oggi è perso.)",
+      "OK  domenica: nessun turno",
+      "OK  saldo coerente con lo storico"
+    ],
+    "id": "T06",
+    "pass": true,
+    "title": "Il completamento del turno accredita lo stipendio corretto"
+  },
+  {
+    "checks": [
+      "OK  1 ora di gioco: fame −4.00 (dati: 4.0)",
+      "OK  energia −3.00 da fermo (dati: 3.0)",
+      "OK  sonno −5.00",
+      "OK  correndo l'energia scende di più: −9.00/h",
+      "OK  giornata = 20 minuti reali (1.20 min di gioco al secondo)"
+    ],
+    "id": "T07",
+    "pass": true,
+    "title": "I bisogni cambiano nel tempo"
+  },
+  {
+    "checks": [
+      "OK  8 ore: energia 20 → 100.0 (atteso 100.0)",
+      "OK  sonno 15 → 100.0",
+      "OK  la fame scende più piano dormendo: −16.0 in 8 h",
+      "OK  l'ora avanza: giorno 2, 06:00"
+    ],
+    "id": "T08",
+    "pass": true,
+    "title": "Dormire recupera energia"
+  },
+  {
+    "checks": [
+      "OK  giorno 1: 1 addebito anche richiamando il controllo 2 volte",
+      "OK  giorni 2-7: nessun altro addebito",
+      "OK  giorno 8: secondo affitto (€ 90,00) + telefono (€ 5,00) addebitati una volta",
+      "OK  dopo salvataggio + caricamento + nuovo controllo: ancora 2 addebiti",
+      "OK  fino al giorno 14 nessun addebito extra",
+      "OK  senza soldi: affitto in arretrato (1), saldo mai negativo (€ 115,00)",
+      "OK  l'arretrato si salda dal telefono quando arrivano i soldi",
+      "OK  saldo coerente con lo storico"
+    ],
+    "id": "T09",
+    "pass": true,
+    "title": "L'affitto viene addebitato una sola volta per periodo"
+  },
+  {
+    "checks": [
+      "OK  denaro, inventario, bisogni, giorno/ora e lavoro identici dopo il caricamento",
+      "OK  file corrotto riconosciuto (json) e backup caricato",
+      "OK  file modificato a mano: checksum non valido",
+      "OK  file mancante: stato 'missing', nessun crash",
+      "OK  versione 99 non supportata: rifiutata (version 99)"
+    ],
+    "id": "T10",
+    "pass": true,
+    "title": "Il salvataggio ripristina correttamente la partita (stesso processo)"
+  },
+  {
+    "checks": [
+      "OK  16:9 (1920x1080) → logico 1280x720: comandi dentro lo schermo=true, sovrapposizioni=false, joystick ok=true, telefono dentro=true, pulsante minimo 64 px",
+      "OK  20:9 (2400x1080) → logico 1600x720: comandi dentro lo schermo=true, sovrapposizioni=false, joystick ok=true, telefono dentro=true, pulsante minimo 64 px",
+      "OK  21:9 (2560x1080) → logico 1707x720: comandi dentro lo schermo=true, sovrapposizioni=false, joystick ok=true, telefono dentro=true, pulsante minimo 64 px",
+      "OK  4:3 tablet (2048x1536) → logico 1280x960: comandi dentro lo schermo=true, sovrapposizioni=false, joystick ok=true, telefono dentro=true, pulsante minimo 64 px",
+      "OK  3:2 (2160x1440) → logico 1280x853: comandi dentro lo schermo=true, sovrapposizioni=false, joystick ok=true, telefono dentro=true, pulsante minimo 64 px"
+    ],
+    "id": "T11",
+    "pass": true,
+    "title": "L'interfaccia funziona su schermi di dimensioni differenti"
+  },
+  {
+    "checks": [
+      "OK  telefono: home + 6 app aperte",
+      "OK  uscito di casa camminando (x=5.0)",
+      "OK  3 turni lavorati e pagati (3)",
+      "OK  dialoghi con 2 NPC presenti",
+      "OK  salva/carica a fine sessione",
+      "OK  denaro coerente dopo 4 giorni (saldo € 535,30)",
+      "OK  errori di script/motore: verificati dal runner shell sul log (vedi TEST-REPORT)"
+    ],
+    "id": "T12",
+    "pass": true,
+    "title": "Nessun errore critico durante il normale utilizzo (sessione automatica)"
+  },
+  {
+    "checks": [
+      "OK  B1: 1500 azioni casuali (acquisti, tempo, bollette): saldo mai negativo, coerente (finale € 0,20)",
+      "OK  B4: senza pasti l'energia va sotto 20 dopo 16 ore di gioco (entro 48)",
+      "OK  valori letti da data/economy.json (affitto € 90, paga € 45)"
+    ],
+    "id": "BAL",
+    "pass": true,
+    "title": "Test di bilanciamento di Ledger (B2 = T06, B3 = T09)"
+  },
+  {
+    "checks": [
+      "OK  64 pulsanti controllati, senza azione: []"
+    ],
+    "id": "X01",
+    "pass": true,
+    "title": "Nessun pulsante finto (telefono, pannelli, HUD)"
+  },
+  {
+    "checks": [
+      "OK  martedì 08:30 in giro: Mimmo, Rosa, Sig. Bianchi, Signora Ada, Dario, Marta",
+      "OK  alle 02:00 tutti a casa (0 visibili)",
+      "OK  32 blocchi di dialogo: segnaposto non risolti = 0"
+    ],
+    "id": "X02",
+    "pass": true,
+    "title": "NPC con orari e dialoghi collegati ai dati"
+  },
+  {
+    "checks": [
+      "OK  pane: fame 40 → 55 (effetto dai dati +15)",
+      "OK  porzioni 3 → 2",
+      "OK  a 0 porzioni non si mangia (fame invariata)",
+      "OK  la pasta senza cucina è rifiutata: Serve la cucina di casa: cucinala a casa."
+    ],
+    "id": "X03",
+    "pass": true,
+    "title": "Mangiare dall'inventario (caso Hook 10)"
+  },
+  {
+    "checks": [
+      "OK  turno iniziato martedì 06:30",
+      "OK  background: compare la pausa del turno, il turno resta sospeso",
+      "OK  dopo chiusura e riapertura il turno è annullato",
+      "OK  nessuno stipendio senza aver lavorato (voci storico 2 → 2)",
+      "OK  non si ripete il turno lo stesso giorno: Il turno di oggi è stato interrotto e non si può ripetere. Prossimo: domani 06:30–12:30.",
+      "OK  saldo coerente con lo storico"
+    ],
+    "id": "X04",
+    "pass": true,
+    "title": "App in background/chiusa durante il turno (caso Hook 13)"
+  },
+  {
+    "checks": [
+      "OK  salvato in /home/box/.local/share/godot/app_userdata/REAL LIFE- ZERO/test_save.json"
+    ],
+    "id": "T10a",
+    "pass": true,
+    "title": "Preparazione chiusura/riapertura: partita salvata, il processo ora si chiude"
+  },
+  {
+    "checks": [
+      "OK  Continua dal menu: caricamento riuscito in un nuovo processo",
+      "OK  time identico dopo la riapertura",
+      "OK  economy identico dopo la riapertura",
+      "OK  needs identico dopo la riapertura",
+      "OK  inventory identico dopo la riapertura",
+      "OK  jobs identico dopo la riapertura",
+      "OK  posizione del personaggio ripristinata (scarto 0.01 m)",
+      "OK  saldo € 401,90"
+    ],
+    "id": "T10b",
+    "pass": true,
+    "title": "Chiusura e riapertura del gioco: i dati restano corretti (secondo processo)"
+  }
+]

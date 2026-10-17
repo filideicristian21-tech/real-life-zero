@@ -1,0 +1,22 @@
+# REAL LIFE: ZERO — brief dell'utente (17 ott 2026), riassunto fedele
+- Godot 4.x stabile, GDScript. Target finale iOS + Android. Single player offline, salvataggi locali.
+- Protagonista 20 anni, 500 €, stanza in affitto in cittadina italiana immaginaria. Simulazione credibile, non arcade.
+- 3D realistico ottimizzato mobile: strade, marciapiedi, parcheggi, case, negozi, PBR, ombre, terza persona, personaggio umano animato (camminata, corsa, interazioni). Niente cubi/capsule spacciati per realistici; asset gratuiti con licenza.
+- Mappa ~200x200 m: appartamento, bar (bancone), minimarket (scaffali), strade/piazzetta, fermata bus (punto interazione), edifici di contorno. Almeno 3 luoghi esplorabili. Niente porte finte.
+- Controlli mobile: joystick sx, camera touch dx, Interagisci, Corri (se energia), Telefono; UI adattiva; pausa/ripresa.
+- Bisogni: fame, energia, sonno, denaro, tempo/calendario. Bilanciati.
+- Economia: 500 € iniziali, entrate lavoro, acquisti, cibo, affitto periodico, storico transazioni, prezzi visibili, controllo saldo. Niente bug di soldi.
+- Appartamento: entra/esci, dormi, oggetti interattivi, prossime spese.
+- Minimarket: >=5 prodotti (nome, prezzo, effetto, quantità inventario).
+- Bar: lavoro con orario turno, vai al lavoro, inizia turno, attività reale, stipendio solo se requisiti ok.
+- Tempo: giornata = 20 min reali (configurabile), giorno/notte, orologio, orari negozi, turni, affitto. Un'unica fonte di tempo.
+- NPC: pochi ma funzionanti (percorso, animazioni, orari, collisioni, interazioni).
+- Telefono: saldo, inventario, calendario/ora, storico, bisogni, info lavoro. Tutti i pulsanti funzionanti.
+- Architettura modulare (scenes/, scripts/, assets/, data/, tests/, docs/), autoload centrali, valori di bilanciamento in file dati.
+- Salvataggio: denaro, inventario, bisogni, giorno/ora, lavoro, progressi; gestire file mancanti/corrotti; testare chiusura/riapertura.
+- Prestazioni: 30 FPS mobile, luce economica, collisioni semplici.
+- Fasi 1-7 in ordine (ambiente, prototipo, interazioni, simulazione, persistenza, qualità, verifica).
+- 12 test obbligatori; distinguere test eseguiti da pianificati; non inventare risultati.
+- Non spendere soldi, non pubblicare su store.
+- Consegna: progetto Godot apribile, sorgenti, demo 3D giocabile, controlli mobile, economia+bisogni, 3 luoghi, save/load, licenze asset, istruzioni apertura/export, report test.
+- PRIORITÀ: piccolo gioco funzionante, concreto e divertente.

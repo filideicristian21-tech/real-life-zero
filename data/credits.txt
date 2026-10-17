@@ -1,0 +1,14 @@
+REAL LIFE: ZERO - Crediti
+Build di test, non pubblicata. Gioco offline: nessuna pubblicita', nessun acquisto, nessun dato raccolto.
+
+Motore: Godot Engine 4.7.2 (licenza MIT) - godotengine.org
+
+Personaggi 3D: Quaternius, via Poly Pizza (CC0)
+Arredi, auto e cibo (provvisori): Kenney - kenney.nl (CC0)
+Lampioni e cespugli: Poly Haven (CC0)
+Texture: ambientCG e Poly Haven (CC0)
+Suoni: Kenney - RPG Audio, Interface Sounds (CC0)
+Font: Inter di Rasmus Andersson (SIL Open Font License 1.1)
+
+Elenco completo, una riga per asset: docs/LICENSES.md
+Luoghi, marchi e persone sono inventati.

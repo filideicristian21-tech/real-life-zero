@@ -1,0 +1,698 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[town] elementi in MultiMesh: 3930
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 8.
+[toast] Addebitato: Ricarica telefono settimana 1 −5,00 €.
+[toast] Sei troppo stanco per correre. Riposati o mangia qualcosa.
+[PASS] T01 Il personaggio si muove e si ferma correttamente
+      OK  camminata 1 s: 2.20 m (atteso ~2.4 m), animazione 'walk'
+      OK  dopo il rilascio: velocità 0.000 m/s, deriva 0.000 m, animazione 'idle'
+      OK  corsa 1 s: 4.77 m (> 1,6× camminata), animazione 'run'
+      OK  con energia 5 la corsa non parte (soglia 15)
+      OK  animazioni walk/idle/run attive
+[PASS] T02 La telecamera non attraversa pareti o pavimenti
+      OK  216 pose camera (6 punti, 12 direzioni, 3 inclinazioni): 0 con un muro tra personaggio e camera 
+      OK  camera sotto il pavimento: 0 casi
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 8.
+[toast] Addebitato: Ricarica telefono settimana 1 −5,00 €.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 15.
+[toast] Addebitato: Ricarica telefono settimana 2 −5,00 €.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 06:30.
+[PASS] T03 Le porte si aprono e si chiudono
+      OK  porta chiusa blocca il passaggio (x massimo raggiunto -47.49, soglia muro -47,0)
+      OK  Interagisci apre la porta di casa (rotazione cerniera -1.57 rad)
+      OK  con la porta aperta il personaggio esce in strada (x=-42.92)
+      OK  Interagisci richiude la porta
+      OK  Market: porta bloccata la domenica e lunedì alle 07:30 (apre alle 08:00), aperta lunedì alle 09:00
+      OK  Bar Centrale: porta bloccata il lunedì (giorno di chiusura)
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 8.
+[toast] Addebitato: Ricarica telefono settimana 1 −5,00 €.
+[toast] Non hai abbastanza soldi. Ti servono 1,20 €, ne hai 1,00.
+[toast] Non hai abbastanza soldi. Ti servono 3,50 €, ne hai 1,00.
+[toast] Non hai abbastanza soldi. Ti servono 4,50 €, ne hai 1,00.
+[PASS] T04 Non si possono comprare prodotti senza denaro sufficiente
+      OK  Pasta € 1,20 con saldo € 1,00: rifiutato (money)
+      OK  Panino € 3,50: rifiutato
+      OK  saldo invariato (€ 1,00), mai negativo
+      OK  inventario invariato
+      OK  anche al bar l'ordine senza soldi è rifiutato
+      OK  saldo == iniziale + somma storico
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 8.
+[toast] Addebitato: Ricarica telefono settimana 1 −5,00 €.
+[toast] Hai comprato Pane casereccio 500 g per 1,80 €. Saldo: 403,20 €.
+[toast] Hai comprato Latte «Valcolle» 1 L per 1,50 €. Saldo: 401,70 €.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[PASS] T05 Un acquisto riduce il saldo e aggiorna l'inventario una sola volta
+      OK  acquisto riuscito
+      OK  saldo 405,00 → 403,20 (−1,80)
+      OK  inventario: 3 porzioni (1 confezione da 3)
+      OK  una sola voce nello storico
+      OK  scorta scaffale −1
+      OK  doppio tocco su Compra: 1 addebito, 1 confezione (secondo tocco: debounce)
+      OK  Market chiuso alle 21:00: acquisto bloccato, saldo invariato
+      OK  saldo coerente con lo storico
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 8.
+[toast] Addebitato: Ricarica telefono settimana 1 −5,00 €.
+[toast] Stipendio arrivato: +45,00 € per il turno al Bar Centrale. Saldo: 450,00 €.
+[toast] Stipendio arrivato: +35,00 € per il turno al Bar Centrale. Saldo: 485,00 €.
+[toast] Turno non completato: niente paga per oggi. Ordini serviti: 6 su 10 richiesti.
+[toast] Turno non completato: niente paga per oggi. Hai lasciato il turno prima della fine.
+[PASS] T06 Il completamento del turno accredita lo stipendio corretto
+      OK  giorno 1 (lunedì, bar chiuso): turno non disponibile → il tutorial manda al primo turno di martedì
+      OK  turno puntuale con 10 ordini: +€ 45,00 (atteso € 45,00)
+      OK  seconda chiusura: nessun doppio pagamento (voci stipendio: 1)
+      OK  ritardo di 20 min: +€ 35,00 (atteso € 35,00)
+      OK  solo 6 ordini su 10: niente paga
+      OK  turno lasciato a metà: niente paga
+      OK  oltre 45 min di ritardo: turno perso (Troppo tardi: oltre 45 minuti di ritardo il turno di oggi è perso.)
+      OK  domenica: nessun turno
+      OK  saldo coerente con lo storico
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 8.
+[toast] Addebitato: Ricarica telefono settimana 1 −5,00 €.
+[PASS] T07 I bisogni cambiano nel tempo
+      OK  1 ora di gioco: fame −4.00 (dati: 4.0)
+      OK  energia −3.00 da fermo (dati: 3.0)
+      OK  sonno −5.00
+      OK  correndo l'energia scende di più: −9.00/h
+      OK  giornata = 20 minuti reali (1.20 min di gioco al secondo)
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 8.
+[toast] Addebitato: Ricarica telefono settimana 1 −5,00 €.
+[PASS] T08 Dormire recupera energia
+      OK  8 ore: energia 20 → 100.0 (atteso 100.0)
+      OK  sonno 15 → 100.0
+      OK  la fame scende più piano dormendo: −16.0 in 8 h
+      OK  l'ora avanza: giorno 2, 06:00
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 8.
+[toast] Addebitato: Ricarica telefono settimana 1 −5,00 €.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 15.
+[toast] Addebitato: Ricarica telefono settimana 2 −5,00 €.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 8.
+[toast] Addebitato: Ricarica telefono settimana 1 −5,00 €.
+[toast] Non hai abbastanza soldi per l'affitto (90,00 €). Ti mancano 80,00 €. Puoi saldarlo dal telefono (Conto).
+[toast] Addebitato: Ricarica telefono settimana 2 −5,00 €.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 15.
+[PASS] T09 L'affitto viene addebitato una sola volta per periodo
+      OK  giorno 1: 1 addebito anche richiamando il controllo 2 volte
+      OK  giorni 2-7: nessun altro addebito
+      OK  giorno 8: secondo affitto (€ 90,00) + telefono (€ 5,00) addebitati una volta
+      OK  dopo salvataggio + caricamento + nuovo controllo: ancora 2 addebiti
+      OK  fino al giorno 14 nessun addebito extra
+      OK  senza soldi: affitto in arretrato (1), saldo mai negativo (€ 115,00)
+      OK  l'arretrato si salda dal telefono quando arrivano i soldi
+      OK  saldo coerente con lo storico
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 8.
+[toast] Addebitato: Ricarica telefono settimana 1 −5,00 €.
+[toast] Hai comprato Pane casereccio 500 g per 1,80 €. Saldo: 403,20 €.
+[toast] Hai comprato Uova (6) per 2,50 €. Saldo: 400,70 €.
+[PASS] T10 Il salvataggio ripristina correttamente la partita (stesso processo)
+      OK  denaro, inventario, bisogni, giorno/ora e lavoro identici dopo il caricamento
+      OK  file corrotto riconosciuto (json) e backup caricato
+      OK  file modificato a mano: checksum non valido
+      OK  file mancante: stato 'missing', nessun crash
+      OK  versione 99 non supportata: rifiutata (version 99)
+[PASS] T11 L'interfaccia funziona su schermi di dimensioni differenti
+      OK  16:9 (1920x1080) → logico 1280x720: comandi dentro lo schermo=true, sovrapposizioni=false, joystick ok=true, telefono dentro=true, pulsante minimo 64 px
+      OK  20:9 (2400x1080) → logico 1600x720: comandi dentro lo schermo=true, sovrapposizioni=false, joystick ok=true, telefono dentro=true, pulsante minimo 64 px
+      OK  21:9 (2560x1080) → logico 1707x720: comandi dentro lo schermo=true, sovrapposizioni=false, joystick ok=true, telefono dentro=true, pulsante minimo 64 px
+      OK  4:3 tablet (2048x1536) → logico 1280x960: comandi dentro lo schermo=true, sovrapposizioni=false, joystick ok=true, telefono dentro=true, pulsante minimo 64 px
+      OK  3:2 (2160x1440) → logico 1280x853: comandi dentro lo schermo=true, sovrapposizioni=false, joystick ok=true, telefono dentro=true, pulsante minimo 64 px
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 8.
+[toast] Addebitato: Ricarica telefono settimana 1 −5,00 €.
+[toast] Hai comprato Panino confezionato per 3,50 €. Saldo: 401,50 €.
+[toast] Hai comprato Pasta «Molino Antico» 500 g per 1,20 €. Saldo: 400,30 €.
+[toast] Hai consumato: Panino confezionato. Fame +35, Energia +5.
+[toast] Stipendio arrivato: +45,00 € per il turno al Bar Centrale. Saldo: 445,30 €.
+[toast] Stipendio arrivato: +45,00 € per il turno al Bar Centrale. Saldo: 490,30 €.
+[toast] Stipendio arrivato: +45,00 € per il turno al Bar Centrale. Saldo: 535,30 €.
+[PASS] T12 Nessun errore critico durante il normale utilizzo (sessione automatica)
+      OK  telefono: home + 6 app aperte
+      OK  uscito di casa camminando (x=5.0)
+      OK  3 turni lavorati e pagati (3)
+      OK  dialoghi con 2 NPC presenti
+      OK  salva/carica a fine sessione
+      OK  denaro coerente dopo 4 giorni (saldo € 535,30)
+      OK  errori di script/motore: verificati dal runner shell sul log (vedi TEST-REPORT)
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 8.
+[toast] Addebitato: Ricarica telefono settimana 1 −5,00 €.
+[toast] Hai comprato Bevanda energetica 250 ml per 1,60 €. Saldo: 403,40 €.
+[toast] Hai comprato Pizza surgelata per 3,00 €. Saldo: 400,40 €.
+[toast] Hai comprato Latte «Valcolle» 1 L per 1,50 €. Saldo: 398,90 €.
+[toast] Hai comprato Banane 1 kg per 2,00 €. Saldo: 396,90 €.
+[toast] Hai comprato Uova (6) per 2,50 €. Saldo: 394,40 €.
+[toast] Hai comprato Tonno in scatola 3×80 g per 3,80 €. Saldo: 390,60 €.
+[toast] Hai comprato Uova (6) per 2,50 €. Saldo: 388,10 €.
+[toast] Hai comprato Sugo al pomodoro 400 g per 1,90 €. Saldo: 386,20 €.
+[toast] Hai comprato Tonno in scatola 3×80 g per 3,80 €. Saldo: 382,40 €.
+[toast] Hai comprato Pizza surgelata per 3,00 €. Saldo: 379,40 €.
+[toast] Hai comprato Pane casereccio 500 g per 1,80 €. Saldo: 377,60 €.
+[toast] Hai comprato Panino confezionato per 3,50 €. Saldo: 374,10 €.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Hai sonno. Torna a casa a dormire.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Hai comprato Panino confezionato per 3,50 €. Saldo: 370,60 €.
+[toast] Hai comprato Pasta «Molino Antico» 500 g per 1,20 €. Saldo: 369,40 €.
+[toast] Hai comprato Panino confezionato per 3,50 €. Saldo: 365,90 €.
+[toast] Hai comprato Pasta «Molino Antico» 500 g per 1,20 €. Saldo: 364,70 €.
+[toast] Hai comprato Pasta «Molino Antico» 500 g per 1,20 €. Saldo: 363,50 €.
+[toast] Hai comprato Latte «Valcolle» 1 L per 1,50 €. Saldo: 362,00 €.
+[toast] Hai comprato Uova (6) per 2,50 €. Saldo: 359,50 €.
+[toast] Hai comprato Pane casereccio 500 g per 1,80 €. Saldo: 357,70 €.
+[toast] Hai comprato Acqua naturale 1,5 L per 0,45 €. Saldo: 357,25 €.
+[toast] Hai comprato Pane casereccio 500 g per 1,80 €. Saldo: 355,45 €.
+[toast] Hai comprato Pizza surgelata per 3,00 €. Saldo: 352,45 €.
+[toast] Hai comprato Pasta «Molino Antico» 500 g per 1,20 €. Saldo: 351,25 €.
+[toast] Hai comprato Pasta «Molino Antico» 500 g per 1,20 €. Saldo: 350,05 €.
+[toast] Hai comprato Bevanda energetica 250 ml per 1,60 €. Saldo: 348,45 €.
+[toast] Hai comprato Pizza surgelata per 3,00 €. Saldo: 345,45 €.
+[toast] Hai comprato Panino confezionato per 3,50 €. Saldo: 341,95 €.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Hai comprato Sugo al pomodoro 400 g per 1,90 €. Saldo: 340,05 €.
+[toast] Hai comprato Sugo al pomodoro 400 g per 1,90 €. Saldo: 338,15 €.
+[toast] Hai comprato Bevanda energetica 250 ml per 1,60 €. Saldo: 336,55 €.
+[toast] Hai comprato Banane 1 kg per 2,00 €. Saldo: 334,55 €.
+[toast] Hai comprato Bevanda energetica 250 ml per 1,60 €. Saldo: 332,95 €.
+[toast] Hai comprato Biscotti 350 g per 2,20 €. Saldo: 330,75 €.
+[toast] Hai comprato Latte «Valcolle» 1 L per 1,50 €. Saldo: 329,25 €.
+[toast] Hai comprato Banane 1 kg per 2,00 €. Saldo: 327,25 €.
+[toast] Hai comprato Pasta «Molino Antico» 500 g per 1,20 €. Saldo: 326,05 €.
+[toast] Hai comprato Pizza surgelata per 3,00 €. Saldo: 323,05 €.
+[toast] Hai comprato Sugo al pomodoro 400 g per 1,90 €. Saldo: 321,15 €.
+[toast] Hai comprato Pane casereccio 500 g per 1,80 €. Saldo: 319,35 €.
+[toast] Hai comprato Uova (6) per 2,50 €. Saldo: 316,85 €.
+[toast] Hai comprato Pasta «Molino Antico» 500 g per 1,20 €. Saldo: 315,65 €.
+[toast] Hai comprato Sugo al pomodoro 400 g per 1,90 €. Saldo: 313,75 €.
+[toast] Hai comprato Pane casereccio 500 g per 1,80 €. Saldo: 311,95 €.
+[toast] Hai comprato Bevanda energetica 250 ml per 1,60 €. Saldo: 310,35 €.
+[toast] Hai comprato Sugo al pomodoro 400 g per 1,90 €. Saldo: 308,45 €.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Hai comprato Sugo al pomodoro 400 g per 1,90 €. Saldo: 306,55 €.
+[toast] Hai comprato Latte «Valcolle» 1 L per 1,50 €. Saldo: 305,05 €.
+[toast] Hai comprato Tonno in scatola 3×80 g per 3,80 €. Saldo: 301,25 €.
+[toast] Hai comprato Latte «Valcolle» 1 L per 1,50 €. Saldo: 299,75 €.
+[toast] Hai comprato Acqua naturale 1,5 L per 0,45 €. Saldo: 299,30 €.
+[toast] Hai comprato Tonno in scatola 3×80 g per 3,80 €. Saldo: 295,50 €.
+[toast] Hai comprato Banane 1 kg per 2,00 €. Saldo: 293,50 €.
+[toast] Hai comprato Pizza surgelata per 3,00 €. Saldo: 290,50 €.
+[toast] Hai comprato Bevanda energetica 250 ml per 1,60 €. Saldo: 288,90 €.
+[toast] Hai comprato Pizza surgelata per 3,00 €. Saldo: 285,90 €.
+[toast] Hai comprato Tonno in scatola 3×80 g per 3,80 €. Saldo: 282,10 €.
+[toast] Hai comprato Acqua naturale 1,5 L per 0,45 €. Saldo: 281,65 €.
+[toast] Hai comprato Panino confezionato per 3,50 €. Saldo: 278,15 €.
+[toast] Hai comprato Biscotti 350 g per 2,20 €. Saldo: 275,95 €.
+[toast] Hai comprato Panino confezionato per 3,50 €. Saldo: 272,45 €.
+[toast] Hai comprato Pizza surgelata per 3,00 €. Saldo: 269,45 €.
+[toast] Hai comprato Sugo al pomodoro 400 g per 1,90 €. Saldo: 267,55 €.
+[toast] Hai comprato Pasta «Molino Antico» 500 g per 1,20 €. Saldo: 266,35 €.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Hai comprato Latte «Valcolle» 1 L per 1,50 €. Saldo: 264,85 €.
+[toast] Hai comprato Latte «Valcolle» 1 L per 1,50 €. Saldo: 263,35 €.
+[toast] Hai comprato Bevanda energetica 250 ml per 1,60 €. Saldo: 261,75 €.
+[toast] Hai comprato Pane casereccio 500 g per 1,80 €. Saldo: 259,95 €.
+[toast] Hai comprato Biscotti 350 g per 2,20 €. Saldo: 257,75 €.
+[toast] Hai comprato Latte «Valcolle» 1 L per 1,50 €. Saldo: 256,25 €.
+[toast] Hai comprato Biscotti 350 g per 2,20 €. Saldo: 254,05 €.
+[toast] Hai comprato Tonno in scatola 3×80 g per 3,80 €. Saldo: 250,25 €.
+[toast] Hai comprato Banane 1 kg per 2,00 €. Saldo: 248,25 €.
+[toast] Hai comprato Uova (6) per 2,50 €. Saldo: 245,75 €.
+[toast] Hai comprato Bevanda energetica 250 ml per 1,60 €. Saldo: 244,15 €.
+[toast] Hai comprato Pane casereccio 500 g per 1,80 €. Saldo: 242,35 €.
+[toast] Hai comprato Tonno in scatola 3×80 g per 3,80 €. Saldo: 238,55 €.
+[toast] Hai comprato Pizza surgelata per 3,00 €. Saldo: 235,55 €.
+[toast] Hai comprato Banane 1 kg per 2,00 €. Saldo: 233,55 €.
+[toast] Hai comprato Tonno in scatola 3×80 g per 3,80 €. Saldo: 229,75 €.
+[toast] Hai comprato Pane casereccio 500 g per 1,80 €. Saldo: 227,95 €.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Hai comprato Panino confezionato per 3,50 €. Saldo: 224,45 €.
+[toast] Hai comprato Pane casereccio 500 g per 1,80 €. Saldo: 222,65 €.
+[toast] Hai comprato Latte «Valcolle» 1 L per 1,50 €. Saldo: 221,15 €.
+[toast] Hai comprato Pane casereccio 500 g per 1,80 €. Saldo: 219,35 €.
+[toast] Hai comprato Pizza surgelata per 3,00 €. Saldo: 216,35 €.
+[toast] Hai comprato Tonno in scatola 3×80 g per 3,80 €. Saldo: 212,55 €.
+[toast] Hai comprato Tonno in scatola 3×80 g per 3,80 €. Saldo: 208,75 €.
+[toast] Hai comprato Uova (6) per 2,50 €. Saldo: 206,25 €.
+[toast] Hai comprato Panino confezionato per 3,50 €. Saldo: 202,75 €.
+[toast] Hai comprato Pizza surgelata per 3,00 €. Saldo: 199,75 €.
+[toast] Hai comprato Pane casereccio 500 g per 1,80 €. Saldo: 197,95 €.
+[toast] Chiuso. Riapre alle lunedì alle 08:00.
+[toast] Chiuso. Riapre alle lunedì alle 08:00.
+[toast] Chiuso. Riapre alle lunedì alle 08:00.
+[toast] Chiuso. Riapre alle lunedì alle 08:00.
+[toast] Chiuso. Riapre alle lunedì alle 08:00.
+[toast] Chiuso. Riapre alle lunedì alle 08:00.
+[toast] Chiuso. Riapre alle lunedì alle 08:00.
+[toast] Chiuso. Riapre alle lunedì alle 08:00.
+[toast] Chiuso. Riapre alle lunedì alle 08:00.
+[toast] Chiuso. Riapre alle lunedì alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 15.
+[toast] Addebitato: Ricarica telefono settimana 2 −5,00 €.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Hai comprato Pane casereccio 500 g per 1,80 €. Saldo: 101,15 €.
+[toast] Hai comprato Banane 1 kg per 2,00 €. Saldo: 99,15 €.
+[toast] Hai comprato Uova (6) per 2,50 €. Saldo: 96,65 €.
+[toast] Hai comprato Sugo al pomodoro 400 g per 1,90 €. Saldo: 94,75 €.
+[toast] Hai comprato Banane 1 kg per 2,00 €. Saldo: 92,75 €.
+[toast] Hai comprato Latte «Valcolle» 1 L per 1,50 €. Saldo: 91,25 €.
+[toast] Hai comprato Banane 1 kg per 2,00 €. Saldo: 89,25 €.
+[toast] Hai comprato Acqua naturale 1,5 L per 0,45 €. Saldo: 88,80 €.
+[toast] Hai comprato Pizza surgelata per 3,00 €. Saldo: 85,80 €.
+[toast] Hai comprato Banane 1 kg per 2,00 €. Saldo: 83,80 €.
+[toast] Hai comprato Biscotti 350 g per 2,20 €. Saldo: 81,60 €.
+[toast] Hai comprato Panino confezionato per 3,50 €. Saldo: 78,10 €.
+[toast] Hai comprato Pasta «Molino Antico» 500 g per 1,20 €. Saldo: 76,90 €.
+[toast] Hai comprato Sugo al pomodoro 400 g per 1,90 €. Saldo: 75,00 €.
+[toast] Hai comprato Bevanda energetica 250 ml per 1,60 €. Saldo: 73,40 €.
+[toast] Hai comprato Banane 1 kg per 2,00 €. Saldo: 71,40 €.
+[toast] Hai comprato Acqua naturale 1,5 L per 0,45 €. Saldo: 70,95 €.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Hai comprato Latte «Valcolle» 1 L per 1,50 €. Saldo: 69,45 €.
+[toast] Hai comprato Panino confezionato per 3,50 €. Saldo: 65,95 €.
+[toast] Hai comprato Sugo al pomodoro 400 g per 1,90 €. Saldo: 64,05 €.
+[toast] Hai comprato Latte «Valcolle» 1 L per 1,50 €. Saldo: 62,55 €.
+[toast] Hai comprato Pizza surgelata per 3,00 €. Saldo: 59,55 €.
+[toast] Hai comprato Latte «Valcolle» 1 L per 1,50 €. Saldo: 58,05 €.
+[toast] Hai comprato Pizza surgelata per 3,00 €. Saldo: 55,05 €.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Hai comprato Pane casereccio 500 g per 1,80 €. Saldo: 53,25 €.
+[toast] Hai comprato Pizza surgelata per 3,00 €. Saldo: 50,25 €.
+[toast] Hai comprato Tonno in scatola 3×80 g per 3,80 €. Saldo: 46,45 €.
+[toast] Hai comprato Pasta «Molino Antico» 500 g per 1,20 €. Saldo: 45,25 €.
+[toast] Hai comprato Sugo al pomodoro 400 g per 1,90 €. Saldo: 43,35 €.
+[toast] Hai comprato Uova (6) per 2,50 €. Saldo: 40,85 €.
+[toast] Hai comprato Latte «Valcolle» 1 L per 1,50 €. Saldo: 39,35 €.
+[toast] Hai comprato Latte «Valcolle» 1 L per 1,50 €. Saldo: 37,85 €.
+[toast] Hai comprato Latte «Valcolle» 1 L per 1,50 €. Saldo: 36,35 €.
+[toast] Hai comprato Latte «Valcolle» 1 L per 1,50 €. Saldo: 34,85 €.
+[toast] Hai comprato Latte «Valcolle» 1 L per 1,50 €. Saldo: 33,35 €.
+[toast] Hai comprato Panino confezionato per 3,50 €. Saldo: 29,85 €.
+[toast] Hai comprato Sugo al pomodoro 400 g per 1,90 €. Saldo: 27,95 €.
+[toast] Hai comprato Sugo al pomodoro 400 g per 1,90 €. Saldo: 26,05 €.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Hai comprato Latte «Valcolle» 1 L per 1,50 €. Saldo: 24,55 €.
+[toast] Hai comprato Biscotti 350 g per 2,20 €. Saldo: 22,35 €.
+[toast] Hai comprato Panino confezionato per 3,50 €. Saldo: 18,85 €.
+[toast] Hai comprato Pane casereccio 500 g per 1,80 €. Saldo: 17,05 €.
+[toast] Hai comprato Tonno in scatola 3×80 g per 3,80 €. Saldo: 13,25 €.
+[toast] Hai comprato Pizza surgelata per 3,00 €. Saldo: 10,25 €.
+[toast] Hai comprato Latte «Valcolle» 1 L per 1,50 €. Saldo: 8,75 €.
+[toast] Hai comprato Biscotti 350 g per 2,20 €. Saldo: 6,55 €.
+[toast] Hai comprato Bevanda energetica 250 ml per 1,60 €. Saldo: 4,95 €.
+[toast] Hai comprato Bevanda energetica 250 ml per 1,60 €. Saldo: 3,35 €.
+[toast] Hai comprato Acqua naturale 1,5 L per 0,45 €. Saldo: 2,90 €.
+[toast] Hai comprato Pane casereccio 500 g per 1,80 €. Saldo: 1,10 €.
+[toast] Non hai abbastanza soldi. Ti servono 2,00 €, ne hai 1,10.
+[toast] Non hai abbastanza soldi. Ti servono 1,90 €, ne hai 1,10.
+[toast] Non hai abbastanza soldi. Ti servono 2,00 €, ne hai 1,10.
+[toast] Non hai abbastanza soldi. Ti servono 3,80 €, ne hai 1,10.
+[toast] Non hai abbastanza soldi. Ti servono 2,20 €, ne hai 1,10.
+[toast] Non hai abbastanza soldi. Ti servono 2,00 €, ne hai 1,10.
+[toast] Non hai abbastanza soldi. Ti servono 2,20 €, ne hai 1,10.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Non hai abbastanza soldi. Ti servono 2,50 €, ne hai 1,10.
+[toast] Non hai abbastanza soldi. Ti servono 1,20 €, ne hai 1,10.
+[toast] Non hai abbastanza soldi. Ti servono 3,80 €, ne hai 1,10.
+[toast] Non hai abbastanza soldi. Ti servono 1,60 €, ne hai 1,10.
+[toast] Non hai abbastanza soldi. Ti servono 2,00 €, ne hai 1,10.
+[toast] Non hai abbastanza soldi. Ti servono 3,00 €, ne hai 1,10.
+[toast] Non hai abbastanza soldi. Ti servono 1,90 €, ne hai 1,10.
+[toast] Non hai abbastanza soldi. Ti servono 2,20 €, ne hai 1,10.
+[toast] Non hai abbastanza soldi. Ti servono 3,00 €, ne hai 1,10.
+[toast] Hai comprato Acqua naturale 1,5 L per 0,45 €. Saldo: 0,65 €.
+[toast] Non hai abbastanza soldi. Ti servono 1,90 €, ne hai 0,65.
+[toast] Non hai abbastanza soldi. Ti servono 1,90 €, ne hai 0,65.
+[toast] Non hai abbastanza soldi. Ti servono 1,50 €, ne hai 0,65.
+[toast] Non hai abbastanza soldi. Ti servono 3,00 €, ne hai 0,65.
+[toast] Non hai abbastanza soldi. Ti servono 2,50 €, ne hai 0,65.
+[toast] Non hai abbastanza soldi. Ti servono 1,80 €, ne hai 0,65.
+[toast] Non hai abbastanza soldi. Ti servono 1,90 €, ne hai 0,65.
+[toast] Hai comprato Acqua naturale 1,5 L per 0,45 €. Saldo: 0,20 €.
+[toast] Non hai abbastanza soldi. Ti servono 1,80 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 3,00 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 0,45 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 3,80 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 1,60 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 1,90 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 3,80 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 3,00 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 2,50 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 1,50 €, ne hai 0,20.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Non hai abbastanza soldi. Ti servono 3,50 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 2,20 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 3,00 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 2,50 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 3,50 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 3,80 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 3,80 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 1,80 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 1,20 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 2,50 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 1,80 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 1,90 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 1,50 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 3,50 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 0,45 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 2,00 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 1,50 €, ne hai 0,20.
+[toast] Chiuso. Riapre alle lunedì alle 08:00.
+[toast] Chiuso. Riapre alle lunedì alle 08:00.
+[toast] Chiuso. Riapre alle lunedì alle 08:00.
+[toast] Chiuso. Riapre alle lunedì alle 08:00.
+[toast] Chiuso. Riapre alle lunedì alle 08:00.
+[toast] Chiuso. Riapre alle lunedì alle 08:00.
+[toast] Chiuso. Riapre alle lunedì alle 08:00.
+[toast] Chiuso. Riapre alle lunedì alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Non hai abbastanza soldi per l'affitto (90,00 €). Ti mancano 89,80 €. Puoi saldarlo dal telefono (Conto).
+[toast] Non hai abbastanza soldi per l'affitto (5,00 €). Ti mancano 4,80 €. Puoi saldarlo dal telefono (Conto).
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Non hai abbastanza soldi. Ti servono 1,90 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 1,60 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 1,90 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 3,80 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 3,50 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 3,80 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 1,80 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 1,50 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 3,80 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 3,50 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 1,50 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 0,45 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 0,45 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 1,60 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 3,00 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 1,80 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 2,20 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 2,20 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 1,80 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 1,90 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 1,80 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 1,60 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 2,50 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 1,80 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 1,20 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 1,80 €, ne hai 0,20.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Non hai abbastanza soldi. Ti servono 1,90 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 2,20 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 1,60 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 0,45 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 2,50 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 2,20 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 2,50 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 1,60 €, ne hai 0,20.
+[toast] Chiuso. Riapre alle domani alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Chiuso. Riapre alle 08:00.
+[toast] Non hai abbastanza soldi. Ti servono 1,20 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 1,50 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 2,00 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 3,80 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 3,50 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 1,20 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 0,45 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 3,50 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 3,50 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 3,50 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 2,20 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 2,20 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 1,50 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 1,20 €, ne hai 0,20.
+[toast] Non hai abbastanza soldi. Ti servono 2,50 €, ne hai 0,20.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 8.
+[toast] Addebitato: Ricarica telefono settimana 1 −5,00 €.
+[toast] Hai fame. Mangia qualcosa (Zaino o Market).
+[toast] Hai sonno. Torna a casa a dormire.
+[toast] Sei a corto di energia: sotto 20 non puoi iniziare il turno.
+[toast] Hai fame. Mangia qualcosa (Zaino o Market).
+[toast] Sei a corto di energia: sotto 20 non puoi iniziare il turno.
+[PASS] BAL Test di bilanciamento di Ledger (B2 = T06, B3 = T09)
+      OK  B1: 1500 azioni casuali (acquisti, tempo, bollette): saldo mai negativo, coerente (finale € 0,20)
+      OK  B4: senza pasti l'energia va sotto 20 dopo 16 ore di gioco (entro 48)
+      OK  valori letti da data/economy.json (affitto € 90, paga € 45)
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 8.
+[toast] Addebitato: Ricarica telefono settimana 1 −5,00 €.
+[PASS] X01 Nessun pulsante finto (telefono, pannelli, HUD)
+      OK  64 pulsanti controllati, senza azione: []
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 8.
+[toast] Addebitato: Ricarica telefono settimana 1 −5,00 €.
+[PASS] X02 NPC con orari e dialoghi collegati ai dati
+      OK  martedì 08:30 in giro: Mimmo, Rosa, Sig. Bianchi, Signora Ada, Dario, Marta
+      OK  alle 02:00 tutti a casa (0 visibili)
+      OK  32 blocchi di dialogo: segnaposto non risolti = 0
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 8.
+[toast] Addebitato: Ricarica telefono settimana 1 −5,00 €.
+[PASS] X03 Mangiare dall'inventario (caso Hook 10)
+      OK  pane: fame 40 → 55 (effetto dai dati +15)
+      OK  porzioni 3 → 2
+      OK  a 0 porzioni non si mangia (fame invariata)
+      OK  la pasta senza cucina è rifiutata: Serve la cucina di casa: cucinala a casa.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 8.
+[toast] Addebitato: Ricarica telefono settimana 1 −5,00 €.
+[PASS] X04 App in background/chiusa durante il turno (caso Hook 13)
+      OK  turno iniziato martedì 06:30
+      OK  background: compare la pausa del turno, il turno resta sospeso
+      OK  dopo chiusura e riapertura il turno è annullato
+      OK  nessuno stipendio senza aver lavorato (voci storico 2 → 2)
+      OK  non si ripete il turno lo stesso giorno: Il turno di oggi è stato interrotto e non si può ripetere. Prossimo: domani 06:30–12:30.
+      OK  saldo coerente con lo storico
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 8.
+[toast] Addebitato: Ricarica telefono settimana 1 −5,00 €.
+[toast] Hai comprato Pasta «Molino Antico» 500 g per 1,20 €. Saldo: 403,80 €.
+[toast] Hai comprato Sugo al pomodoro 400 g per 1,90 €. Saldo: 401,90 €.
+[PASS] T10a Preparazione chiusura/riapertura: partita salvata, il processo ora si chiude
+      OK  salvato in /home/box/.local/share/godot/app_userdata/REAL LIFE- ZERO/test_save.json
+RESULT: 18 test, 0 falliti
+[toast] Il turno interrotto (app chiusa) è stato annullato: niente paga per oggi.
+WARNING: 20 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 8 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[town] elementi in MultiMesh: 3930
+[toast] Bentornato. È il giorno 3, ore 14:40. Hai 401,90 €.
+[PASS] T10b Chiusura e riapertura del gioco: i dati restano corretti (secondo processo)
+      OK  Continua dal menu: caricamento riuscito in un nuovo processo
+      OK  time identico dopo la riapertura
+      OK  economy identico dopo la riapertura
+      OK  needs identico dopo la riapertura
+      OK  inventory identico dopo la riapertura
+      OK  jobs identico dopo la riapertura
+      OK  posizione del personaggio ripristinata (scarto 0.01 m)
+      OK  saldo € 401,90
+RESULT: 1 test, 0 falliti
