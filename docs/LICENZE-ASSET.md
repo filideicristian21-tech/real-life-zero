@@ -75,10 +75,17 @@ Tutto e' stato scaricato gratuitamente dalle fonti ufficiali indicate (i file Ke
 | assets/textures/stonebase_albedo.jpg, stonebase_normal.jpg | Large Sandstone Blocks | Poly Haven | https://polyhaven.com/a/large_sandstone_blocks | CC0 1.0 | ridotte a 512px, ricompresse JPG |
 | assets/textures/floor_bar_albedo.jpg, floor_bar_normal.jpg | Terrazzo 013 | ambientCG | https://ambientcg.com/view?id=Terrazzo013 | CC0 1.0 | ridotte a 512px, ricompresse JPG |
 | assets/textures/sky_kloofendal_1k.hdr | Kloofendal 48d Partly Cloudy (Pure Sky) | Poly Haven | https://polyhaven.com/a/kloofendal_48d_partly_cloudy_puresky | CC0 1.0 | versione 1K (scelta 1K invece di 2K per peso web/mobile) |
+| assets/textures/sky_qwantani_dawn_1k.hdr | Qwantani Dawn (Pure Sky) | Poly Haven | https://polyhaven.com/a/qwantani_dawn_puresky | CC0 1.0 | v0.3: cielo di alba/tramonto; versione 1K |
+| assets/textures/sky_qwantani_night_1k.hdr | Qwantani Night (Pure Sky) | Poly Haven | https://polyhaven.com/a/qwantani_night_puresky | CC0 1.0 | v0.3: cielo notturno; versione 1K |
+| assets/cars_v03/corallo.glb | Car (NormalCar1) | Quaternius (via Poly Pizza) | https://poly.pizza/u/Quaternius (pacchetto «Cars», cerca «Car») | CC0 1.0 | v0.3: materiali PBR rifatti in Blender 4.2 (vernice con clearcoat, vetri, gomme), riesportato GLB; nome di modello inventato |
+| assets/cars_v03/ginestra.glb | Car (NormalCar2) | Quaternius (via Poly Pizza) | https://poly.pizza/u/Quaternius (pacchetto «Cars», cerca «Car») | CC0 1.0 | come sopra |
+| assets/cars_v03/suv.glb | SUV | Quaternius (via Poly Pizza) | https://poly.pizza/u/Quaternius (cerca «SUV») | CC0 1.0 | come sopra |
+| assets/cars_v03/rotta.glb | Broken Car | Quaternius (via Poly Pizza) | https://poly.pizza/m/Y67erogmR9 | CC0 1.0 | come sopra (auto in demolizione dietro l'autosalone) |
+| assets/cars_v03/hatch.glb, sedan.glb, van.glb | Hatchback, Sedan, Van dal «Free Low Poly Vehicles Pack» | RGS_Dev (Raphael Gonçalves) | https://rgsdev.itch.io/free-low-poly-vehicles-pack | CC0 1.0 (License.txt nel pacchetto) | FBX convertiti in Blender 4.2, materiali PBR rifatti; scaricato gratis (prezzo 0) |
 | assets/props/ph_potted_plant_04/ (gltf + bin + 3 jpg) | Potted Plant 04 | Poly Haven (James Ray Cock) | https://polyhaven.com/a/potted_plant_04 | CC0 1.0 | texture ridotte a 512px |
 | assets/props/ph_covered_car/ (gltf + bin + 3 jpg) | Covered Car | Poly Haven (MP) | https://polyhaven.com/a/covered_car | CC0 1.0 | texture ridotte a 512px |
 | assets/ui/icon_run.png, icon_phone.png, icon_interact.png | icone HUD | create per questo progetto (Pillow) | - | CC0 1.0 (opera propria) | - |
-| assets/shaders/sky.gdshader | shader cielo HDRI + notte | scritto per questo progetto | - | CC0 1.0 (opera propria) | - |
+| assets/shaders/sky.gdshader | shader cielo HDRI giorno/alba/notte | scritto per questo progetto | - | CC0 1.0 (opera propria) | - |
 | (nessun file) macchina espresso, bancone, bottiglie, scaffali del market | geometria procedurale in scripts/world/town.gd | opera propria | - | - | il modello CC-BY «Modern Coffee Machine» (visthetique) suggerito da Scout NON è stato usato: nessun credito TASL necessario |
 | assets/audio/click.ogg | Interface Sounds: click_001.ogg | Kenney | https://kenney.nl/assets/interface-sounds | CC0 1.0 | solo rinominato |
 | assets/audio/confirm.ogg | Interface Sounds: confirmation_001.ogg | Kenney | https://kenney.nl/assets/interface-sounds | CC0 1.0 | solo rinominato |
@@ -106,4 +113,7 @@ Tutto e' stato scaricato gratuitamente dalle fonti ufficiali indicate (i file Ke
 ## Note
 - Kenney Furniture/Car/Food Kit sono PLACEHOLDER (stile "toy" diverso dai personaggi Quaternius), da sostituire in una versione successiva.
 - I modelli Quaternius contengono anche animazioni non usate (es. pistola/spada): il gioco usa solo idle/walk/run/interact.
-- Marchi, luoghi e persone sono inventati (San Vito al Colle, Bar Centrale da Mimmo, Market Il Girasole, Latte «Valcolle», Pasta «Molino Antico», Zero Phone...).
+- Marchi, luoghi e persone sono inventati (San Vito al Colle, Bar Centrale da Mimmo, Market Il Girasole, Banca Popolare del Colle, Boutique Marisa, Palestra Fit Colle, Trattoria Da Rosa, Autosalone Bertoni, ConsegnaGiù, auto «Ginestra» e «Corallo», Latte «Valcolle», Pasta «Molino Antico», Zero Phone...).
+- v0.3: i personaggi restano i modelli Quaternius CC0 (con colori/outfit diversi per lo staff dei nuovi luoghi). MakeHuman (CC0) è stato valutato e scaricato sul box ma NON è ancora nel gioco: nessun file MakeHuman/MPFB è incluso, quindi nessuna riga di licenza.
+- v0.3: «Universal Animation Library» (Quaternius, CC0) scaricata per il retarget futuro, non inclusa nel gioco.
+- Nessun asset CC-BY, NC o ND; nessun file Mixamo o Renderpeople.

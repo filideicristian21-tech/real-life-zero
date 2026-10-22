@@ -4,12 +4,14 @@ Versione di prova (demo) — v0.3. Adatto a tutti (autovalutazione). Gioco offli
 Motore: Godot Engine 4.7.2 (licenza MIT) - godotengine.org
 
 Personaggi 3D: Quaternius, via Poly Pizza (CC0)
-Arredi, auto e cibo (provvisori): Kenney - kenney.nl (CC0)
+Auto: Quaternius (Poly Pizza) e RGS_Dev - Free Low Poly Vehicles Pack (CC0), materiali rifatti
+Arredi e cibo (provvisori): Kenney - kenney.nl (CC0)
 Lampioni, cespugli, pianta in vaso (Potted Plant 04, James Ray Cock), auto coperta (Covered Car, MP): Poly Haven (CC0)
-Cielo: Kloofendal 48d Partly Cloudy, Poly Haven (CC0)
+Cielo: Kloofendal 48d Partly Cloudy, Qwantani Dawn e Qwantani Night (Pure Sky), Poly Haven (CC0)
 Texture: ambientCG e Poly Haven (CC0)
 Suoni: Kenney - RPG Audio, Interface Sounds (CC0)
 Font: Inter di Rasmus Andersson (SIL Open Font License 1.1)
 
 Elenco completo, una riga per asset: docs/LICENSES.md
-Luoghi, marchi e persone sono inventati.
+Luoghi, marchi, auto e persone sono inventati.
+Banca Popolare del Colle: simulazione di gioco, non è consulenza finanziaria e non rappresenta prodotti reali.
