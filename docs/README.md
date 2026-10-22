@@ -1,7 +1,9 @@
-# REAL LIFE: ZERO (v0.1.0, build di test)
+# REAL LIFE: ZERO (v0.3.0, versione di prova (demo))
 
 Life sim 3D in terza persona per smartphone (Godot 4). Sei Luca Ferraro, hai 20 anni, 500 € e una stanza in affitto a San Vito al Colle, una cittadina inventata.
 Lavori al Bar Centrale da Mimmo, fai la spesa al Market Il Girasole, paghi l'affitto e gestisci fame, energia e sonno.
+
+**Novità v0.3:** Banca Popolare del Colle (conto, risparmio al 2% lordo sul saldo minimo del mese, canone 2 €, affidabilità 300–850), bollette di fine mese (mese di 28 giorni), tre lavori (barista, cassiere, rider), 3 case in affitto e 2 in vendita con mutuo, 9 mobili, 7 capi d'abbigliamento, palestra, bus, 2 auto usate da guidare (max 50 km/h, frenano per i pedoni), imprevisto del giovedì, 6 nuovi personaggi dello staff con dialoghi, cielo all'alba e di notte. Tutte le cifre sono stime di gioco. *Simulazione di gioco: non è consulenza finanziaria e non rappresenta prodotti reali.*
 Il gioco è offline: niente pubblicità, niente acquisti, nessun dato raccolto. I salvataggi stanno solo in `user://`.
 
 - **Versione web:** https://filideicristian21-tech.github.io/real-life-zero/ (single-thread, gira anche su GitHub Pages)
@@ -19,11 +21,12 @@ Sul PC: WASD o frecce, Shift per correre, E o Spazio per interagire, Tab o P per
 
 ## Struttura
 - `scenes/main.tscn`: scena principale. Il mondo viene costruito da codice (`scripts/world/town.gd`).
-- `scripts/autoload/`: singleton `Data`, `GameTime` (unica fonte del tempo), `Economy`, `Needs`, `Inventory`, `Jobs`, `SaveSystem`, `Game`, `Sfx`.
+- `scripts/autoload/`: singleton `Data`, `GameTime` (unica fonte del tempo), `Economy`, `Needs`, `Inventory`, `Jobs`, `Life` (banca, case, auto, v0.3), `SaveSystem` (migra i salvataggi v0.2), `Game`, `Sfx`.
 - `scripts/world/`, `scripts/actors/`, `scripts/ui/`: città, porte, giorno e notte, giocatore, NPC, interfaccia touch e telefono.
 - `data/`: tutti i valori di bilanciamento e i testi.
   - `economy.json`: prezzi, orari, paga, affitto.
   - `balance.json`: tempo, sonno, velocità, autosave.
+  - `life.json` (v0.3: banca, bollette, lavori, case, mobili, vestiti, auto; generato da `tools/make_life_json.py`).
   - `texts.json`, `dialogues.json`, `places.json`, `credits.txt`.
   Si modificano senza toccare il codice.
 - `tests/`: test automatici (`run_tests.sh`) e lo strumento per gli screenshot (`shots.tscn`).
