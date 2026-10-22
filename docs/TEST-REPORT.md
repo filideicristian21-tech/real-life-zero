@@ -1,6 +1,6 @@
 # REAL LIFE: ZERO - Report dei test
 
-Build: v0.1.0 (Godot 4.7.2-stable, renderer Compatibility). Data esecuzione: 17 ott 2026, sul box Linux (headless).
+Build attuale: v0.3.0 (Godot 4.7.2-stable, renderer Compatibility). Ultima esecuzione: 17 ott 2026, sul box Linux (headless).
 Comando: `bash tests/run_tests.sh` (due processi Godot separati: il secondo riapre il salvataggio del primo).
 Output grezzo: `tests/results.json`, log completo `tests/test_log.txt`, errori filtrati `tests/errors.txt` (vuoto: 0 errori di script/motore nel log).
 
@@ -8,6 +8,220 @@ Output grezzo: `tests/results.json`, log completo `tests/test_log.txt`, errori f
 Ciò che i test automatici NON possono provare: il tocco con le dita su un telefono vero, gli FPS su un Android vero e l'avvio dell'APK su un dispositivo. Questi punti restano PIANIFICATI.
 
 Nota sull'elenco: i 12 titoli T01-T12 sono quelli del brief originale dell'utente (sezione 13 del messaggio, quella dei test obbligatori). `docs/BRIEF-utente.md` è un riassunto e non li ripete. Il piano di Hook (20 casi, colonna "Mappa Hook") è mappato sotto.
+
+## v0.3.0 (17 ott 2026) - riepilogo
+Build: v0.3.0 (Godot 4.7.2-stable, Compatibility). Comando: `bash tests/run_tests.sh`.
+**Risultato: 59 + 1 test automatici ESEGUITI (T10b nel secondo processo), 0 falliti, 0 errori di script/motore nel log** (`tests/errors.txt` vuoto).
+- 32 test di regressione v0.1/v0.2 (T01-T12, BAL, X01-X17, T10a) + T10b.
+- 27 test nuovi v0.3 in `tests/v03_tests.gd`: casi di Hook v0.3, i 6 test di bilanciamento di Ledger (portati da Python a GDScript), le regole di Guard sui testi.
+- Piano di Hook v0.3: 38 casi. **31 ESEGUITI** (anche parziali/adattati, spiegati sotto), gli altri PIANIFICATI (manuali, su telefono) o NON PREVISTI dalla v0.3.
+- Un bug vero trovato dai test nuovi e corretto: nell'app Banca la lista «In arrivo (7 giorni)» leggeva chiavi sbagliate (errore di script, righe vuote).
+
+### Piano di Hook v0.3 (38 casi): mappa e stato
+| # | Caso Hook v0.3 | Stato | Test / note |
+|---|---|---|---|
+| B1 | App Banca | ESEGUITO | V-B1/J6/X4 (saldo e «In arrivo» coincidono con il gioco; il test ha trovato un bug vero nelle righe «In arrivo», corretto) |
+| B2 | Versa e preleva | ESEGUITO | V-B2/B3/B5 |
+| B3 | Oltre il saldo / oltre i contanti | ESEGUITO | V-B2/B3/B5 |
+| B4 | Doppio tocco su Conferma | PIANIFICATO (manuale) | nella banca non c'è una conferma in due passi; il doppio tap vero sullo schermo non è simulabile qui. Il doppio acquisto nei negozi è coperto da T05 |
+| B5 | Importi limite | ESEGUITO | V-B2/B3/B5 (0, negativo, enorme rifiutati; centesimi interi) |
+| B6 | Stipendio sul conto | ESEGUITO | V-J1 (paga una volta, voce giusta), T06 |
+| B7 | Interessi e canone in un mese, save/load | ESEGUITO | V-B7, LEDGER-3 |
+| L1 | Scadenza bolletta | ESEGUITO | V-L1/L2/L6 |
+| L2 | Pagamento anticipato | ESEGUITO (adattato) | V-L1/L2/L6: nella v0.3 le bollette si addebitano a fine mese; gli arretrati si pagano dal telefono senza secondo addebito (V-L3/L4) |
+| L3 | Bolletta non pagata | ESEGUITO | V-L3/L4 (mora una volta) |
+| L4 | Distacco luce e ritorno | ESEGUITO (logica) | V-L3/L4, V-L4b. L'effetto visivo in casa è PIANIFICATO (manuale) |
+| L5 | Consumo legato all'uso | NON PREVISTO | le bollette v0.3 sono a importo fisso per casa (dati di Ledger): niente da testare |
+| L6 | Chiusura forzata il giorno della scadenza | ESEGUITO | V-L1/L2/L6 (salva/carica prima e dopo l'addebito), T10b |
+| J1 | Tre lavori, turno puntuale | ESEGUITO | V-J1 (barista, cassiere, rider) |
+| J2 | Ritardo, mezzo turno, requisiti | ESEGUITO | V-J2/J3/J4 |
+| J3 | Turni sovrapposti | ESEGUITO | V-J2/J3/J4 (impossibile iniziarne due) |
+| J4 | Dimissioni | ESEGUITO | V-J2/J3/J4 |
+| J5 | Lavoro che richiede auto o notte | ESEGUITO (parziale) | nessun lavoro v0.3 richiede l'auto; il rider ha fasce serali (V-J1, LEDGER-4). Il bus è l'alternativa (V-X6) |
+| J6 | Telefono Lavori con 0/1/2 lavori | ESEGUITO | V-B1/J6/X4 (0, 1, 2 lavori; con 3 non testato perché J3 lo limita negli orari) |
+| H1 | Compra mobile | ESEGUITO | V-H1/H2/H4 |
+| H2 | Mobile senza soldi | ESEGUITO | V-H1/H2/H4 |
+| H3 | Posiziona, sposta, ruota | NON PREVISTO / PIANIFICATO | nella v0.3 i mobili hanno posti fissi (slot) e non si trascinano; la collisione con il personaggio va provata a mano |
+| H4 | Rivendita, niente compra-vendi | ESEGUITO | V-H1/H2/H4, LEDGER-2 |
+| H5 | Mobili interattivi | ESEGUITO (parziale) | V-H1/H2/H4 (comfort→sonno), V-X6; X01 + V-B1/J6/X4 per i pulsanti |
+| H6 | Trasloco | ESEGUITO | V-H6 |
+| H7 | Salva con 10+ mobili | ESEGUITO (adattato) | V-H7 con tutti i 9 mobili del catalogo (10 non esistono) |
+| A1 | Compra auto con/senza soldi | ESEGUITO | V-A1/A4 |
+| A2 | Sali, guida, scendi, parcheggia (touch) | PIANIFICATO (manuale) | salita/discesa provate in V-A7 e negli screenshot; il touch vero no |
+| A3 | Collisioni con muri e NPC | PIANIFICATO (manuale) | il codice frena davanti a pedoni e NPC (Guard), ma non c'è un test automatico di guida |
+| A4 | Serbatoio vuoto e rifornimento | ESEGUITO | V-A1/A4 |
+| A5 | Costi ricorrenti | ESEGUITO | V-A5 |
+| A6 | Uscire dall'auto in punti stretti | PIANIFICATO (manuale) | - |
+| A7 | Salva con auto parcheggiata | ESEGUITO (parcheggiata) | V-A7; il salvataggio con il personaggio dentro l'auto non è testato |
+| A8 | FPS guidando 5 minuti | PIANIFICATO, NON MISURATO | nessun telefono nel box |
+| X1 | 30 giorni con lavori, bollette, affitto, auto | ESEGUITO | V-X1 (2 lavori + auto), LEDGER-1, X17 |
+| X2 | Ripresa da 0 € | ESEGUITO | V-X2, LEDGER-6 |
+| X3 | Salvataggio v0.2 → v0.3 | ESEGUITO | V-X3 (salvataggio vero creato con la v0.2.0, commit c297243) |
+| X4 | Ogni nuova app e pulsante | ESEGUITO | V-B1/J6/X4: 66 schermate (4 app × 4 schede × 3 stati + 6 sportelli dei luoghi), 514 pulsanti, 0 senza azione |
+
+### Dettaglio dei test v0.3 (output reale di tests/results.json)
+### V-B2/B3/B5 - Banca: versa/preleva, rifiuti oltre il saldo e importi non validi: **PASS**
+- OK  versati € 100 e prelevati € 40: conto e risparmi si spostano dello stesso importo
+- OK  nessuna moneta creata o persa (totale € 400,01)
+- OK  2 voci nello storico del conto, 2 nei risparmi
+- OK  prelievo e versamento oltre il disponibile rifiutati: «Nei risparmi hai solo 60,00 €.» / «Nel conto hai solo 340,01 €.»
+- OK  0, negativi e importo enorme rifiutati
+- OK  dopo i rifiuti niente cambia; saldo = storico
+
+### V-B7 - Interessi sul saldo minimo del mese (2% lordo, 26% ritenuta) e canone mensile: **PASS**
+- OK  € 10.000 fermi per 28 giorni: € 12,33 netti (Ledger: 12,33)
+- OK  meno di un turno da barista (€ 45,00)
+- OK  versamento il giorno 28: interessi € 0,00 (non sfruttabile)
+- OK  canone del conto (€ 2) addebitato una volta a fine mese
+- OK  dopo salva/carica nessun accredito o canone ripetuto
+- OK  saldo = storico
+
+### V-L1/L2/L6 - Bollette luce/gas del monolocale: una volta per mese, anche dopo salva/carica: **PASS**
+- OK  mese 1: luce 1, gas 1 (attese 1 e 1)
+- OK  dopo salva/carica e un giorno in più: ancora 1 bolletta luce
+- OK  storico intatto (14 voci)
+- OK  saldo = storico, mai negativo
+
+### V-L3/L4 - Bollette non pagate: mora una volta, luce sospesa dopo 2 bollette, si riparte pagando: **PASS**
+- OK  bollette del mese 1 in sospeso, una per tipo
+- OK  mora applicata alle bollette scadute (8)
+- OK  luce sospesa con 2+ bollette non pagate (piastra non utilizzabile)
+- OK  saldo mai negativo e coerente
+
+### V-L4b - Dopo il pagamento la luce torna: **PASS**
+- OK  nessuna bolletta in sospeso, luce attiva
+
+### V-J1 - Tre lavori: un turno puntuale ciascuno, paga dai dati e una sola volta: **PASS**
+- OK  barista: € 45,00 (dati € 45,00) 
+- OK  cassiere: € 42,00 (dati € 42,00) 
+- OK  rider: 3 consegne = € 9,40 (3 × € 2,80 + mancia € 1,00) 
+- OK  bici (€ 140) e zaino termico (€ 35) comprati: requisiti del rider
+- OK  saldo = storico
+
+### V-J2/J3/J4 - Ritardo −20%, turni sovrapposti impossibili, mezzo turno non pagato, dopo le dimissioni niente turni: **PASS**
+- OK  barista in ritardo di 20 min: € 36,00 (atteso € 36,00)
+- OK  cassiere mentre sei al bar: «Sei già in turno.»
+- OK  cassiere con 5 clienti su 12: paga € 0,00
+- OK  rider senza bici/zaino: «È presto: il turno inizia alle 11:30 (puoi timbrare dalle 11:15).»
+- OK  dopo le dimissioni: «Non lavori ancora per Market Il Girasole: candidati dal telefono (Lavori).»
+- OK  saldo = storico
+
+### V-H1/H2/H4 - Mobili: acquisto, rifiuto senza soldi, comfort→sonno, niente trucco compra-rivendi: **PASS**
+- OK  senza soldi: «Ti servono 199,00 €, ne hai 30,00.», niente cambia
+- OK  materasso comprato a € 199,00
+- OK  sonno 12.0→14.0 energia/ora, comfort 2→10
+- OK  5 cicli vendi+ricompra: perdita € 696,50
+- OK  ogni mobile e vestito si rivende sotto il prezzo (30%/20%)
+- OK  stanza piena: «Non c'è più spazio. Vendi un mobile o cerca una casa più grande.»
+- OK  saldo = storico
+
+### V-H6 - Trasloco: cauzione restituita, nuovo affitto una volta, il vecchio si ferma: **PASS**
+- OK  senza requisiti: «Non hai ancora i requisiti: entrate nette negli ultimi 28 giorni di almeno € 960,00 (ora € 0,00).»
+- OK  spesa netta € 1.260,00 = cauzione + primo canone − cauzione della stanza (€ 1.260,00)
+- OK  nessun affitto della stanza dopo il trasloco
+- OK  affitto del monolocale addebitato 1 volta in 17 giorni (periodo 28)
+- OK  saldo = storico
+
+### V-A1/A4 - Auto: acquisto con e senza soldi, assicurazione obbligatoria, benzina e rifornimento: **PASS**
+- OK  senza soldi: «Ti servono 3.380,00 €, ne hai 400,01.»
+- OK  con i soldi: € 3.380,00 (prezzo + passaggio + bollo = € 3.380,00)
+- OK  senza assicurazione non si guida («Senza assicurazione non puoi guidare.»), dopo l'RC sì
+- OK  serbatoio vuoto: «Benzina finita. L'auto non parte.»
+- OK  10 L a € 1,85 = € 18,50
+- OK  senza soldi il rifornimento è rifiutato
+- OK  dopo salva/carica l'auto e la benzina restano
+- OK  saldo = storico
+
+### V-A5 - Costi ricorrenti: bollo una volta l'anno, assicurazione 28 giorni, strisce blu: **PASS**
+- OK  bollo pagato all'acquisto e non ripetuto entro l'anno
+- OK  pass residenti: niente ticket
+- OK  senza pass serve il ticket; dopo il ticket da 2 h si può lasciare l'auto
+- OK  dopo le 20 le strisce blu sono gratis
+- OK  dopo 28 giorni l'assicurazione scade e va rinnovata
+- OK  saldo = storico
+
+### V-X5 - Imprevisto del giovedì deterministico (Nova): **PASS**
+- OK  4 imprevisti nei giovedì 4, 11, 18, 25
+- OK  due partite uguali danno gli stessi imprevisti
+- OK  saldo = storico
+
+### V-X6 - Palestra (energia massima 90→100) e bus (biglietto o abbonamento): **PASS**
+- OK  abbonamento non comprabile due volte: «Hai già l'abbonamento fino al giorno 29.»
+- OK  3 sessioni in 3 giorni: energia massima 90→91
+- OK  corsa in bus € 1,50
+- OK  con l'abbonamento la corsa è gratis
+- OK  saldo = storico
+
+### V-X7 - Affidabilità: sale pagando in tempo, con tetto mensile, tra 300 e 850: **PASS**
+- OK  60 giorni di affitti puntuali: 605 → 633
+- OK  crescita entro il tetto (25/mese)
+- OK  nei limiti
+
+### V-X1 - 30 giorni con 2 lavori, auto, affitto e bollette (simulazione automatica): **PASS**
+- OK  saldo = storico ogni sera per 30 giorni
+- OK  mai sotto zero
+- OK  nessun addebito o stipendio doppio
+- OK  giorno finale 30, € 5.713,02, 64 voci
+
+### V-X2 - A zero euro: si lavora a piedi, si incassa, il debito resta lieve e recuperabile: **PASS**
+- OK  arretrati in sospeso: 2
+- OK  turno al bar raggiungibile a piedi, pagato € 45,00
+- OK  saldo mai negativo, coerente
+
+### V-X3 - Salvataggio v0.2 reale → v0.3: migrato senza perdere soldi né storico: **PASS**
+- OK  riconosciuto (versione 1) e migrato
+- OK  saldo identico: € 400,00
+- OK  storico identico (6 voci) e coerente
+- OK  nessun addebito retroattivo al caricamento
+- OK  nuovi sistemi ai valori iniziali di Ledger
+- OK  risalvato come versione 2
+
+### LEDGER-1 - Nessun bug di soldi: scenario barista + stanza, 30 giorni: **PASS**
+- OK  minimo € 391,15, fine € 760,22 (Ledger, modello Python: min 391,11 / fine 708,52)
+- OK  dopo 30 giorni si risparmia qualcosa
+
+### LEDGER-2 - Nessun ciclo compra/rivendi in guadagno: **PASS**
+- OK  ogni oggetto si rivende sotto il prezzo
+
+### LEDGER-3 - Interesse non sfruttabile: **PASS**
+- OK  € 10.000 per un mese = € 12,33 < un turno
+
+### LEDGER-4 - Rider: niente guadagno infinito (tetto consegne, energia insufficiente per due fasce piene): **PASS**
+- OK  due fasce piene richiedono 103 di energia (massimo 100)
+
+### LEDGER-5 - Mutuo coerente: rata dai dati, rata × n > capitale: **PASS**
+- OK  monolocale_garibaldi € 217,92, casa_bilocale_mulino € 388,30 (Ledger: 217,92 / 388,30)
+
+### LEDGER-6 - Economia stretta: senza lavoro i soldi finiscono in circa 3 settimane: **PASS**
+- OK  senza lavoro non si riesce più a pagare il giorno 22 (Ledger: ~22)
+- OK  saldo mai negativo, coerente
+
+### V-G1 - Regole di Guard nei testi del gioco: **PASS**
+- OK  etichetta: «Versione di prova (demo) — v0.3»
+- OK  privacy web
+- OK  avviso della banca inventata presente
+- OK  nessuna parola vietata (PEGI, azzardo, trading, marchi reali): []
+
+### V-B1/J6/X4 - App nuove del telefono (Banca, Lavori, Casa, Auto) e sportelli dei luoghi: niente pulsanti finti: **PASS**
+- OK  66 schermate, 514 pulsanti controllati, senza azione: []
+- OK  B1: l'app Banca mostra il saldo del gioco (€ 523,46)
+- OK  B1: «In arrivo (7 giorni)» elenca l'affitto con l'importo
+- OK  J6: 0 lavori → «Non hai ancora un lavoro»
+- OK  J6: 1 lavoro → solo Barista
+- OK  J6: 2 lavori → Barista e Rider, con prossimo turno
+
+### V-H7 - Salva con tutti i mobili (bilocale, 12 posti) e ricarica: identici: **PASS**
+- OK  9 mobili comprati (il catalogo ne ha 9; 10+ non è possibile: il caso Hook usa tutti quelli esistenti)
+- OK  dopo salva/carica l'elenco dei mobili è identico
+- OK  saldo invariato e = storico
+
+### V-A7 - Salva con l'auto parcheggiata, ricarica: posizione e direzione uguali: **PASS**
+- OK  salito e sceso dall'auto
+- OK  scarto posizione 0.000 m, direzione -1.57 → -1.57 rad
+
+---
+
+# Report v0.1/v0.2 (storico, test ancora eseguiti ogni volta)
 
 ## 1. I 12 test obbligatori (ESEGUITI, automatici)
 ### T01 - Il personaggio si muove e si ferma correttamente: **PASS**
