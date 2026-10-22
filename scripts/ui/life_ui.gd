@@ -74,7 +74,7 @@ func _bank_conto(v: VBoxContainer) -> void:
 	if up.is_empty():
 		_p(v, "Nessuna spesa prevista.", 17, UIKit.MUTED)
 	for u in up:
-		ui._row(v, "%s · %s" % [u["desc"], e(int(u["amount"]))], null, "giorno %d" % int(u["day"]))
+		ui._row(v, "%s · %s" % [u["voce"], e(int(u["importo"]))], null, "giorno %d" % int(u["giorno"]))
 	if not Economy.pending_bills.is_empty():
 		_h(v, "Da pagare (arretrati)")
 	for i in Economy.pending_bills.size():

@@ -26,6 +26,9 @@ func run() -> void:
 	x_migrate_v02()
 	ledger_tests()
 	x_texts_guard()
+	x_new_apps()
+	h_save_many()
+	a_save_parked()
 
 func hist_count(prefix: String) -> int:
 	var n := 0
@@ -587,4 +590,130 @@ func x_texts_guard() -> void:
 		[Data.t("privacy_web") .begins_with("Il gioco salva i dati solo nel tuo browser e non raccoglie dati personali."), "privacy web"],
 		["non è consulenza finanziaria" in all, "avviso della banca inventata presente"],
 		[bad.is_empty(), "nessuna parola vietata (PEGI, azzardo, trading, marchi reali): %s" % str(bad)],
+	])
+
+# ---------------------------------------------------------------- B1, J6, X4: app nuove del telefono
+func _ui_text(node: Node) -> String:
+	var out := []
+	for l in node.find_children("*", "Label", true, false):
+		out.append(l.text)
+	for l in node.find_children("*", "RichTextLabel", true, false):
+		out.append(l.text)
+	return "\n".join(out)
+
+func _open_app(app: String, tab: String) -> void:
+	var ui = T.main.ui
+	if ui.modal_kind != "phone":
+		ui.toggle_phone()
+	ui.life_ui.tabs[app] = tab
+	ui.phone_open_app(app)
+
+func x_new_apps() -> void:
+	var ui = T.main.ui
+	var dead := []
+	var total := 0
+	var shown := 0
+	var apps := {"banca": ["conto", "risparmi", "spese", "aff"], "lavori": ["mio", "offerte", "cand", "promo"],
+		"casa": ["mia", "cerca", "mobili", "armadio"], "auto": ["mia", "conc", "benzina", "ass"]}
+	var places := {
+		"banca_sportello": func(): ui.life_ui.open_bank(),
+		"boutique": func(): ui.life_ui.open_boutique(),
+		"palestra": func(): ui.life_ui.open_gym(),
+		"trattoria": func(): ui.life_ui.open_trattoria(),
+		"autosalone": func(): ui.life_ui.open_dealer(),
+		"distributore": func(): ui.life_ui.open_fuel(),
+	}
+	var jobs_txt := []
+	for state in 3:
+		T.fresh(2, "12:00")
+		if state >= 1:
+			give(1000000)
+			Jobs.hire("barista")
+			Life.buy_car("utilitaria_ginestra", false)
+			Life.buy_insurance()
+			Life.buy_furniture("tende_oscuranti")
+		if state >= 2:
+			Jobs.hire("rider")
+		_open_app("lavori", "mio")
+		jobs_txt.append(_ui_text(ui.modal))
+		for app in apps:
+			for tab in apps[app]:
+				_open_app(app, tab)
+				shown += 1
+				for b in ui.modal.find_children("*", "Button", true, false):
+					total += 1
+					if b.pressed.get_connections().is_empty():
+						dead.append("%s/%s:%s" % [app, tab, b.text])
+		ui.close_modal()
+		for k in places:
+			T.set_time(2, "12:00")
+			places[k].call()
+			if ui.modal:
+				shown += 1
+				for b in ui.modal.find_children("*", "Button", true, false):
+					total += 1
+					if b.pressed.get_connections().is_empty():
+						dead.append("%s:%s" % [k, b.text])
+			ui.close_modal()
+			T.get_tree().paused = false
+	# B1: il conto mostra lo stesso saldo del gioco
+	T.fresh(2, "12:00")
+	give(12345)
+	_open_app("banca", "conto")
+	var bank_txt := _ui_text(ui.modal)
+	var shows_bal := ("Saldo disponibile: € " + Data.euro(Economy.money_cents)) in bank_txt
+	ui.close_modal()
+	var j0: String = jobs_txt[0]
+	var j1: String = jobs_txt[1]
+	var j2: String = jobs_txt[2]
+	T.record("V-B1/J6/X4", "App nuove del telefono (Banca, Lavori, Casa, Auto) e sportelli dei luoghi: niente pulsanti finti", [
+		[dead.is_empty() and total > 50, "%d schermate, %d pulsanti controllati, senza azione: %s" % [shown, total, str(dead)]],
+		[shows_bal, "B1: l'app Banca mostra il saldo del gioco (€ %s)" % Data.euro(Economy.money_cents)],
+		["Affitto · €" in bank_txt, "B1: «In arrivo (7 giorni)» elenca l'affitto con l'importo"],
+		["Non hai ancora un lavoro" in j0, "J6: 0 lavori → «Non hai ancora un lavoro»"],
+		[Jobs.title("barista") in j1 and not (Jobs.title("rider") in j1), "J6: 1 lavoro → solo %s" % Jobs.title("barista")],
+		[Jobs.title("barista") in j2 and Jobs.title("rider") in j2, "J6: 2 lavori → %s e %s, con prossimo turno" % [Jobs.title("barista"), Jobs.title("rider")]],
+	])
+
+# ---------------------------------------------------------------- H7: salva con tutti i mobili
+func h_save_many() -> void:
+	T.fresh(2, "10:00")
+	give(5000000)
+	_set_home("bilocale_piazza")
+	var bought := 0
+	for f in Data.life["furniture"]:
+		if Life.buy_furniture(str(f["id"])) == "":
+			bought += 1
+	var before := JSON.stringify(Life.furniture)
+	var money := Economy.money_cents
+	var ok := save_reload()
+	var after := JSON.stringify(Life.furniture)
+	T.record("V-H7", "Salva con tutti i mobili (bilocale, 12 posti) e ricarica: identici", [
+		[bought >= 8, "%d mobili comprati (il catalogo ne ha %d; 10+ non è possibile: il caso Hook usa tutti quelli esistenti)" % [Life.furniture.size(), Data.life["furniture"].size()]],
+		[ok and before == after, "dopo salva/carica l'elenco dei mobili è identico"],
+		[Economy.money_cents == money and Economy.is_consistent(), "saldo invariato e = storico"],
+	])
+
+# ---------------------------------------------------------------- A7: salva con l'auto parcheggiata
+func a_save_parked() -> void:
+	T.fresh(2, "10:00")
+	give(1000000)
+	Life.buy_car("utilitaria_ginestra", false, Vector3(30.0, 0.02, 0.95), -PI / 2.0)
+	Life.buy_insurance()
+	var pc = T.main.player_car
+	T.main.player.teleport(Vector3(30.0, 0.12, -1.5), 0.0)
+	var entered := false
+	if pc:
+		pc.enter_car()
+		entered = true
+		pc.speed = 0.0
+		pc.exit_car()
+	var pos0: Array = Life.car["pos"].duplicate()
+	var yaw0 := float(Life.car["yaw"])
+	var ok := save_reload()
+	var pos1: Array = Life.car["pos"]
+	var d := Vector3(pos0[0], pos0[1], pos0[2]).distance_to(Vector3(pos1[0], pos1[1], pos1[2]))
+	T.record("V-A7", "Salva con l'auto parcheggiata, ricarica: posizione e direzione uguali", [
+		[entered, "salito e sceso dall'auto"],
+		[ok and Life.has_car() and d < 0.05 and absf(float(Life.car["yaw"]) - yaw0) < 0.01, "scarto posizione %.3f m, direzione %.2f → %.2f rad" % [d, yaw0, float(Life.car["yaw"])]],
 	])

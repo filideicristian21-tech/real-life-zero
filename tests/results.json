@@ -611,6 +611,38 @@
   },
   {
     "checks": [
+      "OK  66 schermate, 514 pulsanti controllati, senza azione: []",
+      "OK  B1: l'app Banca mostra il saldo del gioco (€ 523,46)",
+      "OK  B1: «In arrivo (7 giorni)» elenca l'affitto con l'importo",
+      "OK  J6: 0 lavori → «Non hai ancora un lavoro»",
+      "OK  J6: 1 lavoro → solo Barista",
+      "OK  J6: 2 lavori → Barista e Rider, con prossimo turno"
+    ],
+    "id": "V-B1/J6/X4",
+    "pass": true,
+    "title": "App nuove del telefono (Banca, Lavori, Casa, Auto) e sportelli dei luoghi: niente pulsanti finti"
+  },
+  {
+    "checks": [
+      "OK  9 mobili comprati (il catalogo ne ha 9; 10+ non è possibile: il caso Hook usa tutti quelli esistenti)",
+      "OK  dopo salva/carica l'elenco dei mobili è identico",
+      "OK  saldo invariato e = storico"
+    ],
+    "id": "V-H7",
+    "pass": true,
+    "title": "Salva con tutti i mobili (bilocale, 12 posti) e ricarica: identici"
+  },
+  {
+    "checks": [
+      "OK  salito e sceso dall'auto",
+      "OK  scarto posizione 0.000 m, direzione -1.57 → -1.57 rad"
+    ],
+    "id": "V-A7",
+    "pass": true,
+    "title": "Salva con l'auto parcheggiata, ricarica: posizione e direzione uguali"
+  },
+  {
+    "checks": [
       "OK  salvato in /home/box/.local/share/godot/app_userdata/REAL LIFE- ZERO/test_save.json"
     ],
     "id": "T10a",

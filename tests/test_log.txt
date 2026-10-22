@@ -1253,14 +1253,35 @@ Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
       OK  avviso della banca inventata presente
       OK  nessuna parola vietata (PEGI, azzardo, trading, marchi reali): []
 [toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (9,99 €). Da 500,00 € ti restano 400,01 €.
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (9,99 €). Da 500,00 € ti restano 400,01 €.
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (9,99 €). Da 500,00 € ti restano 400,01 €.
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (9,99 €). Da 500,00 € ti restano 400,01 €.
+[PASS] V-B1/J6/X4 App nuove del telefono (Banca, Lavori, Casa, Auto) e sportelli dei luoghi: niente pulsanti finti
+      OK  66 schermate, 514 pulsanti controllati, senza azione: []
+      OK  B1: l'app Banca mostra il saldo del gioco (€ 523,46)
+      OK  B1: «In arrivo (7 giorni)» elenca l'affitto con l'importo
+      OK  J6: 0 lavori → «Non hai ancora un lavoro»
+      OK  J6: 1 lavoro → solo Barista
+      OK  J6: 2 lavori → Barista e Rider, con prossimo turno
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (9,99 €). Da 500,00 € ti restano 400,01 €.
+[PASS] V-H7 Salva con tutti i mobili (bilocale, 12 posti) e ricarica: identici
+      OK  9 mobili comprati (il catalogo ne ha 9; 10+ non è possibile: il caso Hook usa tutti quelli esistenti)
+      OK  dopo salva/carica l'elenco dei mobili è identico
+      OK  saldo invariato e = storico
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (9,99 €). Da 500,00 € ti restano 400,01 €.
+[toast] Al volante: avanti/indietro per accelerare e frenare, sinistra/destra per sterzare. Limite 50 km/h.
+[PASS] V-A7 Salva con l'auto parcheggiata, ricarica: posizione e direzione uguali
+      OK  salito e sceso dall'auto
+      OK  scarto posizione 0.000 m, direzione -1.57 → -1.57 rad
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (9,99 €). Da 500,00 € ti restano 400,01 €.
 [toast] Hai comprato Pasta «Molino Antico» 500 g per 1,20 €. Saldo: 398,81 €.
 [toast] Hai comprato Sugo al pomodoro 400 g per 1,90 €. Saldo: 396,91 €.
 [PASS] T10a Preparazione chiusura/riapertura: partita salvata, il processo ora si chiude
       OK  salvato in /home/box/.local/share/godot/app_userdata/REAL LIFE- ZERO/test_save.json
-RESULT: 55 test, 0 falliti
-WARNING: 18 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+RESULT: 58 test, 0 falliti
+WARNING: 10 ObjectDB instances were leaked at exit (run with `--verbose` for details).
    at: cleanup (core/object/object.cpp:2536)
-ERROR: 6 resources still in use at exit (run with --verbose for details).
+ERROR: 4 resources still in use at exit (run with --verbose for details).
    at: clear (core/io/resource.cpp:822)
 Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
 
