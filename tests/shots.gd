@@ -27,6 +27,11 @@ func _ready() -> void:
 		["09_via_roma_tramonto", Vector3(-60.0, 0.12, 5.6), -PI / 2.0, "19:30", -0.15],
 		["10_piazza_notte", Vector3(10.0, 0.12, -10.0), PI, "22:30", -0.2],
 		["10b_parcheggio", Vector3(-16.0, 0.12, -41.0), PI - 0.5, "16:00", -0.4],
+		["16_banca_boutique_palestra", Vector3(52.0, 0.12, 4.6), PI, "10:30", -0.12],
+		["17_trattoria_distributore", Vector3(44.0, 0.12, -4.8), 0.0, "12:40", -0.12],
+		["18_autosalone", Vector3(70.0, 0.12, -1.5), 0.25, "15:00", -0.2],
+		["19_campanile", Vector3(4.0, 0.12, -14.0), PI + 0.36, "17:45", 0.22],
+		["19b_via_roma_alba", Vector3(-30.0, 0.12, 4.8), -PI / 2.0 - 0.15, "06:20", -0.1],
 	]
 	Game.skip_tutorial()
 	for s in shots:
@@ -63,6 +68,29 @@ func _ready() -> void:
 	for i in 4: await get_tree().process_frame
 	await RenderingServer.frame_post_draw
 	get_viewport().get_texture().get_image().save_png(out_dir + "/14_hud.png")
+	for app in [["banca", "spese", "20_app_banca_spese"], ["lavori", "offerte", "21_app_lavori"], ["casa", "cerca", "22_app_casa"], ["auto", "conc", "23_app_auto"]]:
+		main.ui.toggle_phone()
+		main.ui.life_ui.tabs[app[0]] = app[1]
+		main.ui.phone_open_app(app[0])
+		for i in 6: await get_tree().process_frame
+		await RenderingServer.frame_post_draw
+		get_viewport().get_texture().get_image().save_png(out_dir + "/" + app[2] + ".png")
+		main.ui.close_modal()
+	# guida: auto di prova consegnata davanti all'Autosalone
+	Economy.earn(500000, "Prova screenshot", "test")
+	GameTime.total_minutes = float(Data.hhmm_to_min("10:00"))
+	Life.buy_car("utilitaria_ginestra", false, Vector3(30.0, 0.02, 0.95), -PI / 2.0)
+	Life.buy_insurance()
+	main.player.teleport(Vector3(30.0, 0.12, -1.5), 0.0)
+	main.player_car.enter_car()
+	main.player.cam_yaw_node.rotation.y = -PI / 2.0 + 0.5
+	main.player.cam_pitch_node.rotation.x = -0.25
+	main.day_night.update(true)
+	for i in 10: await get_tree().process_frame
+	await RenderingServer.frame_post_draw
+	get_viewport().get_texture().get_image().save_png(out_dir + "/24_guida.png")
+	main.player_car.speed = 0.0
+	main.player_car.exit_car()
 	main.ui.show_main_menu()
 	for i in 6: await get_tree().process_frame
 	await RenderingServer.frame_post_draw

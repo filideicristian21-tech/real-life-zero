@@ -49,7 +49,7 @@
   {
     "checks": [
       "OK  acquisto riuscito",
-      "OK  saldo 405,00 → 403,20 (−1,80)",
+      "OK  saldo 400,01 → 398,21 (−1,80)",
       "OK  inventario: 3 porzioni (1 confezione da 3)",
       "OK  una sola voce nello storico",
       "OK  scorta scaffale −1",
@@ -66,7 +66,7 @@
       "OK  giorno 1 (lunedì, bar chiuso): turno non disponibile → il tutorial manda al primo turno di martedì",
       "OK  turno puntuale con 10 ordini: +€ 45,00 (atteso € 45,00)",
       "OK  seconda chiusura: nessun doppio pagamento (voci stipendio: 1)",
-      "OK  ritardo di 20 min: +€ 35,00 (atteso € 35,00)",
+      "OK  ritardo di 20 min: +€ 36,00 (atteso € 36,00)",
       "OK  solo 6 ordini su 10: niente paga",
       "OK  turno lasciato a metà: niente paga",
       "OK  oltre 45 min di ritardo: turno perso (Troppo tardi: oltre 45 minuti di ritardo il turno di oggi è perso.)",
@@ -91,7 +91,7 @@
   },
   {
     "checks": [
-      "OK  8 ore: energia 20 → 100.0 (atteso 100.0)",
+      "OK  8 ore: energia 20 → 90.0 (atteso 90.0)",
       "OK  sonno 15 → 100.0",
       "OK  la fame scende più piano dormendo: −16.0 in 8 h",
       "OK  l'ora avanza: giorno 2, 06:00"
@@ -104,10 +104,10 @@
     "checks": [
       "OK  giorno 1: 1 addebito anche richiamando il controllo 2 volte",
       "OK  giorni 2-7: nessun altro addebito",
-      "OK  giorno 8: secondo affitto (€ 90,00) + telefono (€ 5,00) addebitati una volta",
+      "OK  giorno 8: secondo affitto (€ 90,00) addebitato una volta (telefono v0.3: mensile, non il giorno 8)",
       "OK  dopo salvataggio + caricamento + nuovo controllo: ancora 2 addebiti",
       "OK  fino al giorno 14 nessun addebito extra",
-      "OK  senza soldi: affitto in arretrato (1), saldo mai negativo (€ 115,00)",
+      "OK  senza soldi: affitto in arretrato (2), saldo mai negativo (€ 185,00)",
       "OK  l'arretrato si salda dal telefono quando arrivano i soldi",
       "OK  saldo coerente con lo storico"
     ],
@@ -146,7 +146,7 @@
       "OK  3 turni lavorati e pagati (3)",
       "OK  dialoghi con 2 NPC presenti",
       "OK  salva/carica a fine sessione",
-      "OK  denaro coerente dopo 4 giorni (saldo € 535,30)",
+      "OK  denaro coerente dopo 4 giorni (saldo € 505,31)",
       "OK  errori di script/motore: verificati dal runner shell sul log (vedi TEST-REPORT)"
     ],
     "id": "T12",
@@ -155,7 +155,7 @@
   },
   {
     "checks": [
-      "OK  B1: 1500 azioni casuali (acquisti, tempo, bollette): saldo mai negativo, coerente (finale € 0,20)",
+      "OK  B1: 1500 azioni casuali (acquisti, tempo, bollette): saldo mai negativo, coerente (finale € 0,16)",
       "OK  B4: senza pasti l'energia va sotto 20 dopo 16 ore di gioco (entro 48)",
       "OK  valori letti da data/economy.json (affitto € 90, paga € 45)"
     ],
@@ -165,7 +165,7 @@
   },
   {
     "checks": [
-      "OK  64 pulsanti controllati, senza azione: []"
+      "OK  67 pulsanti controllati, senza azione: []"
     ],
     "id": "X01",
     "pass": true,
@@ -207,9 +207,9 @@
   },
   {
     "checks": [
-      "OK  saldo dopo la nuova partita € 405,00 (500 − 90 − 5)",
-      "OK  avviso unico: «Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (5,00 €). Da 500,00 € ti restano 405,00 €.»",
-      "OK  primo passo del tutorial: «Benvenuto a San Vito al Colle. Hai 20 anni e una stanza in affitto. Sei arrivato con 500,00 €: oggi hai già pagato la prima settimana d'affitto (90,00 €) e la ricarica del telefono (5,00 €), quindi ti restano 405,00 €. Lo vedi nel Telefono, app Conto.»",
+      "OK  saldo dopo la nuova partita € 400,01 (500 − 90 − 9,99)",
+      "OK  avviso unico: «Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (9,99 €). Da 500,00 € ti restano 400,01 €.»",
+      "OK  primo passo del tutorial: «Benvenuto a San Vito al Colle. Hai 20 anni e una stanza in affitto. Sei arrivato con 500,00 €: oggi hai già pagato la prima settimana d'affitto (90,00 €) e la ricarica del telefono (9,99 €), quindi ti restano 400,01 €. Lo vedi nel Telefono, app Conto.»",
       "OK  nello storico: 2 voci (affitto settimana 1, ricarica telefono)"
     ],
     "id": "X05",
@@ -229,7 +229,7 @@
   {
     "checks": [
       "OK  salvataggio ricaricato dal disco",
-      "OK  saldo dopo la riapertura € 403,50 (= dopo l'acquisto)",
+      "OK  saldo dopo la riapertura € 398,51 (= dopo l'acquisto)",
       "OK  il latte è nell'inventario dopo la riapertura (4 porzioni)",
       "OK  saldo coerente con lo storico"
     ],
@@ -337,7 +337,7 @@
   },
   {
     "checks": [
-      "OK  saldo coerente con lo storico dopo 21 giorni (€ 670,80, 95 voci)",
+      "OK  saldo coerente con lo storico dopo 21 giorni (€ 683,81, 95 voci)",
       "OK  affitti dei giorni 8, 15 e 22 addebitati una volta ciascuno (3, oggi è il giorno 22) + giorno 1 alla nuova partita",
       "OK  mai saldo negativo, nessuno sfratto con una routine normale",
       "OK  bisogni sempre tra 0 e 100",
@@ -364,7 +364,7 @@
       "OK  inventory identico dopo la riapertura",
       "OK  jobs identico dopo la riapertura",
       "OK  posizione del personaggio ripristinata (scarto 0.01 m)",
-      "OK  saldo € 401,90"
+      "OK  saldo € 396,91"
     ],
     "id": "T10b",
     "pass": true,

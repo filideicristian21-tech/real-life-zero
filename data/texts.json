@@ -48,6 +48,10 @@
   ],
   "phone": {
     "conto": "Conto",
+    "banca": "Banca",
+    "lavori": "Lavori",
+    "casa": "Casa",
+    "auto": "Auto",
     "zaino": "Zaino",
     "agenda": "Agenda",
     "lavoro": "Lavoro",
@@ -60,11 +64,11 @@
   "feedback": {
     "bought": "Hai comprato {prodotto} per {prezzo} €. Saldo: {saldo} €.",
     "no_money": "Non hai abbastanza soldi. Ti servono {prezzo} €, ne hai {saldo}.",
-    "paid": "Stipendio arrivato: +{paga} € per il turno al Bar Centrale. Saldo: {saldo} €.",
+    "paid": "Paga arrivata: +{paga} € per il turno ({lavoro}). Saldo: {saldo} €.",
     "not_paid": "Turno non completato: niente paga per oggi. {motivo}",
     "rent_paid": "Affitto pagato: −{affitto} €. Prossima scadenza: giorno {giorno}.",
     "rent_unpaid": "Non hai abbastanza soldi per l'affitto ({affitto} €). Ti mancano {mancanti} €.",
-    "closed": "Chiuso. Riapre alle {apertura}.",
+    "closed": "Chiuso. Riapre: {apertura}.",
     "too_tired_run": "Sei troppo stanco per correre. Riposati o mangia qualcosa.",
     "first_day_bills": "Primo giorno: pagati affitto settimana 1 ({affitto}) e ricarica telefono ({telefono}). Da {iniziale} ti restano {saldo}."
   },

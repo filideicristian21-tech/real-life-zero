@@ -1,0 +1,1012 @@
+{
+ "version": "0.3",
+ "currency": "EUR",
+ "money_unit": "cents",
+ "all_prices_are_estimates": true,
+ "estimate_note": "STIMA: tutti gli importi sono stime realistiche per una cittadina italiana nel 2026, non listini reali",
+ "calendar": {
+  "real_minutes_per_game_day": 20,
+  "days_per_game_month": 28,
+  "months_per_game_year": 12,
+  "days_per_game_year": 336,
+  "start": {
+   "day": 1,
+   "weekday": "lun",
+   "time": "07:00",
+   "month": 10
+  },
+  "month_end_processing": "giorno 28, 23:59: canone conto, interessi, credit score mensile"
+ },
+ "start": {
+  "money_cents": 50000,
+  "savings_cents": 0,
+  "credit_score": 600,
+  "home_id": "stanza_via_roma",
+  "deposit_already_paid": true,
+  "owned_furniture": [
+   "letto_singolo_base"
+  ],
+  "owned_clothes": [
+   "maglietta_base"
+  ],
+  "energy_max": 90,
+  "skills": {
+   "caffe": 5,
+   "precisione": 5,
+   "fisico": 5
+  },
+  "needs": {
+   "hunger": 70,
+   "energy": 80
+  }
+ },
+ "needs_note": "bisogni 0–100 come v1 (100 = ottimo). Novità v0.3: energia massima base 90, la palestra la porta fino a 100.",
+ "bank": {
+  "checking": {
+   "name": "Conto corrente Giovani",
+   "monthly_fee_cents": 200,
+   "fee_charged": "fine mese di gioco",
+   "overdraft_default": "non consentito: il pagamento viene bloccato se il saldo non basta",
+   "overdraft_lines": [
+    {
+     "id": "fido_base",
+     "name": "Fido piccolo",
+     "min_credit_score": 650,
+     "limit_cents": 15000,
+     "min_net_income_28d_cents": 60000
+    },
+    {
+     "id": "fido_plus",
+     "name": "Fido",
+     "min_credit_score": 720,
+     "limit_cents": 40000,
+     "min_net_income_28d_cents": 90000
+    }
+   ],
+   "overdraft_interest_bp_annual": 1200,
+   "overdraft_interest_formula": "interessi_cents = floor( somma_su_giorni_del_mese(max(0, -saldo_fine_giorno_cents)) * 1200 / 10000 / 336 ), addebitati a fine mese",
+   "overdraft_max_days_continuous": 28,
+   "overdraft_over_limit": "impossibile: i pagamenti oltre il fido vengono bloccati"
+  },
+  "savings": {
+   "name": "Conto risparmio",
+   "interest_bp_annual_gross": 200,
+   "withholding_tax_bp": 2600,
+   "interest_formula": "interesse_cents = floor( saldo_minimo_risparmio_nel_mese_cents * 200 * (10000 - 2600) / (10000 * 10000 * 12) )",
+   "interest_basis": "saldo MINIMO del mese di gioco (giacenza minima): depositare l'ultimo giorno non rende nulla",
+   "credited": "fine mese di gioco (giorno 28)",
+   "min_deposit_cents": 100,
+   "transfers_free": true,
+   "example": {
+    "min_balance_cents": 100000,
+    "interest_cents": 123
+   }
+  },
+  "name": "Banca Popolare del Colle",
+  "hours": {
+   "open": "08:30",
+   "close": "13:30",
+   "closed_days": [
+    "sab",
+    "dom"
+   ]
+  },
+  "disclaimer": "Simulazione di gioco: non è consulenza finanziaria e non rappresenta prodotti reali."
+ },
+ "taxes": {
+  "wage_flat_rate_bp": 2000,
+  "name": "Trattenute (aliquota forfettaria)",
+  "note": "STIMA semplificata che riunisce contributi e IRPEF di un part-time: netto = lordo - floor(lordo*2000/10000). Le mance non sono tassate (semplificazione).",
+  "show_in_ui": [
+   "lordo",
+   "trattenute",
+   "netto"
+  ],
+  "tari": {
+   "name": "Tassa rifiuti (TARI)",
+   "installments_per_year": 4,
+   "installment_every_game_months": 3,
+   "late_fee_cents": 500,
+   "annual_amount_cents_by_home": {
+    "stanza_via_roma": 0,
+    "monolocale_corso": 15000,
+    "bilocale_piazza": 21000,
+    "monolocale_garibaldi": 15000,
+    "casa_bilocale_mulino": 21000
+   },
+   "note": "nella stanza la TARI è inclusa nel canone"
+  }
+ },
+ "bills": {
+  "grace_days": 5,
+  "late_fee_cents": 500,
+  "credit_score_late": -15,
+  "suspension_after_unpaid": 2,
+  "suspension_effect": "luce sospesa: niente forno/piastra/macchina caffè finché non si paga; nessuna penale extra",
+  "electricity": {
+   "name": "Luce",
+   "period_days": 28,
+   "fixed_cents": 1000,
+   "price_cents_per_kwh": 28,
+   "formula": "importo = fixed_cents + round( (kwh_base_casa + somma(wh_per_use * utilizzi)/1000) * 28 )"
+  },
+  "gas": {
+   "name": "Gas",
+   "period_days": 28,
+   "fixed_cents": 800,
+   "price_cents_per_smc": 120,
+   "heating_months": [
+    11,
+    12,
+    1,
+    2,
+    3
+   ],
+   "formula": "importo = fixed_cents + (smc_base_casa + smc_riscaldamento_casa se mese invernale) * 120"
+  },
+  "phone": {
+   "name": "Telefono (ricarica mensile)",
+   "period_days": 28,
+   "amount_cents": 999,
+   "first_due_day": 1
+  }
+ },
+ "jobs": [
+  {
+   "id": "barista",
+   "name": "Barista – Bar Centrale da Mimmo",
+   "workdays": [
+    "mar",
+    "mer",
+    "gio",
+    "ven",
+    "sab"
+   ],
+   "shifts": [
+    {
+     "start": "06:30",
+     "end": "12:30",
+     "hours": 6
+    }
+   ],
+   "check_in_window_min": 15,
+   "requirements": {
+    "energy_min_at_start": 20,
+    "orders_min_completed": 10
+   },
+   "energy_per_hour": 5,
+   "hunger_per_hour": 4,
+   "activity": "Prendi l'ordinazione, prepara caffè/cappuccino alla macchina, servi al bancone (min 10 ordini a turno)",
+   "skill": "caffe",
+   "skill_gain_per_shift": 2,
+   "late_policy": {
+    "late_after_min": 15,
+    "pay_cut_pct": 20,
+    "absent_after_min": 45
+   },
+   "levels": [
+    {
+     "level": 1,
+     "title": "Barista",
+     "gross_cents_per_shift": 5625,
+     "net_cents_per_shift": 4500,
+     "conditions": null
+    },
+    {
+     "level": 2,
+     "title": "Barista esperto",
+     "gross_cents_per_shift": 6250,
+     "net_cents_per_shift": 5000,
+     "conditions": {
+      "shifts_completed": 10,
+      "punctuality_pct_min": 90,
+      "skill_min": 25
+     }
+    },
+    {
+     "level": 3,
+     "title": "Capo turno",
+     "gross_cents_per_shift": 7000,
+     "net_cents_per_shift": 5600,
+     "conditions": {
+      "shifts_completed": 40,
+      "punctuality_pct_min": 95,
+      "skill_min": 60
+     }
+    }
+   ],
+   "perks": {
+    "free_item_per_shift": "caffe",
+    "employee_discount_pct": 50
+   },
+   "place": "Bar Centrale"
+  },
+  {
+   "id": "cassiere",
+   "name": "Cassiere – Market Il Girasole",
+   "workdays": [
+    "lun",
+    "mar",
+    "mer",
+    "gio",
+    "ven",
+    "sab"
+   ],
+   "shifts": [
+    {
+     "start": "08:00",
+     "end": "14:00",
+     "hours": 6
+    },
+    {
+     "start": "14:00",
+     "end": "20:00",
+     "hours": 6
+    }
+   ],
+   "check_in_window_min": 15,
+   "hiring": {
+    "interview_score_min": 60
+   },
+   "requirements": {
+    "energy_min_at_start": 20,
+    "customers_min_served": 12,
+    "max_change_errors": 2
+   },
+   "energy_per_hour": 4,
+   "hunger_per_hour": 4,
+   "activity": "Scansiona i prodotti, incassa e dai il resto corretto (minigioco del resto)",
+   "skill": "precisione",
+   "skill_gain_per_shift": 2,
+   "late_policy": {
+    "late_after_min": 15,
+    "pay_cut_pct": 20,
+    "absent_after_min": 45
+   },
+   "levels": [
+    {
+     "level": 1,
+     "title": "Cassiere",
+     "gross_cents_per_shift": 5250,
+     "net_cents_per_shift": 4200,
+     "conditions": null
+    },
+    {
+     "level": 2,
+     "title": "Cassiere esperto",
+     "gross_cents_per_shift": 5750,
+     "net_cents_per_shift": 4600,
+     "conditions": {
+      "shifts_completed": 12,
+      "punctuality_pct_min": 90,
+      "skill_min": 30
+     }
+    },
+    {
+     "level": 3,
+     "title": "Responsabile di cassa",
+     "gross_cents_per_shift": 6500,
+     "net_cents_per_shift": 5200,
+     "conditions": {
+      "shifts_completed": 45,
+      "punctuality_pct_min": 95,
+      "skill_min": 65
+     }
+    }
+   ],
+   "perks": {
+    "employee_discount_pct": 10
+   },
+   "max_shifts_per_day": 1,
+   "place": "Market Il Girasole"
+  },
+  {
+   "id": "rider",
+   "name": "Rider in bici – ConsegnaGiù",
+   "workdays": [
+    "lun",
+    "mar",
+    "mer",
+    "gio",
+    "ven",
+    "sab",
+    "dom"
+   ],
+   "shifts": [
+    {
+     "start": "11:30",
+     "end": "14:30",
+     "hours": 3,
+     "max_deliveries": 7
+    },
+    {
+     "start": "18:30",
+     "end": "22:30",
+     "hours": 4,
+     "max_deliveries": 10
+    }
+   ],
+   "hiring": {
+    "interview_score_min": 50
+   },
+   "requirements": {
+    "energy_min_at_start": 35,
+    "owns_item": [
+     "bici_usata",
+     "zaino_termico"
+    ]
+   },
+   "energy_per_hour": 5,
+   "energy_extra_per_delivery": 4,
+   "hunger_per_hour": 5,
+   "activity": "Ritira l'ordine al bar/minimarket, pedala fino all'indirizzo entro il tempo indicato, consegna",
+   "skill": "fisico",
+   "skill_gain_per_10_deliveries": 1,
+   "tips_estimate": {
+    "rule": "deterministica: 100 cents ogni 3 consegne puntuali consecutive (STIMA media ~0,33 €/consegna)",
+    "tip_cents": 100,
+    "every_on_time_deliveries": 3,
+    "taxed": false
+   },
+   "on_time_threshold_min": 20,
+   "levels": [
+    {
+     "level": 1,
+     "title": "Rider",
+     "gross_cents_per_delivery": 350,
+     "net_cents_per_delivery": 280,
+     "conditions": null
+    },
+    {
+     "level": 2,
+     "title": "Rider affidabile",
+     "gross_cents_per_delivery": 390,
+     "net_cents_per_delivery": 312,
+     "conditions": {
+      "deliveries_completed": 60,
+      "on_time_pct_min": 90,
+      "skill_min": 25
+     }
+    },
+    {
+     "level": 3,
+     "title": "Rider top",
+     "gross_cents_per_delivery": 430,
+     "net_cents_per_delivery": 344,
+     "conditions": {
+      "deliveries_completed": 250,
+      "on_time_pct_min": 95,
+      "skill_min": 60
+     },
+     "bonus_max_deliveries_per_shift": 2
+    }
+   ],
+   "equipment": [
+    {
+     "id": "bici_usata",
+     "name": "Bici da città usata",
+     "price_cents": 14000,
+     "maintenance_every_deliveries": 150,
+     "maintenance_cents": 2500,
+     "maintenance_effect": "se non fatta: consegne +20% di tempo (niente guasti casuali)"
+    },
+    {
+     "id": "zaino_termico",
+     "name": "Zaino termico",
+     "price_cents": 3500
+    }
+   ],
+   "place": "ConsegnaGiù"
+  }
+ ],
+ "interview": {
+  "formula": "punteggio = 40 + floor(abilità_più_alta/2) + somma(bonus_colloquio dei vestiti indossati)",
+  "retry_after_days": 3
+ },
+ "homes_rent": [
+  {
+   "id": "stanza_via_roma",
+   "name": "Stanza in affitto, Via dei Tigli 12",
+   "period_days": 7,
+   "rent_cents": 9000,
+   "deposit_cents": 18000,
+   "bills_included": [
+    "luce",
+    "gas",
+    "tari"
+   ],
+   "phone_separate": true,
+   "provides": [
+    "cucina",
+    "forno"
+   ],
+   "furniture_slots": 3,
+   "requirements": null,
+   "late_fee_cents": 1000,
+   "grace_days": 2,
+   "eviction_after_missed_payments": 2,
+   "zona": "Via dei Tigli",
+   "provides_note": "la stanza ha già una cucina con forno (si vede nella scena): scostamento da Ledger"
+  },
+  {
+   "id": "monolocale_corso",
+   "name": "Monolocale arredato, corso Italia 5 (30 m²)",
+   "period_days": 28,
+   "rent_cents": 48000,
+   "deposit_cents": 96000,
+   "bills_included": [],
+   "kwh_base_per_month": 110,
+   "smc_base_per_month": 12,
+   "smc_heating_per_month": 30,
+   "provides": [
+    "cucina"
+   ],
+   "furniture_slots": 7,
+   "requirements": {
+    "credit_score_min": 600,
+    "net_income_28d_min_cents": 96000
+   },
+   "late_fee_cents": 2500,
+   "grace_days": 3,
+   "eviction_after_missed_payments": 2,
+   "bills_example": {
+    "electricity_month_cents": 4080,
+    "gas_summer_month_cents": 2240,
+    "gas_winter_month_cents": 5840
+   },
+   "zona": "Corso Italia"
+  },
+  {
+   "id": "bilocale_piazza",
+   "name": "Bilocale, piazza Garibaldi 3 (50 m²)",
+   "period_days": 28,
+   "rent_cents": 65000,
+   "deposit_cents": 130000,
+   "bills_included": [],
+   "kwh_base_per_month": 150,
+   "smc_base_per_month": 18,
+   "smc_heating_per_month": 45,
+   "provides": [
+    "cucina"
+   ],
+   "furniture_slots": 12,
+   "requirements": {
+    "credit_score_min": 640,
+    "net_income_28d_min_cents": 130000
+   },
+   "late_fee_cents": 3000,
+   "grace_days": 3,
+   "eviction_after_missed_payments": 2,
+   "bills_example": {
+    "electricity_month_cents": 5200,
+    "gas_summer_month_cents": 2960,
+    "gas_winter_month_cents": 8360
+   },
+   "zona": "Piazza Garibaldi"
+  }
+ ],
+ "homes_sale": [
+  {
+   "id": "monolocale_garibaldi",
+   "name": "Monolocale in vendita, via Garibaldi 40 (40 m²)",
+   "price_cents": 5500000,
+   "down_payment_cents": 1100000,
+   "closing_costs_cents": 350000,
+   "mortgage_principal_cents": 4400000,
+   "mortgage_installment_cents": 21792,
+   "condo_fees_monthly_cents": 3000,
+   "kwh_base_per_month": 110,
+   "smc_base_per_month": 12,
+   "smc_heating_per_month": 30,
+   "furniture_slots": 7,
+   "provides": [],
+   "requirements": {
+    "credit_score_min": 700,
+    "cash_needed_cents": 1450000,
+    "net_income_28d_min_cents": 66037
+   },
+   "bills_example": {
+    "electricity_month_cents": 4080,
+    "gas_summer_month_cents": 2240,
+    "gas_winter_month_cents": 5840
+   },
+   "zona": "Via Garibaldi"
+  },
+  {
+   "id": "casa_bilocale_mulino",
+   "name": "Bilocale in vendita, via del Mulino 8 (65 m²)",
+   "price_cents": 9800000,
+   "down_payment_cents": 1960000,
+   "closing_costs_cents": 450000,
+   "mortgage_principal_cents": 7840000,
+   "mortgage_installment_cents": 38830,
+   "condo_fees_monthly_cents": 4500,
+   "kwh_base_per_month": 150,
+   "smc_base_per_month": 18,
+   "smc_heating_per_month": 45,
+   "furniture_slots": 12,
+   "provides": [],
+   "requirements": {
+    "credit_score_min": 720,
+    "cash_needed_cents": 2410000,
+    "net_income_28d_min_cents": 117667
+   },
+   "bills_example": {
+    "electricity_month_cents": 5200,
+    "gas_summer_month_cents": 2960,
+    "gas_winter_month_cents": 8360
+   },
+   "zona": "Via del Mulino"
+  }
+ ],
+ "mortgage": {
+  "tan_bp": 340,
+  "term_months": 300,
+  "down_payment_pct": 20,
+  "min_credit_score": 700,
+  "max_installment_pct_of_net_income": 33,
+  "min_job_level": 2,
+  "early_repayment_penalty_cents": 0,
+  "formula": "rata_cents = round( P * i / (1 - (1+i)^(-n)) ), con P = prezzo - anticipo, i = 340/10000/12, n = 300 mesi di gioco",
+  "missed_installment": {
+   "late_fee_cents": 2500,
+   "credit_score": -40,
+   "foreclosure_after_missed": 3
+  }
+ },
+ "furniture": [
+  {
+   "id": "letto_singolo_base",
+   "name": "Letto singolo base",
+   "price_cents": 0,
+   "effects": {
+    "sleep_energy_per_hour": 12
+   }
+  },
+  {
+   "id": "materasso_memory",
+   "name": "Materasso memory",
+   "price_cents": 19900,
+   "effects": {
+    "sleep_energy_per_hour_bonus": 2
+   }
+  },
+  {
+   "id": "tende_oscuranti",
+   "name": "Tende oscuranti",
+   "price_cents": 3500,
+   "effects": {
+    "sleep_energy_per_hour_bonus": 1,
+    "daytime_sleep_ok": true
+   }
+  },
+  {
+   "id": "piastra_induzione",
+   "name": "Piastra a induzione",
+   "price_cents": 4900,
+   "provides": [
+    "cucina"
+   ],
+   "wh_per_use": 500
+  },
+  {
+   "id": "forno_elettrico",
+   "name": "Forno elettrico",
+   "price_cents": 7900,
+   "provides": [
+    "forno"
+   ],
+   "wh_per_use": 1000
+  },
+  {
+   "id": "frigorifero_piccolo",
+   "name": "Frigorifero piccolo",
+   "price_cents": 16900,
+   "provides": [
+    "frigo"
+   ],
+   "kwh_per_month": 15,
+   "effects": {
+    "perishables_extra_days": 4
+   }
+  },
+  {
+   "id": "divano_letto",
+   "name": "Divano letto",
+   "price_cents": 24900,
+   "effects": {
+    "rest_energy_per_hour": 4
+   }
+  },
+  {
+   "id": "scrivania_sedia",
+   "name": "Scrivania e sedia",
+   "price_cents": 8900,
+   "effects": {
+    "study_skill_per_hour": 1,
+    "study_max_hours_per_day": 2,
+    "study_energy_per_hour": -3
+   }
+  },
+  {
+   "id": "macchina_caffe",
+   "name": "Macchina caffè a capsule",
+   "price_cents": 5900,
+   "wh_per_use": 50,
+   "consumable": {
+    "id": "capsule_10",
+    "name": "Capsule (10)",
+    "price_cents": 350
+   },
+   "effects": {
+    "energy_per_use": 8,
+    "caffe_skill_per_day": 1
+   }
+  }
+ ],
+ "furniture_resale_pct": 30,
+ "clothes": [
+  {
+   "id": "maglietta_base",
+   "name": "Maglietta",
+   "price_cents": 800,
+   "effects": {}
+  },
+  {
+   "id": "camicia_bianca",
+   "name": "Camicia bianca",
+   "price_cents": 2500,
+   "effects": {
+    "interview_bonus": 5,
+    "promotion_note": "richiesta da cassiere liv. 3"
+   }
+  },
+  {
+   "id": "pantaloni_chino",
+   "name": "Pantaloni chino",
+   "price_cents": 3500,
+   "effects": {
+    "interview_bonus": 5
+   }
+  },
+  {
+   "id": "completo_colloquio",
+   "name": "Completo da colloquio",
+   "price_cents": 14900,
+   "effects": {
+    "interview_bonus": 15,
+    "bank_meeting_bonus": "richiesto per firmare il mutuo"
+   }
+  },
+  {
+   "id": "scarpe_running",
+   "name": "Scarpe da running",
+   "price_cents": 5900,
+   "effects": {
+    "rider_energy_per_delivery_reduction": 1,
+    "gym_energy_cost_reduction": 3
+   }
+  },
+  {
+   "id": "giacca_impermeabile",
+   "name": "Giacca impermeabile",
+   "price_cents": 4500,
+   "effects": {
+    "rain_no_slowdown": true,
+    "rider_on_time_bonus_min": 2
+   }
+  },
+  {
+   "id": "felpa",
+   "name": "Felpa",
+   "price_cents": 2200,
+   "effects": {
+    "cold_energy_loss_reduction": 1
+   }
+  }
+ ],
+ "clothes_resale_pct": 20,
+ "gym": {
+  "name": "Palestra Fit Colle",
+  "hours": {
+   "open": "07:00",
+   "close": "22:00",
+   "closed_days": [
+    "dom"
+   ]
+  },
+  "monthly_pass_cents": 3500,
+  "single_entry_cents": 800,
+  "session_hours": 1,
+  "session_effects": {
+   "energy": -15,
+   "hunger": -10,
+   "fisico_skill": 2
+  },
+  "energy_max_rule": "+1 energia massima ogni 3 sessioni (max 1 sessione conteggiata al giorno), fino a 100; -1 ogni 7 giorni senza palestra, mai sotto 90",
+  "break_even_sessions_per_month": 5
+ },
+ "transport": {
+  "bus": {
+   "name": "Bus urbano",
+   "ticket_cents": 150,
+   "monthly_pass_cents": 3000
+  }
+ },
+ "cars": {
+  "fuel_price_cents_per_liter": 185,
+  "parking": {
+   "blue_lines_cents_per_hour": 120,
+   "blue_lines_hours": "08:00-20:00",
+   "resident_pass_cents_per_month": 2500,
+   "fines": "nessuna multa casuale: senza ticket l'auto non si può lasciare sulle strisce (blocco UI)"
+  },
+  "purchase": {
+   "ownership_transfer_cents": 35000,
+   "installment_plan": {
+    "min_credit_score": 600,
+    "min_shifts_completed": 5,
+    "down_payment_pct": 10,
+    "tan_bp": 990,
+    "term_months": 36,
+    "max_installment_pct_of_net_income": 25,
+    "formula": "rata_cents = round( P * i / (1 - (1+i)^(-n)) ), P = prezzo - anticipo + passaggio di proprietà, i = 990/10000/12, n = 36"
+   }
+  },
+  "maintenance": {
+   "service_every_km": 5000,
+   "service_cents": 15000,
+   "wear_pct_per_100_km": 1,
+   "wear_warning_pct": 80,
+   "repair_at_100_pct": {
+    "cents": 22000,
+    "effect": "auto ferma finché non riparata (guasto annunciato, non casuale)"
+   },
+   "inspection_every_game_years": 2,
+   "inspection_cents": 7900
+  },
+  "models": [
+   {
+    "id": "utilitaria_ginestra",
+    "name": "Ginestra 1.2 utilitaria (2010, 160.000 km)",
+    "price_cents": 290000,
+    "fuel_l_per_100km_x10": 58,
+    "insurance_annual_cents": 90000,
+    "insurance_monthly_cents": 7700,
+    "road_tax_annual_cents": 13000,
+    "installment_example": {
+     "principal_cents": 296000,
+     "installment_cents": 9537
+    },
+    "km_start": 160000,
+    "color": "#C9C2B2",
+    "tank_l": 35
+   },
+   {
+    "id": "compatta_corallo",
+    "name": "Corallo 1.0 compatta (2015, 110.000 km)",
+    "price_cents": 620000,
+    "fuel_l_per_100km_x10": 50,
+    "insurance_annual_cents": 108000,
+    "insurance_monthly_cents": 9300,
+    "road_tax_annual_cents": 16000,
+    "installment_example": {
+     "principal_cents": 593000,
+     "installment_cents": 19107
+    },
+    "km_start": 110000,
+    "color": "#3A5A8C",
+    "tank_l": 35
+   }
+  ],
+  "insurance_note": "RC neopatentato 20 anni: annuale, oppure mensile con ~3% in più (STIMA)",
+  "benefits": "supermercato in città (12 km a/r): spesa -15%; future offerte di lavoro in città",
+  "tank_note": "STIMA: serbatoio 35 L per entrambe; nomi dei modelli inventati (Guard: niente marchi reali)",
+  "dealer": {
+   "name": "Autosalone Bertoni — Usato Garantito",
+   "hours": {
+    "open": "09:00",
+    "close": "19:00",
+    "closed_days": [
+     "dom"
+    ]
+   }
+  },
+  "fuel_station": {
+   "name": "Distributore del Colle",
+   "hours": {
+    "open": "07:00",
+    "close": "21:00",
+    "closed_days": []
+   }
+  },
+  "drive": {
+   "max_speed_kmh": 50,
+   "reverse_kmh": 12,
+   "km_per_world_unit": 0.004,
+   "note": "1 m di gioco = 4 m di strada reale per rendere sensibili i consumi in una mappa piccola (STIMA)"
+  }
+ },
+ "credit_score": {
+  "min": 300,
+  "max": 850,
+  "start": 600,
+  "monthly_gain_cap": 25,
+  "events": {
+   "rent_paid_on_time": 3,
+   "bill_paid_on_time": 2,
+   "loan_installment_on_time": 3,
+   "month_end_savings_ge_20000": 2,
+   "month_end_savings_ge_100000": 4,
+   "rent_late": -25,
+   "bill_late": -15,
+   "loan_installment_late": -40,
+   "overdraft_used_more_than_14_days": -10,
+   "overdraft_over_28_days": -30,
+   "eviction": -80,
+   "foreclosure": -150
+  },
+  "thresholds": {
+   "car_installment": 600,
+   "rent_monolocale": 600,
+   "rent_bilocale": 640,
+   "fido_base": 650,
+   "mortgage": 700,
+   "fido_plus": 720
+  },
+  "ui_bands": [
+   {
+    "min": 300,
+    "label": "Scarso"
+   },
+   {
+    "min": 580,
+    "label": "Discreto"
+   },
+   {
+    "min": 670,
+    "label": "Buono"
+   },
+   {
+    "min": 740,
+    "label": "Ottimo"
+   }
+  ],
+  "label": "Affidabilità (punteggio nel gioco)"
+ },
+ "gambling": {
+  "enabled": false,
+  "note": "nessun casinò, gratta e vinci, loot box o trading speculativo: unica rendita passiva è il conto risparmio"
+ },
+ "clothes_shop": {
+  "name": "Boutique Marisa",
+  "hours": {
+   "open": "09:30",
+   "close": "19:30",
+   "closed_days": [
+    "dom"
+   ]
+  }
+ },
+ "furniture_shop": {
+  "name": "Arredo Casa Colle (consegna in giornata)"
+ },
+ "restaurant": {
+  "name": "Trattoria Da Rosa",
+  "hours_lunch": {
+   "open": "12:00",
+   "close": "14:30"
+  },
+  "hours_dinner": {
+   "open": "19:00",
+   "close": "22:00"
+  },
+  "closed_days": [
+   "lun"
+  ],
+  "note": "STIMA prezzi trattoria di paese 2026",
+  "menu": [
+   {
+    "id": "primo_giorno",
+    "name": "Primo del giorno",
+    "price_cents": 850,
+    "hunger": 40,
+    "energy": 6
+   },
+   {
+    "id": "menu_pranzo",
+    "name": "Menu pranzo (primo, secondo, acqua)",
+    "price_cents": 1300,
+    "hunger": 65,
+    "energy": 10
+   },
+   {
+    "id": "secondo_contorno",
+    "name": "Secondo con contorno",
+    "price_cents": 1100,
+    "hunger": 45,
+    "energy": 8
+   },
+   {
+    "id": "tiramisu",
+    "name": "Tiramisù della casa",
+    "price_cents": 450,
+    "hunger": 12,
+    "energy": 6
+   }
+  ]
+ },
+ "equipment_shop_note": "Bici e zaino si comprano dall'app Lavori (ConsegnaGiù li consegna a casa)",
+ "thursday_events": [
+  {
+   "id": "schermo",
+   "text": "Lo schermo dello Zero Phone si è crepato: riparazione dal tecnico.",
+   "amount_cents": -2500,
+   "category": "Altro"
+  },
+  {
+   "id": "mancia",
+   "text": "Un cliente abituale ti lascia una busta di ringraziamento per le feste del paese.",
+   "amount_cents": 1500,
+   "category": "Entrate",
+   "requires_job": true
+  },
+  {
+   "id": "scarpe",
+   "text": "Si è scollata una scarpa: risuolatura dal calzolaio.",
+   "amount_cents": -1200,
+   "category": "Altro"
+  },
+  {
+   "id": "nonna",
+   "text": "La nonna ti manda un piccolo regalo per la nuova casa.",
+   "amount_cents": 2000,
+   "category": "Entrate"
+  },
+  {
+   "id": "farmacia",
+   "text": "Raffreddore: spesa in farmacia.",
+   "amount_cents": -800,
+   "category": "Altro"
+  }
+ ],
+ "weekly_goal_options": [
+  {
+   "id": "cuscinetto",
+   "name": "Fondo imprevisti",
+   "target_cents": 30000
+  },
+  {
+   "id": "auto_ginestra",
+   "name": "Anticipo auto (Ginestra)",
+   "target_cents": 64500
+  },
+  {
+   "id": "monolocale",
+   "name": "Cauzione monolocale",
+   "target_cents": 144000
+  }
+ ],
+ "bus_v03": {
+  "stops": [
+   {
+    "id": "fontana",
+    "name": "Piazza della Fontana",
+    "pos": [
+     -21.0,
+     -5.2
+    ]
+   },
+   {
+    "id": "roma_est",
+    "name": "Via Roma Est (Autosalone)",
+    "pos": [
+     64.0,
+     5.2
+    ]
+   }
+  ],
+  "ride_minutes": 6
+ },
+ "_source": "Ledger reallife-ledger-v03.md (STIME, centesimi). Correzioni: nomi auto inventati (Guard), nomi luoghi (Spark), luoghi/eventi/serbatoio aggiunti (STIMA) da tools/make_life_json.py"
+}

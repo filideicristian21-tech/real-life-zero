@@ -3,7 +3,7 @@ extends Node
 
 signal saved(ok: bool, reason: String)
 
-const CURRENT_VERSION := 1
+const CURRENT_VERSION := 2
 var save_path := "user://save.json"
 var backup_path := "user://save_backup.json"
 var last_error := ""
@@ -19,6 +19,7 @@ func build_game_dict() -> Dictionary:
 		"needs": Needs.to_dict(),
 		"inventory": Inventory.to_dict(),
 		"jobs": Jobs.to_dict(),
+		"life": Life.to_dict(),
 		"progress": Game.progress_to_dict(),
 	}
 
@@ -73,20 +74,42 @@ func inspect(path: String) -> Dictionary:
 	var ver := int(doc.get("version", 0))
 	if ver < 1 or ver > CURRENT_VERSION:
 		return {"status": "corrupt", "why": "version %d" % ver}
+	var g0: Dictionary = doc["game"]
+	for k in ["time", "economy", "needs", "inventory", "jobs", "progress"]:
+		if not g0.has(k) or not (g0[k] is Dictionary):
+			return {"status": "corrupt", "why": "missing " + k}
+	if str(doc.get("checksum", "")) != _canon_hash(g0):
+		return {"status": "corrupt", "why": "checksum"}
+	var migrated := ver < CURRENT_VERSION
 	doc = migrate(doc)
 	var g: Dictionary = doc["game"]
-	for k in ["time", "economy", "needs", "inventory", "jobs", "progress"]:
-		if not g.has(k) or not (g[k] is Dictionary):
-			return {"status": "corrupt", "why": "missing " + k}
-	if str(doc.get("checksum", "")) != _canon_hash(g):
-		return {"status": "corrupt", "why": "checksum"}
 	var tm := float(g["time"].get("total_minutes", 0))
 	var day := int(tm / 1440.0) + 1
-	return {"status": "ok", "doc": doc, "day": day, "clock": Data.min_to_hhmm(int(tm) % 1440), "money": int(g["economy"].get("money_cents", 0))}
+	return {"status": "ok", "doc": doc, "migrated": migrated, "from_version": ver, "day": day, "clock": Data.min_to_hhmm(int(tm) % 1440), "money": int(g["economy"].get("money_cents", 0))}
 
 ## Migrazioni future: da versione N a N+1.
 func migrate(doc: Dictionary) -> Dictionary:
-	# v1 è la prima versione: nessuna migrazione necessaria.
+	var ver := int(doc.get("version", 1))
+	if ver < 2:
+		# v0.1/v0.2 -> v0.3: conto e storico restano identici; si aggiungono banca/casa/lavori nuovi
+		# con i valori iniziali di Ledger. Il telefono settimanale passa a mensile: il mese in corso
+		# risulta già pagato se nella v0.2 era stata pagata almeno una ricarica in quel mese.
+		var g: Dictionary = doc["game"]
+		var tm := float(g["time"].get("total_minutes", 0))
+		var day := int(tm / 1440.0) + 1
+		var e: Dictionary = g["economy"]
+		var cp: Array = e.get("charged_periods", [])
+		var month := (day - 1) / 28
+		for k in cp.duplicate():
+			var s := str(k)
+			if s.begins_with("telefono:"):
+				var wk := int(s.split(":")[1])
+				if (wk * 7) / 28 == month and not cp.has("tel28:%d" % month):
+					cp.append("tel28:%d" % month)
+		e["charged_periods"] = cp
+		if not g.has("life"):
+			g["life"] = {"_migrated_from": ver}
+		doc["version"] = 2
 	return doc
 
 func status() -> Dictionary:
@@ -106,6 +129,14 @@ func load_from(path: String) -> bool:
 	Needs.from_dict(g["needs"])
 	Inventory.from_dict(g["inventory"])
 	Jobs.from_dict(g["jobs"])
+	var ld: Dictionary = g.get("life", {})
+	if ld.has("_migrated_from") or ld.is_empty():
+		Life.reset_new_game()
+		# i mesi già trascorsi nella v0.2 non generano addebiti retroattivi
+		for m in range(0, Life.month_of_day(GameTime.day())):
+			Life.processed["month:%d" % m] = true
+	else:
+		Life.from_dict(ld)
 	Game.progress_from_dict(g["progress"])
 	return true
 

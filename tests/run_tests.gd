@@ -399,7 +399,7 @@ func t08_sleep() -> void:
 	var h0 := Needs.hunger
 	var d0 := GameTime.day()
 	Game.sleep_hours(8.0, false)
-	var exp_e: float = min(100.0, 20.0 + 8.0 * float(Data.economy["sleep"]["energy_per_hour"]))
+	var exp_e: float = min(float(Life.energy_max), 20.0 + 8.0 * Life.sleep_energy_per_hour())
 	record("T08", "Dormire recupera energia", [
 		[absf(Needs.energy - exp_e) < 0.01, "8 ore: energia 20 → %.1f (atteso %.1f)" % [Needs.energy, exp_e]],
 		[Needs.sonno > 95.0, "sonno 15 → %.1f" % Needs.sonno],
@@ -446,7 +446,7 @@ func t09_rent_once() -> void:
 	record("T09", "L'affitto viene addebitato una sola volta per periodo", [
 		[r1 == 1 and r1b == 1, "giorno 1: 1 addebito anche richiamando il controllo 2 volte"],
 		[r_before8 == 1, "giorni 2-7: nessun altro addebito"],
-		[r8 == 2 and charged == amount + 500, "giorno 8: secondo affitto (€ %s) + telefono (€ 5,00) addebitati una volta" % Data.euro(amount)],
+		[r8 == 2 and charged == amount, "giorno 8: secondo affitto (€ %s) addebitato una volta (telefono v0.3: mensile, non il giorno 8)" % Data.euro(amount)],
 		[r8b == 2, "dopo salvataggio + caricamento + nuovo controllo: ancora 2 addebiti"],
 		[r14 == 2, "fino al giorno 14 nessun addebito extra"],
 		[pend >= 1 and nonneg, "senza soldi: affitto in arretrato (%d), saldo mai negativo (€ %s)" % [pend, Data.euro(Economy.money_cents)]],
@@ -825,9 +825,9 @@ func x_first_day_notice() -> void:
 		if m.begins_with("Primo giorno"):
 			notice = m
 	record("X05", "Primo avvio: addebito di affitto e telefono spiegato (caso Hook 1)", [
-		[Economy.money_cents == 40500, "saldo dopo la nuova partita € %s (500 − 90 − 5)" % Data.euro(Economy.money_cents)],
-		[notice.contains("90,00") and notice.contains("5,00") and notice.contains("405,00"), "avviso unico: «%s»" % notice],
-		[t.contains("500,00") and t.contains("405,00") and t.contains("90,00"), "primo passo del tutorial: «%s»" % t],
+		[Economy.money_cents == 40001, "saldo dopo la nuova partita € %s (500 − 90 − 9,99)" % Data.euro(Economy.money_cents)],
+		[notice.contains("90,00") and notice.contains("9,99") and notice.contains("400,01"), "avviso unico: «%s»" % notice],
+		[t.contains("500,00") and t.contains("400,01") and t.contains("90,00"), "primo passo del tutorial: «%s»" % t],
 		[Economy.history.size() == 2, "nello storico: 2 voci (affitto settimana 1, ricarica telefono)"],
 	])
 

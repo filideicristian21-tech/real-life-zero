@@ -34,6 +34,8 @@ var _toasts: Array = []
 var _toast_queue: Array = []
 const HUD_BTN := Color(0.102, 0.102, 0.102, 0.6)
 var build_lbl: Label
+var life_ui: LifeUI
+var rider_lbl: Label
 
 func _ready() -> void:
 	layer = 10
@@ -43,7 +45,22 @@ func _ready() -> void:
 	root.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	root.theme = UIKit.make_theme()
 	add_child(root)
+	life_ui = LifeUI.new(self)
 	_build_hud()
+	var rp := PanelContainer.new()
+	rp.name = "RiderPanel"
+	rp.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	rp.set_anchors_preset(Control.PRESET_CENTER_TOP)
+	rp.position = Vector2(-300, 70)
+	rp.custom_minimum_size = Vector2(600, 0)
+	rp.visible = false
+	rider_lbl = UIKit.label("", 20, Color.WHITE, true)
+	rider_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	rp.add_child(rider_lbl)
+	hud.add_child(rp)
+	Life.score_changed.connect(func(_s, d, _r):
+		if d != 0 and not Game.headless_test:
+			show_toast("Affidabilità %+d (ora %d)." % [d, Life.credit_score], "ok" if d > 0 else "warn"))
 	modal_layer = Control.new()
 	modal_layer.set_anchors_preset(Control.PRESET_FULL_RECT)
 	modal_layer.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -222,7 +239,11 @@ func _process(_dt: float) -> void:
 		b.visible = controls_on
 	joystick.enabled = controls_on
 	if p:
-		p.input_enabled = controls_on and not Jobs.in_shift
+		p.input_enabled = controls_on and not (Jobs.in_shift and Jobs.cur_job != "rider")
+	if rider_lbl:
+		var rt := life_ui.rider_text()
+		rider_lbl.text = rt
+		rider_lbl.get_parent().visible = rt != "" and controls_on
 	var mp: Control = hud.get_node("MoneyPanel")
 	mp.position.x = s.x - 64 - 16 - 12 - mp.size.x
 	tut_panel.visible = Game.playing and not is_modal_open() and tut_lbl.text != ""
@@ -610,7 +631,7 @@ func _ask_leave_shift() -> void:
 	_confirm("Lasciare il turno adesso? Non verrai pagato per oggi.", Jobs.abandon_shift.bind("Hai lasciato il turno prima della fine."), "Lascia")
 
 func _process_shift(dt: float) -> void:
-	if not Jobs.in_shift or shift_ui.is_empty() or get_tree().paused:
+	if not Jobs.in_shift or Jobs.cur_job != "barista" or shift_ui.is_empty() or get_tree().paused:
 		return
 	var cfg: Dictionary = Data.balance["shift_minigame"]
 	if shift_ui["order"] == "":
@@ -672,8 +693,12 @@ func close_shift() -> void:
 	if modal_kind == "shift":
 		close_modal()
 	shift_ui = {}
+	life_ui.cashier = {}
 	if main and main.player:
-		main.player.teleport(Vector3(5.0, Town.CURB, -47.5), PI)
+		if Jobs.cur_job == "barista":
+			main.player.teleport(Vector3(5.0, Town.CURB, -47.5), PI)
+		elif Jobs.cur_job == "cassiere":
+			main.player.teleport(Vector3(16.5, Town.CURB, 5.4), PI)
 
 # =====================================================================  SONNO
 func open_sleep_panel() -> void:
@@ -738,20 +763,66 @@ func next_bus_min() -> int:
 		t += every
 	return first + 1440
 
-func open_bus_panel() -> void:
-	open_modal("bus", "Fermata · Linea 3, Piazza della Fontana", _fill_bus, 640)
+var bus_stop_id := "fontana"
+func open_bus_panel(stop: String = "fontana") -> void:
+	bus_stop_id = stop
+	var nm := "Piazza della Fontana" if stop == "fontana" else "Via Roma Est"
+	open_modal("bus", "Fermata · Linea 3, " + nm, _fill_bus, 640)
+
+func _bus_other() -> Dictionary:
+	for s in Data.life["bus_v03"]["stops"]:
+		if s["id"] != bus_stop_id:
+			return s
+	return {}
 
 func _fill_bus(v: VBoxContainer) -> void:
 	var bus: Dictionary = Data.balance["bus"]
+	var tb: Dictionary = Data.life["transport"]["bus"]
 	var nb := next_bus_min()
-	v.add_child(UIKit.label("Corse ogni %d minuti dalle %s alle %s. Biglietto € %s." % [int(bus["every_min"]), bus["first"], bus["last"], Data.euro(int(bus["ticket_cents"]))], 20, Color.WHITE, true))
+	var other := _bus_other()
+	var ride := int(Data.life["bus_v03"]["ride_minutes"])
+	v.add_child(UIKit.label("Corse ogni %d minuti dalle %s alle %s. Biglietto € %s, abbonamento € %s per 28 giorni." % [int(bus["every_min"]), bus["first"], bus["last"], Data.euro(int(tb["ticket_cents"])), Data.euro(int(tb["monthly_pass_cents"]))], 20, Color.WHITE, true))
 	v.add_child(UIKit.label("Prossimo passaggio: %s%s" % [Data.min_to_hhmm(nb), " (domani)" if nb >= 1440 else ""], 22, UIKit.CORAL))
-	v.add_child(UIKit.label("In questa versione il bus porta solo fuori paese e non si sale: la fermata serve per riposare e controllare gli orari.", 17, UIKit.MUTED, true))
-	var wait: int = mini(nb - GameTime.minute_of_day(), int(bus["wait_rest_minutes"])) if nb < 1440 else int(bus["wait_rest_minutes"])
+	if Life.bus_has_pass():
+		v.add_child(UIKit.label("Abbonamento attivo fino al giorno %d." % Life.bus_pass_until, 17, UIKit.GREEN))
+	var wait_bus: int = nb - GameTime.minute_of_day()
+	var rb := UIKit.button("Prendi il bus delle %s per %s (%d min di viaggio)" % [Data.min_to_hhmm(nb), other.get("name", ""), ride], func(): take_bus(), true, 56)
+	rb.disabled = nb >= 1440 or (not Life.bus_has_pass() and not Economy.can_afford(int(tb["ticket_cents"])))
+	v.add_child(rb)
+	if nb >= 1440:
+		v.add_child(UIKit.label("Per oggi le corse sono finite.", 17, UIKit.MUTED))
+	var wait: int = mini(wait_bus, int(bus["wait_rest_minutes"])) if nb < 1440 else int(bus["wait_rest_minutes"])
 	var b := UIKit.button("Siediti sotto la pensilina (%d min)" % max(wait, 5), func():
 		close_modal()
-		rest_minutes(max(wait, 5), float(bus["wait_energy"]), "Ti sei seduto alla fermata e hai visto passare il bus."), true, 52)
+		rest_minutes(max(wait, 5), float(bus["wait_energy"]), "Ti sei seduto alla fermata e hai visto passare il bus."), false, 52)
 	v.add_child(b)
+
+## Corsa in bus tra le due fermate: aspetta il bus, paga (o abbonamento), viaggia 6 minuti.
+func take_bus() -> bool:
+	var nb := next_bus_min()
+	if nb >= 1440:
+		show_toast("Per oggi le corse sono finite.", "warn")
+		return false
+	var err := Life.pay_bus_ride()
+	if err != "":
+		show_toast(err, "warn")
+		return false
+	var other := _bus_other()
+	var wait := nb - GameTime.minute_of_day()
+	var ride := int(Data.life["bus_v03"]["ride_minutes"])
+	close_modal()
+	var go := func():
+		GameTime.advance(float(wait + ride))
+		var p: Array = other["pos"]
+		if main and main.player:
+			main.player.teleport(Vector3(float(p[0]), Town.CURB + 0.05, float(p[1]) + (0.8 if float(p[1]) > 0 else -0.8)), 0.0 if float(p[1]) < 0 else PI)
+		Game.toast("Sei sceso a %s (%s%d min)." % [other["name"], "abbonamento, " if Life.bus_has_pass() else "biglietto € 1,50, ", wait + ride], "ok")
+		Game.save_after_purchase()
+	if Game.headless_test:
+		go.call()
+	else:
+		fade(go)
+	return true
 
 # =====================================================================  DIALOGHI
 func show_dialogue(who: String, lines: Array, npc: NPC) -> void:
@@ -802,7 +873,7 @@ func toggle_phone() -> void:
 	if modal_kind == "phone":
 		close_modal()
 		return
-	if Jobs.in_shift:
+	if Jobs.in_shift and Jobs.cur_job != "rider":
 		show_toast("Durante il turno il telefono resta in tasca. Usa la pausa (II) se ti serve fermarti.", "info")
 		return
 	if is_modal_open():
@@ -827,12 +898,15 @@ func _phone_content(v: VBoxContainer) -> void:
 		v.add_child(UIKit.label("%s · %s · € %s" % [GameTime.weekday_name(), GameTime.clock_text(), Data.euro(Economy.money_cents)], 20, UIKit.MUTED))
 		if Economy.days_to_next_rent() <= 2:
 			v.add_child(UIKit.label("Affitto in scadenza tra %d giorni: € %s" % [Economy.days_to_next_rent(), Data.euro(int(Data.economy["rent"]["amount_cents"]))], 18, Color("#F2A65A")))
-		if Jobs.employed:
-			v.add_child(UIKit.label("Prossimo turno al Bar Centrale: " + Jobs.next_shift_text(), 18, Color("#F2A65A")))
+		for jid in ["barista", "cassiere", "rider"]:
+			if Jobs.st(jid)["employed"]:
+				v.add_child(UIKit.label("Prossimo turno (%s): %s" % [Jobs.title(jid), Jobs.next_shift_text(jid)], 18, Color("#F2A65A")))
+		if not Life.goal.is_empty():
+			v.add_child(UIKit.label("Obiettivo %s: € %s su € %s" % [Life.goal["name"], Data.euro(mini(Life.savings_cents, int(Life.goal["target_cents"]))), Data.euro(int(Life.goal["target_cents"]))], 17, UIKit.MUTED))
 		var g := GridContainer.new()
 		g.columns = 3
 		v.add_child(g)
-		for a in ["conto", "zaino", "agenda", "lavoro", "stato", "menu"]:
+		for a in ["banca", "lavori", "casa", "auto", "zaino", "agenda", "stato", "menu"]:
 			var b := UIKit.button(Data.t("phone." + a), func(): phone_open_app(a), true, 96)
 			b.custom_minimum_size.x = 170
 			g.add_child(b)
@@ -840,6 +914,10 @@ func _phone_content(v: VBoxContainer) -> void:
 	v.add_child(UIKit.button("◂ Home", func(): phone_open_app(""), false, 46))
 	match phone_app:
 		"conto": _app_conto(v)
+		"banca": life_ui.app_banca(v)
+		"lavori": life_ui.app_lavori(v)
+		"casa": life_ui.app_casa(v)
+		"auto": life_ui.app_auto(v)
 		"zaino": _app_zaino(v)
 		"agenda": _app_agenda(v)
 		"lavoro": _app_lavoro(v)
@@ -1066,14 +1144,13 @@ func show_credits() -> void:
 				close_modal())), 760, false)
 
 func show_evicted() -> void:
-	Game.stop()
-	SaveSystem.delete_all()
-	open_modal("evicted", "Fine di questa vita", func(v):
-		v.add_child(UIKit.label("Due affitti non pagati: il signor Bianchi ha dovuto dare la stanza a un altro inquilino. Torni per un po' dalla tua famiglia e ci riprovi con più calma.", 22, Color.WHITE, true))
-		v.add_child(UIKit.label("Consiglio: lavora almeno 3-4 turni a settimana e tieni da parte i soldi dell'affitto.", 18, UIKit.MUTED, true))
-		v.add_child(UIKit.button("Nuova partita", func():
-			close_modal()
-			Game.new_game(), true, 60)), 620, false)
+	# v0.3: niente game over (Guard): avviso chiaro e si continua a giocare.
+	if Game.headless_test:
+		return
+	open_modal("evicted", "Affitto: piano di rientro", func(v):
+		v.add_child(UIKit.label("Due affitti non pagati. Non perdi la partita: l'arretrato resta da saldare (app Banca o bacheca di casa) e la tua affidabilità è scesa. Lavorando qualche turno torni in pari.", 22, Color.WHITE, true))
+		v.add_child(UIKit.label("Consiglio: tieni da parte i soldi dell'affitto nel Salvadanaio.", 18, UIKit.MUTED, true))
+		v.add_child(UIKit.button("Ho capito", func(): close_modal(), true, 56)), 620, true)
 
 func queue_day_summary(info: Dictionary) -> void:
 	if Game.headless_test:

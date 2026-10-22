@@ -1,78 +1,154 @@
 {
-  "version": 1,
-  "time": {
-    "real_seconds_per_game_day": 1200,
-    "start_day": 1,
-    "start_time": "07:00",
-    "shift_speed_mult": 3.0,
-    "weekdays": [
-      "lun",
-      "mar",
-      "mer",
-      "gio",
-      "ven",
-      "sab",
-      "dom"
-    ],
-    "weekday_names": [
-      "Lunedì",
-      "Martedì",
-      "Mercoledì",
-      "Giovedì",
-      "Venerdì",
-      "Sabato",
-      "Domenica"
-    ]
-  },
-  "sonno": {
-    "start": 85,
-    "decay_per_game_hour_awake": 5,
-    "recover_per_sleep_hour": 12.5,
-    "low_threshold": 20,
-    "low_energy_extra_per_hour": 2
-  },
-  "faint": {
-    "energy_at_or_below": 0,
-    "sleep_hours": 6,
-    "message": "Sei crollato dalla stanchezza. Ti risvegli a casa."
-  },
-  "player": {
-    "walk_speed": 2.4,
-    "run_speed": 5.2,
-    "accel": 10.0,
-    "turn_speed": 10.0
-  },
-  "camera": {
-    "distance": 4.2,
-    "min_pitch_deg": -55,
-    "max_pitch_deg": 20,
-    "sensitivity_touch": 0.006,
-    "sensitivity_mouse": 0.004
-  },
-  "shift_minigame": {
-    "order_interval_real_s": 3.0,
-    "order_timeout_real_s": 7.0,
-    "items": [
-      "caffe",
-      "cappuccino",
-      "cornetto",
-      "spremuta",
-      "acqua_05"
-    ]
-  },
-  "bus": {
-    "line": "Linea 3, Piazza della Fontana",
-    "first": "06:10",
-    "last": "21:10",
-    "every_min": 30,
-    "ticket_cents": 150,
-    "wait_rest_minutes": 30,
-    "wait_energy": 3
-  },
-  "tap_water": {
-    "energy": 2,
-    "cooldown_game_min": 60
-  },
-  "autosave_real_seconds": 90,
-  "_note": "Valori proposti (Nova/Ledger) da tarare con i test; non misurati."
+ "version": 1,
+ "time": {
+  "real_seconds_per_game_day": 1200,
+  "start_day": 1,
+  "start_time": "07:00",
+  "shift_speed_mult": 3.0,
+  "weekdays": [
+   "lun",
+   "mar",
+   "mer",
+   "gio",
+   "ven",
+   "sab",
+   "dom"
+  ],
+  "weekday_names": [
+   "Lunedì",
+   "Martedì",
+   "Mercoledì",
+   "Giovedì",
+   "Venerdì",
+   "Sabato",
+   "Domenica"
+  ],
+  "rider_speed_mult": 0.5
+ },
+ "sonno": {
+  "start": 85,
+  "decay_per_game_hour_awake": 5,
+  "recover_per_sleep_hour": 12.5,
+  "low_threshold": 20,
+  "low_energy_extra_per_hour": 2
+ },
+ "faint": {
+  "energy_at_or_below": 0,
+  "sleep_hours": 6,
+  "message": "Sei crollato dalla stanchezza. Ti risvegli a casa."
+ },
+ "player": {
+  "walk_speed": 2.4,
+  "run_speed": 5.2,
+  "accel": 10.0,
+  "turn_speed": 10.0
+ },
+ "camera": {
+  "distance": 4.2,
+  "min_pitch_deg": -55,
+  "max_pitch_deg": 20,
+  "sensitivity_touch": 0.006,
+  "sensitivity_mouse": 0.004
+ },
+ "shift_minigame": {
+  "order_interval_real_s": 3.0,
+  "order_timeout_real_s": 7.0,
+  "items": [
+   "caffe",
+   "cappuccino",
+   "cornetto",
+   "spremuta",
+   "acqua_05"
+  ]
+ },
+ "bus": {
+  "line": "Linea 3, Piazza della Fontana",
+  "first": "06:10",
+  "last": "21:10",
+  "every_min": 30,
+  "ticket_cents": 150,
+  "wait_rest_minutes": 30,
+  "wait_energy": 3
+ },
+ "tap_water": {
+  "energy": 2,
+  "cooldown_game_min": 60
+ },
+ "autosave_real_seconds": 90,
+ "_note": "Valori proposti (Nova/Ledger) da tarare con i test; non misurati.",
+ "rider_pickups": [
+  [
+   5.0,
+   -37.6,
+   "Bar Centrale"
+  ],
+  [
+   18.0,
+   6.0,
+   "Market Il Girasole"
+  ]
+ ],
+ "rider_points": [
+  [
+   -66.0,
+   -6.3,
+   "Via Roma Vecchia 21"
+  ],
+  [
+   -27.0,
+   -6.3,
+   "Via Roma Vecchia 9"
+  ],
+  [
+   38.0,
+   -6.3,
+   "Via Roma Vecchia 4"
+  ],
+  [
+   66.0,
+   -6.3,
+   "Via Roma Vecchia 2"
+  ],
+  [
+   80.0,
+   6.3,
+   "Via Roma Vecchia 1"
+  ],
+  [
+   -52.0,
+   6.3,
+   "Via Roma Vecchia 30"
+  ],
+  [
+   -10.0,
+   6.3,
+   "Via Roma Vecchia 15"
+  ],
+  [
+   -45.5,
+   -46.0,
+   "Via dei Tigli 20"
+  ],
+  [
+   -34.5,
+   -72.0,
+   "Via dei Tigli 33"
+  ],
+  [
+   -45.5,
+   -60.0,
+   "Via dei Tigli 25"
+  ],
+  [
+   28.0,
+   -30.0,
+   "Piazza della Fontana 6"
+  ],
+  [
+   -8.0,
+   -30.0,
+   "Piazza della Fontana 2"
+  ]
+ ],
+ "_note_v03": "rider: tempo rallentato (0.5) durante le consegne per rendere giocabili i 20 minuti di gioco; punti in coordinate x,z"
 }

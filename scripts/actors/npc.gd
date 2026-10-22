@@ -24,6 +24,7 @@ func setup(p_id: String, model_path: String, p_schedule: Array, recolor: Diction
 	display_name = Data.places["npcs"].get(p_id, p_id)
 	name = "NPC_" + p_id
 	schedule = p_schedule
+	add_to_group("pedestrian")
 	collision_layer = 4
 	collision_mask = 1 | 2
 	_cs = CollisionShape3D.new()

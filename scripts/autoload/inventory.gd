@@ -69,6 +69,14 @@ func consume(id: String, has_kitchen: bool) -> Dictionary:
 	var req := str(p.get("requires", ""))
 	if req != "" and not has_kitchen:
 		return {"ok": false, "reason": "needs_kitchen", "text": "Serve il forno di casa: mangiala a casa." if req == "forno" else "Serve la cucina di casa: cucinala a casa."}
+	if req != "" and not Life.capability(req):
+		if Life.power_suspended:
+			return {"ok": false, "reason": "needs_oven", "text": "Luce sospesa: paga le bollette arretrate per usare forno e piastra."}
+		return {"ok": false, "reason": "needs_oven", "text": "Ti serve un forno: lo trovi nell'app Casa → Mobili." if req == "forno" else "Ti serve una cucina: app Casa → Mobili."}
+	if req == "forno":
+		Life.use_appliance(1000)
+	elif req == "cucina" and "piastra_induzione" in Life.furniture:
+		Life.use_appliance(500)
 	remove_portion(id)
 	var hg := float(p["hunger"])
 	var en := float(p["energy"])

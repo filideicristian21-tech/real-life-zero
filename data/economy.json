@@ -1,273 +1,266 @@
 {
-  "version": 1,
-  "currency": "EUR",
-  "money_unit": "cents",
-  "start": {
-    "money_cents": 50000,
-    "day": 1,
-    "weekday": "lun",
-    "time": "07:00",
-    "hunger": 70,
-    "energy": 80
+ "version": 1,
+ "currency": "EUR",
+ "money_unit": "cents",
+ "start": {
+  "money_cents": 50000,
+  "day": 1,
+  "weekday": "lun",
+  "time": "07:00",
+  "hunger": 70,
+  "energy": 80
+ },
+ "needs_decay_per_game_hour": {
+  "hunger": 4,
+  "energy_awake": 3,
+  "energy_working": 5,
+  "energy_running_extra": 6
+ },
+ "needs_thresholds": {
+  "hunger_warning": 25,
+  "hunger_penalty_energy_per_hour": 3,
+  "energy_min_to_run": 15,
+  "energy_min_to_work": 20
+ },
+ "sleep": {
+  "energy_per_hour": 12,
+  "hunger_per_hour": 2,
+  "max_hours": 10
+ },
+ "minimarket": {
+  "hours": {
+   "open": "08:00",
+   "close": "20:00",
+   "closed_days": [
+    "dom"
+   ]
   },
-  "needs_decay_per_game_hour": {
-    "hunger": 4,
-    "energy_awake": 3,
-    "energy_working": 5,
-    "energy_running_extra": 6
-  },
-  "needs_thresholds": {
-    "hunger_warning": 25,
-    "hunger_penalty_energy_per_hour": 3,
-    "energy_min_to_run": 15,
-    "energy_min_to_work": 20
-  },
-  "sleep": {
-    "energy_per_hour": 12,
-    "hunger_per_hour": 2,
-    "max_hours": 10
-  },
-  "minimarket": {
-    "hours": {
-      "open": "08:00",
-      "close": "20:00",
-      "closed_days": [
-        "dom"
-      ]
-    },
-    "products": [
-      {
-        "id": "acqua_15l",
-        "name": "Acqua naturale 1,5 L",
-        "price_cents": 45,
-        "hunger": 0,
-        "energy": 5,
-        "stock": 20,
-        "uses": 3
-      },
-      {
-        "id": "pane_500g",
-        "name": "Pane casereccio 500 g",
-        "price_cents": 180,
-        "hunger": 15,
-        "energy": 0,
-        "stock": 10,
-        "uses": 3
-      },
-      {
-        "id": "pasta_500g",
-        "name": "Pasta «Molino Antico» 500 g",
-        "price_cents": 120,
-        "hunger": 30,
-        "energy": 5,
-        "stock": 15,
-        "uses": 4,
-        "requires": "cucina"
-      },
-      {
-        "id": "sugo_pronto",
-        "name": "Sugo al pomodoro 400 g",
-        "price_cents": 190,
-        "hunger": 5,
-        "energy": 0,
-        "stock": 10,
-        "uses": 3,
-        "bonus_with": "pasta_500g",
-        "bonus_hunger": 5
-      },
-      {
-        "id": "uova_6",
-        "name": "Uova (6)",
-        "price_cents": 250,
-        "hunger": 15,
-        "energy": 5,
-        "stock": 8,
-        "uses": 3,
-        "requires": "cucina"
-      },
-      {
-        "id": "latte_1l",
-        "name": "Latte «Valcolle» 1 L",
-        "price_cents": 150,
-        "hunger": 8,
-        "energy": 3,
-        "stock": 10,
-        "uses": 4
-      },
-      {
-        "id": "biscotti",
-        "name": "Biscotti 350 g",
-        "price_cents": 220,
-        "hunger": 10,
-        "energy": 5,
-        "stock": 12,
-        "uses": 5
-      },
-      {
-        "id": "banane_1kg",
-        "name": "Banane 1 kg",
-        "price_cents": 200,
-        "hunger": 12,
-        "energy": 8,
-        "stock": 10,
-        "uses": 5
-      },
-      {
-        "id": "tonno_3x80",
-        "name": "Tonno in scatola 3×80 g",
-        "price_cents": 380,
-        "hunger": 20,
-        "energy": 3,
-        "stock": 8,
-        "uses": 3
-      },
-      {
-        "id": "panino_pronto",
-        "name": "Panino confezionato",
-        "price_cents": 350,
-        "hunger": 35,
-        "energy": 5,
-        "stock": 6,
-        "uses": 1
-      },
-      {
-        "id": "pizza_surgelata",
-        "name": "Pizza surgelata",
-        "price_cents": 300,
-        "hunger": 45,
-        "energy": 0,
-        "stock": 6,
-        "uses": 1,
-        "requires": "forno"
-      },
-      {
-        "id": "energy_drink",
-        "name": "Bevanda energetica 250 ml",
-        "price_cents": 160,
-        "hunger": 0,
-        "energy": 20,
-        "stock": 10,
-        "uses": 1,
-        "side_effect": {
-          "sleep_quality": -10
-        }
-      }
-    ],
-    "name": "Market Il Girasole"
-  },
-  "bar": {
-    "hours": {
-      "open": "06:30",
-      "close": "20:00",
-      "closed_days": [
-        "lun"
-      ]
-    },
-    "employee_discount": 0.5,
-    "menu": [
-      {
-        "id": "caffe",
-        "name": "Caffè",
-        "price_cents": 120,
-        "hunger": 0,
-        "energy": 10
-      },
-      {
-        "id": "cappuccino",
-        "name": "Cappuccino",
-        "price_cents": 160,
-        "hunger": 5,
-        "energy": 8
-      },
-      {
-        "id": "cornetto",
-        "name": "Cornetto",
-        "price_cents": 140,
-        "hunger": 12,
-        "energy": 3
-      },
-      {
-        "id": "spremuta",
-        "name": "Spremuta",
-        "price_cents": 300,
-        "hunger": 5,
-        "energy": 6
-      },
-      {
-        "id": "acqua_05",
-        "name": "Acqua 0,5 L",
-        "price_cents": 100,
-        "hunger": 0,
-        "energy": 3
-      },
-      {
-        "id": "panino_bar",
-        "name": "Panino del bar",
-        "price_cents": 450,
-        "hunger": 40,
-        "energy": 5
-      },
-      {
-        "id": "tramezzino",
-        "name": "Tramezzino",
-        "price_cents": 280,
-        "hunger": 20,
-        "energy": 2
-      }
-    ],
-    "name": "Bar Centrale da Mimmo"
-  },
-  "job_barista": {
-    "workdays": [
-      "mar",
-      "mer",
-      "gio",
-      "ven",
-      "sab"
-    ],
-    "shift": {
-      "start": "06:30",
-      "end": "12:30",
-      "hours": 6,
-      "check_in_window_min": 15
-    },
-    "pay_cents_per_shift": 4500,
-    "pay_note": "netto, circa 7,50 €/h (STIMA part-time); pagato a fine turno",
-    "requirements": {
-      "energy_min_at_start": 20,
-      "orders_min_completed": 10
-    },
-    "late_policy": {
-      "late_after_min": 15,
-      "pay_cut_cents": 1000,
-      "absent_after_min": 45,
-      "pay_if_absent_cents": 0
-    },
-    "free_item_per_shift": "caffe"
-  },
-  "rent": {
-    "room_name": "Stanza in affitto, Via dei Tigli 12",
-    "amount_cents": 9000,
-    "period_days": 7,
-    "due_weekday": "lun",
-    "first_due_day": 1,
-    "late_fee_cents": 1000,
-    "grace_days": 2,
-    "eviction_after_missed_payments": 2
-  },
-  "recurring_bills": [
-    {
-      "id": "telefono",
-      "name": "Ricarica telefono",
-      "amount_cents": 500,
-      "period_days": 7,
-      "due_weekday": "lun"
+  "products": [
+   {
+    "id": "acqua_15l",
+    "name": "Acqua naturale 1,5 L",
+    "price_cents": 45,
+    "hunger": 0,
+    "energy": 5,
+    "stock": 20,
+    "uses": 3
+   },
+   {
+    "id": "pane_500g",
+    "name": "Pane casereccio 500 g",
+    "price_cents": 180,
+    "hunger": 15,
+    "energy": 0,
+    "stock": 10,
+    "uses": 3
+   },
+   {
+    "id": "pasta_500g",
+    "name": "Pasta «Molino Antico» 500 g",
+    "price_cents": 120,
+    "hunger": 30,
+    "energy": 5,
+    "stock": 15,
+    "uses": 4,
+    "requires": "cucina"
+   },
+   {
+    "id": "sugo_pronto",
+    "name": "Sugo al pomodoro 400 g",
+    "price_cents": 190,
+    "hunger": 5,
+    "energy": 0,
+    "stock": 10,
+    "uses": 3,
+    "bonus_with": "pasta_500g",
+    "bonus_hunger": 5
+   },
+   {
+    "id": "uova_6",
+    "name": "Uova (6)",
+    "price_cents": 250,
+    "hunger": 15,
+    "energy": 5,
+    "stock": 8,
+    "uses": 3,
+    "requires": "cucina"
+   },
+   {
+    "id": "latte_1l",
+    "name": "Latte «Valcolle» 1 L",
+    "price_cents": 150,
+    "hunger": 8,
+    "energy": 3,
+    "stock": 10,
+    "uses": 4
+   },
+   {
+    "id": "biscotti",
+    "name": "Biscotti 350 g",
+    "price_cents": 220,
+    "hunger": 10,
+    "energy": 5,
+    "stock": 12,
+    "uses": 5
+   },
+   {
+    "id": "banane_1kg",
+    "name": "Banane 1 kg",
+    "price_cents": 200,
+    "hunger": 12,
+    "energy": 8,
+    "stock": 10,
+    "uses": 5
+   },
+   {
+    "id": "tonno_3x80",
+    "name": "Tonno in scatola 3×80 g",
+    "price_cents": 380,
+    "hunger": 20,
+    "energy": 3,
+    "stock": 8,
+    "uses": 3
+   },
+   {
+    "id": "panino_pronto",
+    "name": "Panino confezionato",
+    "price_cents": 350,
+    "hunger": 35,
+    "energy": 5,
+    "stock": 6,
+    "uses": 1
+   },
+   {
+    "id": "pizza_surgelata",
+    "name": "Pizza surgelata",
+    "price_cents": 300,
+    "hunger": 45,
+    "energy": 0,
+    "stock": 6,
+    "uses": 1,
+    "requires": "forno"
+   },
+   {
+    "id": "energy_drink",
+    "name": "Bevanda energetica 250 ml",
+    "price_cents": 160,
+    "hunger": 0,
+    "energy": 20,
+    "stock": 10,
+    "uses": 1,
+    "side_effect": {
+     "sleep_quality": -10
     }
+   }
   ],
-  "money_thresholds": {
-    "soldi_pochi_below_cents": 10000,
-    "soldi_tanti_above_cents": 60000,
-    "note": "soldi_pochi: sotto 100 €, soldi_tanti: sopra 600 € (dialoghi NPC)"
+  "name": "Market Il Girasole"
+ },
+ "bar": {
+  "hours": {
+   "open": "06:30",
+   "close": "20:00",
+   "closed_days": [
+    "lun"
+   ]
   },
-  "_source": "Ledger reallife-ledger.md v1 (STIME). Nomi prodotti: Spark. Soglie soldi: aggiunte (brief Lumen/parent)."
+  "employee_discount": 0.5,
+  "menu": [
+   {
+    "id": "caffe",
+    "name": "Caffè",
+    "price_cents": 120,
+    "hunger": 0,
+    "energy": 10
+   },
+   {
+    "id": "cappuccino",
+    "name": "Cappuccino",
+    "price_cents": 160,
+    "hunger": 5,
+    "energy": 8
+   },
+   {
+    "id": "cornetto",
+    "name": "Cornetto",
+    "price_cents": 140,
+    "hunger": 12,
+    "energy": 3
+   },
+   {
+    "id": "spremuta",
+    "name": "Spremuta",
+    "price_cents": 300,
+    "hunger": 5,
+    "energy": 6
+   },
+   {
+    "id": "acqua_05",
+    "name": "Acqua 0,5 L",
+    "price_cents": 100,
+    "hunger": 0,
+    "energy": 3
+   },
+   {
+    "id": "panino_bar",
+    "name": "Panino del bar",
+    "price_cents": 450,
+    "hunger": 40,
+    "energy": 5
+   },
+   {
+    "id": "tramezzino",
+    "name": "Tramezzino",
+    "price_cents": 280,
+    "hunger": 20,
+    "energy": 2
+   }
+  ],
+  "name": "Bar Centrale da Mimmo"
+ },
+ "job_barista": {
+  "workdays": [
+   "mar",
+   "mer",
+   "gio",
+   "ven",
+   "sab"
+  ],
+  "shift": {
+   "start": "06:30",
+   "end": "12:30",
+   "hours": 6,
+   "check_in_window_min": 15
+  },
+  "pay_cents_per_shift": 4500,
+  "pay_note": "netto livello 1 (lordo 56,25 € − 20% trattenute); v0.3: livelli e ritardo −20% in data/life.json (Ledger v0.3)",
+  "requirements": {
+   "energy_min_at_start": 20,
+   "orders_min_completed": 10
+  },
+  "late_policy": {
+   "late_after_min": 15,
+   "pay_cut_cents": 900,
+   "absent_after_min": 45,
+   "pay_if_absent_cents": 0,
+   "pay_cut_pct": 20
+  },
+  "free_item_per_shift": "caffe"
+ },
+ "rent": {
+  "room_name": "Stanza in affitto, Via dei Tigli 12",
+  "amount_cents": 9000,
+  "period_days": 7,
+  "due_weekday": "lun",
+  "first_due_day": 1,
+  "late_fee_cents": 1000,
+  "grace_days": 2,
+  "eviction_after_missed_payments": 2
+ },
+ "recurring_bills": [],
+ "money_thresholds": {
+  "soldi_pochi_below_cents": 10000,
+  "soldi_tanti_above_cents": 60000,
+  "note": "soldi_pochi: sotto 100 €, soldi_tanti: sopra 600 € (dialoghi NPC)"
+ },
+ "_source": "Ledger reallife-ledger.md v1 (STIME). Nomi prodotti: Spark. Soglie soldi: aggiunte (brief Lumen/parent). v0.3: telefono mensile e ritardo −20% da data/life.json (Ledger v0.3)."
 }

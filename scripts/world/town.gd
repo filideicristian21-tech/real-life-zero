@@ -26,6 +26,8 @@ var spawn_home_yaw := 0.0
 var rng := RandomNumberGenerator.new()
 var world_ui: Node = null   # main, per aprire i pannelli
 var places: Dictionary
+var car_spawn := Vector3(75.4, 0.02, 12.0)
+var traffic: Traffic
 
 func build(p_world_ui: Node) -> void:
 	world_ui = p_world_ui
@@ -41,7 +43,12 @@ func build(p_world_ui: Node) -> void:
 	_market()
 	_decor_buildings()
 	_street_furniture()
+	TownV03.build(self)
 	_boundaries()
+	traffic = Traffic.new()
+	traffic.name = "Traffic"
+	add_child(traffic)
+	traffic.build(4)
 	var n := Build.flush_batches(self)
 	var sb := Build.static_batch(self)
 	print("[town] LOD automatico su ", Build.auto_lod(self), " oggetti")
@@ -129,7 +136,7 @@ func _ground_and_streets() -> void:
 	# righe dei parcheggi lungo il lato sud della strada
 	for i in range(-18, 19):
 		var x := i * 5.0
-		if x > -46.0 and x < -34.0:
+		if (x > -46.0 and x < -34.0) or (x > 19.0 and x < 61.0):
 			continue
 		Build.batch_add("road_line", dash, Build.mat("line_white"), Transform3D(Basis().scaled(Vector3(0.12, 0.01, 2.2)), Vector3(x, 0.025, 2.9)), false)
 
@@ -233,12 +240,12 @@ func _parking() -> void:
 	# siepe di confine
 	Build.box(self, c + Vector3(0, 0.6, -9.3), Vector3(20, 1.2, 0.8), Build.mat("hedge"))
 
+## v0.3: le auto Kenney (stile giocattolo) sono sostituite da modelli low-poly realistici (CarKit).
+const _KIND_V03 := {"sedan": "sedan", "hatchback-sports": "hatch", "van": "van", "suv": "suv", "delivery": "van"}
+var _car_i := 0
 func _car(pos: Vector3, rot: float, kind: String) -> void:
-	Build.prop(self, "res://assets/props/cars/%s.glb" % kind, pos, rot, 1.7, 80.0, true)
-	var sz := Vector3(2.4, 1.6, 4.4)
-	if absf(sin(rot)) > 0.5:
-		sz = Vector3(4.4, 1.6, 2.4)
-	Build.collider(self, pos + Vector3(0, 0.8, 0), sz)
+	_car_i += 1
+	CarKit.parked(self, _KIND_V03.get(kind, "sedan"), pos, rot, CarKit.PALETTE[(_car_i * 7) % CarKit.PALETTE.size()])
 
 # ------------------------------------------------------------------ muri con aperture
 ## Muro lungo l'asse "x" o "z" da a0 ad a1, a coordinata fissa "fixed", con aperture
@@ -454,10 +461,14 @@ func _decor_buildings() -> void:
 	var north := [[-100, -86], [-85, -73], [-72, -61], [-60, -48], [-32, -22.5], [-21.5, -11], [31, 44], [45, 58], [59, 72], [73, 86], [87, 100]]
 	for i in north.size():
 		var s = north[i]
+		if s[0] in [31, 45, 59]:
+			continue   # v0.3: Banca, Boutique, Palestra (town_v03.gd)
 		decor_building(s[0], s[1], -19.0, -7.0, 2 + (i * 7) % 3, cols[i % 4], "s", i % 2 == 0)
 	var south := [[-100, -86], [-85, -73], [-72, -59], [-58, -48], [-32, -18], [-17, -4], [-3, 7], [29, 42], [43, 56], [57, 70], [71, 84], [85, 100]]
 	for i in south.size():
 		var s = south[i]
+		if s[0] in [29, 43, 57, 71]:
+			continue   # v0.3: Trattoria, Distributore, Autosalone
 		decor_building(s[0], s[1], 7.0, 19.0, 2 + (i * 5) % 3, cols[(i + 2) % 4], "n", i % 3 != 1)
 	# lato ovest della piazza e lato est
 	decor_building(-22, -11, -40, -20, 3, "plaster_crema", "e", false)
@@ -917,7 +928,7 @@ func _street_furniture() -> void:
 	_street_sign(Vector3(-9.0, CURB, -6.8), "Piazza della Fontana", 0.0)
 	# auto parcheggiate lungo Via Roma Vecchia
 	var kinds := ["sedan", "hatchback-sports", "van", "sedan", "suv", "hatchback-sports", "sedan", "delivery"]
-	var xs := [-82.5, -67.5, -57.5, -22.5, -2.5, 32.5, 52.5, 77.5]
+	var xs := [-82.5, -67.5, -57.5, -22.5, -2.5, 32.5, 22.5, 87.5]
 	for i in xs.size():
 		_car(Vector3(xs[i], 0.02, 2.6), PI / 2.0 if i % 2 == 0 else -PI / 2.0, kinds[i])
 	# alberi nei giardini dietro le case (sud) e al parco nord

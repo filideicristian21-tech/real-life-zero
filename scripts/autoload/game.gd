@@ -8,7 +8,7 @@ signal day_summary(info: Dictionary)
 signal evicted()
 signal request_fade(on: bool)
 
-const VERSION := "0.2.0"
+const VERSION := "0.3.0"
 var playing := false
 var player: Node3D = null
 var world: Node = null
@@ -65,6 +65,7 @@ func new_game() -> void:
 	Needs.reset_new_game()
 	Inventory.reset_new_game()
 	Jobs.reset_new_game()
+	Life.reset_new_game()
 	tutorial_step = 0
 	tutorial_done = false
 	met.clear()
@@ -140,9 +141,7 @@ func tutorial_text() -> String:
 	vars["giorni_affitto"] = r["period_days"]
 	vars["turno_inizio"] = Data.economy["job_barista"]["shift"]["start"]
 	if tutorial_step == 0:
-		var tel := 0
-		for bl in Data.economy["recurring_bills"]:
-			tel += int(bl["amount_cents"])
+		var tel := int(Life.cfg()["bills"]["phone"]["amount_cents"])
 		vars["saldo"] = euro(int(Data.economy["start"]["money_cents"]) - int(r["amount_cents"]) - tel) + " €"
 	return Data.fmt(tutorial_steps()[tutorial_step]["text"], vars)
 
@@ -168,9 +167,7 @@ func _on_tx(tx: Dictionary) -> void:
 		day_expense += -int(tx["amount"])
 
 func first_day_vars() -> Dictionary:
-	var tel := 0
-	for b in Data.economy["recurring_bills"]:
-		tel += int(b["amount_cents"])
+	var tel := int(Life.cfg()["bills"]["phone"]["amount_cents"])
 	return {"iniziale": euro(int(Data.economy["start"]["money_cents"])) + " €", "affitto": euro(int(Data.economy["rent"]["amount_cents"])) + " €",
 		"telefono": euro(tel) + " €", "saldo": euro(Economy.money_cents) + " €"}
 
@@ -186,9 +183,43 @@ func _on_bill(kind: String, info: Dictionary) -> void:
 		"unpaid":
 			toast(Data.t("feedback.rent_unpaid", {"affitto": euro(int(info["amount"])), "mancanti": euro(int(info["missing"]))}) + " Puoi saldarlo dal telefono (Conto).", "warn")
 		"late_fee":
-			toast("Affitto in ritardo: aggiunta una mora di %s €." % euro(int(Data.economy["rent"]["late_fee_cents"])), "warn")
+			if info.get("is_rent", false):
+				toast("Affitto in ritardo: aggiunta una mora di %s €." % euro(int(info.get("fee_added", 0))), "warn")
+			elif int(info.get("fee_added", 0)) > 0:
+				toast("%s in ritardo: mora di %s €. L'affidabilità scende un po'." % [info["desc"], euro(int(info["fee_added"]))], "warn")
 		"evicted":
-			evicted.emit()
+			_mild_eviction()
+
+## Sfratto "leggero" (Guard: conseguenze miti e sempre recuperabili).
+## Nella stanza: il padrone propone un piano di rientro, la partita continua e l'arretrato resta da saldare.
+## In un appartamento: si torna nella stanza; la cauzione copre l'arretrato e il resto viene restituito.
+func _mild_eviction() -> void:
+	if Life.home_id == "stanza_via_roma":
+		toast("Due affitti non pagati. Il Sig. Bianchi ti propone un piano di rientro: salda l'arretrato dal telefono appena puoi. L'affidabilità è scesa.", "warn")
+		evicted.emit()
+		return
+	var arrears := 0
+	var keep: Array = []
+	for b in Economy.pending_bills:
+		if b["is_rent"]:
+			arrears += int(b["amount"])
+		else:
+			keep.append(b)
+	var dep := Life.deposit_held_cents
+	var covered := mini(dep, arrears)
+	Economy.pending_bills = keep
+	if arrears > covered:
+		Economy.pending_bills.append({"key": "arretrato:%d" % GameTime.day(), "desc": "Arretrato affitto non coperto dalla cauzione", "amount": arrears - covered, "due_day": GameTime.day(), "late_fee_applied": true, "is_rent": false, "kind": "affitto", "grace": 999, "late_fee": 0})
+	var back := dep - covered
+	Life.deposit_held_cents = 0
+	Life.home_id = "stanza_via_roma"
+	Life.rent_anchor_day = GameTime.day()
+	Life.deposit_held_cents = 0
+	Economy.evicted = false
+	if back > 0:
+		Economy.earn(back, "Cauzione restituita (meno l'arretrato)", "cauzione")
+	toast("Affitti non pagati: torni nella stanza di Via dei Tigli. La cauzione ha coperto € %s di arretrato." % euro(covered), "warn")
+	evicted.emit()
 
 func _on_day_changed(_d: int) -> void:
 	var info := {"day": GameTime.day() - 1, "income": day_income, "expense": day_expense, "balance": Economy.money_cents, "rent_in": Economy.days_to_next_rent()}
@@ -205,7 +236,7 @@ func _on_need_warning(k: String) -> void:
 
 func _on_shift_ended(paid: bool, amount: int, reason: String) -> void:
 	if paid:
-		toast(Data.t("feedback.paid", {"paga": euro(amount), "saldo": euro(Economy.money_cents)}), "ok")
+		toast(Data.t("feedback.paid", {"paga": euro(amount), "saldo": euro(Economy.money_cents), "lavoro": Jobs.job(Jobs.cur_job).get("place", "lavoro")}), "ok")
 	else:
 		toast(Data.t("feedback.not_paid", {"motivo": reason}), "warn")
 

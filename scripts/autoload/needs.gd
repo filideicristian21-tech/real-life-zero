@@ -56,7 +56,7 @@ func apply_sleep_hours(h: float) -> void:
 	var s: Dictionary = Data.economy["sleep"]
 	var sc: Dictionary = Data.balance["sonno"]
 	var q: float = max(0.0, 1.0 - sleep_quality_malus / 100.0)
-	energy += float(s["energy_per_hour"]) * h * q
+	energy += Life.sleep_energy_per_hour() * h * q
 	sonno += float(sc["recover_per_sleep_hour"]) * h * q
 	hunger -= float(s["hunger_per_hour"]) * h
 	sleep_quality_malus = 0.0
@@ -75,7 +75,7 @@ func can_run() -> bool:
 
 func _clamp() -> void:
 	hunger = clampf(hunger, 0.0, 100.0)
-	energy = clampf(energy, 0.0, 100.0)
+	energy = clampf(energy, 0.0, float(Life.energy_max))
 	sonno = clampf(sonno, 0.0, 100.0)
 
 func _check_warnings() -> void:

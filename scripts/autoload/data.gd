@@ -2,6 +2,7 @@ extends Node
 ## Carica tutti i valori di bilanciamento e i testi da res://data/*.json.
 
 var economy: Dictionary = {}
+var life: Dictionary = {}
 var balance: Dictionary = {}
 var places: Dictionary = {}
 var texts: Dictionary = {}
@@ -14,6 +15,7 @@ func _ready() -> void:
 
 func reload() -> void:
 	economy = _load("res://data/economy.json")
+	life = _load("res://data/life.json")
 	balance = _load("res://data/balance.json")
 	places = _load("res://data/places.json")
 	texts = _load("res://data/texts.json")

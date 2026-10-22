@@ -18,6 +18,8 @@ var _step_i := 0
 var is_running := false
 var _gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity", 9.8)
 var moved_distance := 0.0
+var car: PlayerCar = null           # v0.3: auto che sta guidando
+var _cs: CollisionShape3D
 
 func _ready() -> void:
 	var pc: Dictionary = Data.balance["player"]
@@ -34,6 +36,8 @@ func _ready() -> void:
 	cs.shape = cap
 	cs.position.y = 0.875
 	add_child(cs)
+	_cs = cs
+	add_to_group("pedestrian")
 	model = CharacterModel.new()
 	add_child(model)
 	# Spark: maglia grigia, jeans blu scuro, sneakers bianche (modello Quaternius «Casual Character», CC0)
@@ -72,7 +76,45 @@ func rotate_camera(delta: Vector2) -> void:
 	cam_yaw_node.rotation.y -= delta.x
 	cam_pitch_node.rotation.x = clampf(cam_pitch_node.rotation.x - delta.y, deg_to_rad(float(c["min_pitch_deg"])), deg_to_rad(float(c["max_pitch_deg"])))
 
+## Input grezzo (joystick o tastiera) per la guida.
+func drive_input() -> Vector2:
+	if not (input_enabled and Game.playing):
+		return Vector2.ZERO
+	var d := move_input
+	var k := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
+	if k.length() > 0.1:
+		d = k
+	return d.limit_length(1.0)
+
+func start_driving(c: PlayerCar) -> void:
+	car = c
+	visible = false
+	_cs.disabled = true
+	remove_from_group("pedestrian")
+	spring.spring_length = float(Data.balance["camera"]["distance"]) + 3.0
+	spring.add_excluded_object(c.get_rid())
+	run_toggle = false
+
+func stop_driving(c: PlayerCar) -> void:
+	car = null
+	var side := Vector3(-cos(c.yaw), 0, sin(c.yaw)) * -1.6
+	global_position = c.global_position + side + Vector3(0, Town.CURB + 0.05, 0)
+	velocity = Vector3.ZERO
+	visible = true
+	_cs.disabled = false
+	add_to_group("pedestrian")
+	spring.spring_length = float(Data.balance["camera"]["distance"])
+	set_yaw(c.yaw + PI)
+
 func _physics_process(delta: float) -> void:
+	if car:
+		global_position = car.global_position
+		cam_yaw_node.global_position = car.global_position + Vector3(0, 1.9, 0)
+		if move_input.length() < 0.1 and absf(car.speed) > 1.0:
+			cam_yaw_node.rotation.y = lerp_angle(cam_yaw_node.rotation.y, car.yaw, clampf(2.5 * delta, 0, 1))
+		Needs.activity = "idle"
+		current_target = car.it
+		return
 	cam_yaw_node.global_position = global_position + Vector3(0, 1.55, 0)
 	var dir2 := Vector2.ZERO
 	if input_enabled and Game.playing:
@@ -94,6 +136,8 @@ func _physics_process(delta: float) -> void:
 			Game.toast(Data.t("feedback.too_tired_run"), "warn")
 	is_running = want_run
 	var speed := (run_speed if is_running else walk_speed) * clampf(dir2.length(), 0.0, 1.0)
+	if Jobs.in_shift and Jobs.cur_job == "rider":
+		speed *= float(Data.balance["time"].get("rider_bike_speed_mult", 1.9))   # in bici
 	var target_v := dir.normalized() * speed if dir.length() > 0.05 else Vector3.ZERO
 	var accel := float(Data.balance["player"]["accel"])
 	velocity.x = lerpf(velocity.x, target_v.x, clampf(accel * delta, 0, 1))
@@ -120,8 +164,10 @@ func _physics_process(delta: float) -> void:
 			Sfx.play("step%d" % _step_i, Vector3.INF, -16.0)
 	else:
 		model.play("idle")
-	if Jobs.in_shift:
+	if Jobs.in_shift and Jobs.cur_job != "rider":
 		Needs.activity = "work"
+	elif Jobs.in_shift:
+		Needs.activity = "walk"
 	elif not Game.sleeping:
 		Needs.activity = "run" if is_running else ("walk" if hv.length() > 0.3 else "idle")
 	_update_target()

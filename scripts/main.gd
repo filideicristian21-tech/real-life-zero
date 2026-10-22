@@ -9,6 +9,7 @@ var npcs: Array[NPC] = []
 var _cam_touch := -1
 var _cam_last := Vector2.ZERO
 var test_mode := false
+var player_car: PlayerCar = null
 
 func _ready() -> void:
 	test_mode = OS.get_cmdline_user_args().has("--test") or Game.headless_test
@@ -31,6 +32,7 @@ func _ready() -> void:
 	add_child(ui)
 	Game.game_started.connect(_on_game_started)
 	Game.evicted.connect(func(): ui.show_evicted())
+	Life.car_changed.connect(_sync_car)
 	Game.day_summary.connect(func(info): ui.queue_day_summary(info))
 	Jobs.shift_ended.connect(func(paid, _a, _r):
 		if not paid:
@@ -46,7 +48,24 @@ func _on_game_started() -> void:
 		player.teleport(Vector3(float(p[0]), float(p[1]) + 0.05, float(p[2])), Game.saved_player_yaw)
 	else:
 		player.teleport(town.spawn_home, 0.0)
+	_sync_car(true)
 	day_night.update(true)
+
+## Crea/rimuove l'auto del giocatore in base a Life.car (acquisto, caricamento, nuova partita).
+func _sync_car(force: bool = false) -> void:
+	if player_car and (force or not Life.has_car()):
+		if player.car == player_car:
+			player.stop_driving(player_car)
+		player_car.queue_free()
+		player_car = null
+	if Life.has_car() and player_car == null:
+		var c: Dictionary = Life.car
+		var md := Life.car_model()
+		var p: Array = c.get("pos", [town.car_spawn.x, 0.02, town.car_spawn.z])
+		player_car = PlayerCar.new()
+		player_car.name = "PlayerCar"
+		add_child(player_car)
+		player_car.setup(str(c["model"]), Color(md.get("color", "#C9C2B2")), Vector3(float(p[0]), 0.02, float(p[2])), float(c.get("yaw", 0.0)))
 
 func send_player_home() -> void:
 	player.teleport(town.spawn_home, 0.0)
