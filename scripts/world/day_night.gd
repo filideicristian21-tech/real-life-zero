@@ -20,6 +20,8 @@ func setup(p_town: Town, parent: Node) -> void:
 	sky_mat = ShaderMaterial.new()
 	sky_mat.shader = load("res://assets/shaders/sky.gdshader")
 	sky_mat.set_shader_parameter("panorama", load("res://assets/textures/sky_kloofendal_1k.hdr"))
+	sky_mat.set_shader_parameter("panorama_dawn", load("res://assets/textures/sky_qwantani_dawn_1k.hdr"))
+	sky_mat.set_shader_parameter("panorama_night", load("res://assets/textures/sky_qwantani_night_1k.hdr"))
 	var sky := Sky.new()
 	sky.sky_material = sky_mat
 	sky.radiance_size = Sky.RADIANCE_SIZE_32
@@ -65,24 +67,27 @@ func update(_force: bool = false) -> void:
 	var low := clampf(elev / 25.0, 0.0, 1.0)
 	var sun_col := Color(1.0, 0.66, 0.42).lerp(Color("#FFE8C8"), low)
 	var n := 0.0
+	var tw := 0.0   # crepuscolo civile: 45 minuti prima dell'alba e dopo il tramonto
 	if not is_day:
-		n = 1.0
+		var dist := (rise - t) if t < rise else (t - set_h)
+		tw = 1.0 - clampf(dist / 0.75, 0.0, 1.0)
+		n = 1.0 - 0.45 * tw
 	elif elev < 8.0:
-		n = 1.0 - elev / 8.0
+		n = (1.0 - elev / 8.0) * 0.45
 	night_factor = n
 	sun.light_color = sun_col if is_day else Color(0.55, 0.62, 0.85)
 	sun.light_energy = lerpf(0.55, 1.4, low) if is_day else 0.1
 	sun.shadow_enabled = is_day and elev > 3.0
-	var dusk_f := (1.0 - low) * (1.0 - n)
+	var dusk_f := maxf((1.0 - low) * (1.0 - n), tw)
 	sky_mat.set_shader_parameter("day_energy", lerpf(0.55, 1.0, low))
 	sky_mat.set_shader_parameter("night", n)
 	sky_mat.set_shader_parameter("dusk", dusk_f)
 	sky_mat.set_shader_parameter("yaw", -az / 360.0)
 	var day_amb := Color(0.74, 0.8, 0.88)
 	var dusk_amb := Color(0.85, 0.66, 0.55)
-	var night_amb := Color(0.2, 0.24, 0.38)
+	var night_amb := Color(0.26, 0.31, 0.46)
 	env.ambient_light_color = day_amb.lerp(dusk_amb, dusk_f).lerp(night_amb, n)
-	env.ambient_light_energy = lerpf(0.75, 0.5, n) + 0.2 * dusk_f
+	env.ambient_light_energy = lerpf(0.75, 0.62, n) + 0.2 * dusk_f
 	env.fog_light_color = Color(0.72, 0.8, 0.88).lerp(Color(0.85, 0.62, 0.5), dusk_f).lerp(Color("#1B2235"), n)
 	if town:
 		town.set_night(n)
