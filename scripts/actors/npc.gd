@@ -121,6 +121,8 @@ func _context() -> String:
 		return "affitto_scaduto"
 	if npc_id == "barista_titolare" and flags_failed_shift():
 		return "turno_non_valido"
+	if npc_id in ["istruttore_palestra", "capo_rider"] and Needs.sonno < float(Data.balance["sonno"]["low_threshold"]):
+		return "energia_bassa"
 	var mc := Game.money_context()
 	if mc != "" and randf() < 0.5:
 		return mc
@@ -147,7 +149,25 @@ static func placeholder_vars() -> Dictionary:
 		"scadenza": Economy.next_rent_due_day(), "giorni_mancanti": Economy.days_to_next_rent(),
 		"giorni_tolleranza": e["rent"]["grace_days"], "frequenza_bus": bus["every_min"], "ultimo_bus": bus["last"],
 		"prezzo_biglietto": Data.euro(int(bus["ticket_cents"])),
+	}.merged(placeholder_vars_v03())
+
+## v0.3 (Lumen): i dialoghi scrivono "{prezzo} €", quindi qui solo il numero ("35,00").
+static func placeholder_vars_v03() -> Dictionary:
+	var L: Dictionary = Data.life
+	var rider_net := 280
+	for j in L["jobs"]:
+		if j["id"] == "rider":
+			rider_net = int(j["levels"][0]["net_cents_per_delivery"])
+	return {
+		"prezzo_abbonamento": num(int(L["gym"]["monthly_pass_cents"])),
+		"prezzo_ingresso": num(int(L["gym"]["single_entry_cents"])),
+		"apertura_banca": L["bank"]["hours"]["open"], "chiusura_banca": L["bank"]["hours"]["close"],
+		"apertura_pranzo": L["restaurant"]["hours_lunch"]["open"],
+		"paga_consegna": num(rider_net),
 	}
+
+static func num(c: int) -> String:
+	return Data.euro(c).replace("€", "").strip_edges()
 
 func _talk() -> void:
 	_talk_timer = 6.0

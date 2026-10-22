@@ -171,7 +171,7 @@ func _build_hud() -> void:
 	btn_phone.tooltip_text = "Telefono"
 	btn_phone.activated.connect(toggle_phone)
 	hud.add_child(btn_phone)
-	build_lbl = UIKit.label("%s · v%s" % [Data.t("build_label"), Game.VERSION], 13, Color(1, 1, 1, 0.5))
+	build_lbl = UIKit.label(Data.t("build_label"), 13, Color(1, 1, 1, 0.5))
 	hud.add_child(build_lbl)
 
 func _touch_btn(text: String, size: int, col: Color) -> TouchButton:
@@ -1017,7 +1017,7 @@ func _app_menu(v: VBoxContainer) -> void:
 			Game.skip_tutorial()
 		_render_phone()))
 	v.add_child(UIKit.button("Crediti e licenze", func(): show_credits()))
-	v.add_child(UIKit.label(Data.t("privacy"), 16, UIKit.MUTED, true))
+	v.add_child(UIKit.label(Game.privacy_text(), 16, UIKit.MUTED, true))
 
 # =====================================================================  PAUSA / MENU / CREDITI
 func open_pause() -> void:
@@ -1112,8 +1112,8 @@ func _fill_menu(v: VBoxContainer, st: Dictionary) -> void:
 			close_modal()
 			Game.new_game(), true, 64))
 	v.add_child(UIKit.button("Crediti e licenze", func(): show_credits()))
-	v.add_child(UIKit.label("%s · v%s · Godot %s" % [Data.t("build_label"), Game.VERSION, Engine.get_version_info()["string"]], 15, UIKit.MUTED))
-	v.add_child(UIKit.label(Data.t("privacy"), 15, UIKit.MUTED, true))
+	v.add_child(UIKit.label("%s (%s) · Godot %s · %s" % [Data.t("build_label"), Game.VERSION, Engine.get_version_info()["string"], Data.t("rating")], 15, UIKit.MUTED))
+	v.add_child(UIKit.label(Game.privacy_text(), 15, UIKit.MUTED, true))
 
 func _start_new() -> void:
 	close_modal()

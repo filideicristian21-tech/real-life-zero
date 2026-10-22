@@ -144,7 +144,7 @@
       "OK  telefono: home + 6 app aperte",
       "OK  uscito di casa camminando (x=5.0)",
       "OK  3 turni lavorati e pagati (3)",
-      "OK  dialoghi con 2 NPC presenti",
+      "OK  dialoghi con 3 NPC presenti",
       "OK  salva/carica a fine sessione",
       "OK  denaro coerente dopo 4 giorni (saldo € 505,31)",
       "OK  errori di script/motore: verificati dal runner shell sul log (vedi TEST-REPORT)"
@@ -173,9 +173,9 @@
   },
   {
     "checks": [
-      "OK  martedì 08:30 in giro: Mimmo, Rosa, Sig. Bianchi, Signora Ada, Dario, Marta",
+      "OK  martedì 08:30 in giro: Mimmo, Rosa, Sig. Bianchi, Signora Ada, Dario, Marta, Dott. Ferri, Marco",
       "OK  alle 02:00 tutti a casa (0 visibili)",
-      "OK  32 blocchi di dialogo: segnaposto non risolti = 0"
+      "OK  64 blocchi di dialogo: segnaposto non risolti = 0"
     ],
     "id": "X02",
     "pass": true,

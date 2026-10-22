@@ -288,5 +288,293 @@
    "Beato te, io lavoro anche il sabato.",
    "Buon viaggio!"
   ]
+ },
+ {
+  "npc": "commessa_vestiti",
+  "contesto": "primo_incontro",
+  "battute": [
+   "Ciao! Dai pure un'occhiata, i camerini sono in fondo.",
+   "Se cerchi qualcosa per un colloquio, ho delle camicie semplici.",
+   "I prezzi sono sui cartellini, niente sorprese alla cassa."
+  ]
+ },
+ {
+  "npc": "commessa_vestiti",
+  "contesto": "mattina",
+  "battute": [
+   "Buongiorno! Ho appena sistemato i nuovi arrivi.",
+   "Di mattina c'è calma, prova quello che vuoi.",
+   "Ti serve una taglia diversa? Chiedi pure."
+  ]
+ },
+ {
+  "npc": "commessa_vestiti",
+  "contesto": "sera",
+  "battute": [
+   "Tra poco chiudo, ma fai con calma.",
+   "Ultima prova? Il camerino è libero.",
+   "Buona serata, torna quando vuoi."
+  ]
+ },
+ {
+  "npc": "commessa_vestiti",
+  "contesto": "soldi_pochi",
+  "battute": [
+   "Nel cesto all'ingresso ci sono i saldi.",
+   "Una maglietta basic va con tutto e costa poco.",
+   "Meglio un capo che usi tanto che tre che restano nell'armadio."
+  ]
+ },
+ {
+  "npc": "commessa_vestiti",
+  "contesto": "soldi_tanti",
+  "battute": [
+   "Questa giacca ti starebbe benissimo.",
+   "Vuoi provare anche le scarpe abbinate?",
+   "Ottima scelta, ti incarto tutto?"
+  ]
+ },
+ {
+  "npc": "istruttore_palestra",
+  "contesto": "primo_incontro",
+  "battute": [
+   "Ciao, prima volta qui? Ti faccio vedere le macchine.",
+   "L'abbonamento costa {prezzo_abbonamento} € al mese, l'ingresso singolo {prezzo_ingresso} €.",
+   "Regola numero uno: riscaldamento, sempre."
+  ]
+ },
+ {
+  "npc": "istruttore_palestra",
+  "contesto": "mattina",
+  "battute": [
+   "Buongiorno! A quest'ora la sala è tutta tua.",
+   "Inizia piano, il corpo si sveglia con calma.",
+   "Ricordati di bere acqua tra una serie e l'altra."
+  ]
+ },
+ {
+  "npc": "istruttore_palestra",
+  "contesto": "sera",
+  "battute": [
+   "Sera piena, aspetta che si liberi la panca.",
+   "Dopo il lavoro un po' di movimento fa bene alla testa.",
+   "Stretching finale e poi a casa a dormire."
+  ]
+ },
+ {
+  "npc": "istruttore_palestra",
+  "contesto": "energia_bassa",
+  "battute": [
+   "Sei distrutto, oggi non è giornata da pesi.",
+   "Allenarsi stanchi è il modo migliore per farsi male.",
+   "Vai a dormire, torna domani."
+  ]
+ },
+ {
+  "npc": "istruttore_palestra",
+  "contesto": "soldi_pochi",
+  "battute": [
+   "Correre al parco è gratis, sai?",
+   "Puoi prendere un ingresso singolo, senza abbonamento.",
+   "Flessioni e piegamenti si fanno anche in camera."
+  ]
+ },
+ {
+  "npc": "istruttore_palestra",
+  "contesto": "soldi_tanti",
+  "battute": [
+   "Vuoi il pacchetto con l'istruttore personale?",
+   "Con l'abbonamento mensile ti conviene, se vieni spesso.",
+   "Ottimo, ti preparo una scheda."
+  ]
+ },
+ {
+  "npc": "impiegato_banca",
+  "contesto": "primo_incontro",
+  "battute": [
+   "Buongiorno, prego, si accomodi.",
+   "Per aprire un conto mi servono documento e codice fiscale.",
+   "Le spiego tutto con calma, non c'è fretta."
+  ]
+ },
+ {
+  "npc": "impiegato_banca",
+  "contesto": "mattina",
+  "battute": [
+   "Buongiorno, ha preso il numero?",
+   "Siamo aperti fino alle {chiusura_banca}.",
+   "Mi dica pure."
+  ]
+ },
+ {
+  "npc": "impiegato_banca",
+  "contesto": "sera",
+  "battute": [
+   "Mi spiace, lo sportello è chiuso. Torni domani dalle {apertura_banca}.",
+   "Per il saldo può usare il telefono.",
+   "Buona serata."
+  ]
+ },
+ {
+  "npc": "impiegato_banca",
+  "contesto": "soldi_pochi",
+  "battute": [
+   "Le consiglio di tenere da parte i soldi per l'affitto prima di tutto.",
+   "Le spese piccole sommate diventano grandi.",
+   "Un risparmio anche minimo ogni settimana aiuta."
+  ]
+ },
+ {
+  "npc": "impiegato_banca",
+  "contesto": "soldi_tanti",
+  "battute": [
+   "Vedo un buon saldo. Vuole mettere qualcosa da parte?",
+   "Un fondo per gli imprevisti è sempre una buona idea.",
+   "Se vuole, le preparo un riepilogo dei movimenti."
+  ]
+ },
+ {
+  "npc": "venditore_auto_usate",
+  "contesto": "primo_incontro",
+  "battute": [
+   "Ciao ragazzo! Cerchi la tua prima macchina?",
+   "Qui hai il prezzo, i chilometri e l'anno su ogni cartello.",
+   "Prima di firmare, fatti sempre un giro di prova."
+  ]
+ },
+ {
+  "npc": "venditore_auto_usate",
+  "contesto": "mattina",
+  "battute": [
+   "Buongiorno! Ho appena lavato tutte le auto.",
+   "Di mattina si vedono meglio i graffi, guarda pure.",
+   "Vuoi provarne una? Le chiavi sono qui."
+  ]
+ },
+ {
+  "npc": "venditore_auto_usate",
+  "contesto": "sera",
+  "battute": [
+   "Sto chiudendo il piazzale, torna domani.",
+   "Pensaci con calma, la macchina non scappa.",
+   "Buona serata!"
+  ]
+ },
+ {
+  "npc": "venditore_auto_usate",
+  "contesto": "soldi_pochi",
+  "battute": [
+   "Con quel budget, per ora, il bus della Linea 3 ti porta ovunque.",
+   "Ricorda che oltre al prezzo ci sono assicurazione e benzina.",
+   "Torna quando hai messo da parte un po' di più."
+  ]
+ },
+ {
+  "npc": "venditore_auto_usate",
+  "contesto": "soldi_tanti",
+  "battute": [
+   "Questa utilitaria è perfetta per la città.",
+   "Bollo e assicurazione li calcoli a parte, eh.",
+   "Vuoi che ti prepari il contratto?"
+  ]
+ },
+ {
+  "npc": "cameriere_ristorante",
+  "contesto": "primo_incontro",
+  "battute": [
+   "Buonasera, un tavolo per uno?",
+   "Il menu del giorno è sulla lavagna.",
+   "Se hai allergie, dimmelo pure."
+  ]
+ },
+ {
+  "npc": "cameriere_ristorante",
+  "contesto": "mattina",
+  "battute": [
+   "Siamo ancora chiusi, il pranzo inizia alle {apertura_pranzo}.",
+   "Sto apparecchiando, torna tra poco.",
+   "Oggi c'è pasta fresca, fidati."
+  ]
+ },
+ {
+  "npc": "cameriere_ristorante",
+  "contesto": "sera",
+  "battute": [
+   "Ecco il menu, ti porto dell'acqua?",
+   "Il piatto della casa stasera è ottimo.",
+   "Il conto te lo porto quando vuoi."
+  ]
+ },
+ {
+  "npc": "cameriere_ristorante",
+  "contesto": "soldi_pochi",
+  "battute": [
+   "Il primo del giorno è il più economico e sazia.",
+   "Un piatto e l'acqua del rubinetto, nessun problema.",
+   "Qui nessuno ti guarda male se prendi solo un primo."
+  ]
+ },
+ {
+  "npc": "cameriere_ristorante",
+  "contesto": "soldi_tanti",
+  "battute": [
+   "Antipasto, primo e dolce?",
+   "Ti consiglio il tiramisù, lo fa lo chef.",
+   "Grazie, buona serata!"
+  ]
+ },
+ {
+  "npc": "capo_rider",
+  "contesto": "primo_incontro",
+  "battute": [
+   "Cerchi lavoro? Ci servono rider per le consegne.",
+   "Ti pago {paga_consegna} € a consegna completata.",
+   "Casco sempre in testa, e il telefono non si guarda mentre guidi."
+  ]
+ },
+ {
+  "npc": "capo_rider",
+  "contesto": "mattina",
+  "battute": [
+   "Mattina tranquilla, poche consegne.",
+   "Controlla freni e luci prima di partire.",
+   "Primo ordine pronto, vai!"
+  ]
+ },
+ {
+  "npc": "capo_rider",
+  "contesto": "sera",
+  "battute": [
+   "Ora di cena, è il momento più pieno.",
+   "Tre ordini in coda, uno alla volta e senza correre.",
+   "Bel lavoro, segna le consegne sul telefono."
+  ]
+ },
+ {
+  "npc": "capo_rider",
+  "contesto": "energia_bassa",
+  "battute": [
+   "Sei stanco morto, stasera fermati.",
+   "Da stanchi si fanno incidenti, non ne vale la pena.",
+   "Riposati, il turno lo recuperi domani."
+  ]
+ },
+ {
+  "npc": "capo_rider",
+  "contesto": "soldi_pochi",
+  "battute": [
+   "Più consegne fai, più guadagni. Ma con la testa.",
+   "La sera rende di più, se te la senti.",
+   "Mangia qualcosa prima di partire."
+  ]
+ },
+ {
+  "npc": "capo_rider",
+  "contesto": "soldi_tanti",
+  "battute": [
+   "Stai andando forte questa settimana!",
+   "Se vuoi, ti metto nei turni del weekend.",
+   "Continua così, ma la sicurezza prima di tutto."
+  ]
  }
 ]

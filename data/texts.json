@@ -90,5 +90,7 @@
     "quit_confirm": "Tornare al menu? I progressi non salvati andranno persi."
   },
   "privacy": "Il gioco funziona offline e salva i dati solo sul tuo dispositivo. Non raccoglie dati personali.",
-  "build_label": "Build di test, non pubblicata"
+  "build_label": "Versione di prova (demo) — v0.3",
+  "privacy_web": "Il gioco salva i dati solo nel tuo browser e non raccoglie dati personali. Il sito è ospitato su GitHub Pages.",
+  "rating": "Adatto a tutti (autovalutazione): niente violenza, azzardo, alcol o acquisti."
 }

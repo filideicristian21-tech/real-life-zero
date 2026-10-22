@@ -18,6 +18,12 @@
     "padrone_di_casa": "Sig. Bianchi",
     "passante_anziana": "Signora Ada",
     "passante_runner": "Dario",
-    "persona_fermata_bus": "Marta"
+    "persona_fermata_bus": "Marta",
+    "commessa_vestiti": "Giulia",
+    "istruttore_palestra": "Marco",
+    "impiegato_banca": "Dott. Ferri",
+    "venditore_auto_usate": "Tonino",
+    "cameriere_ristorante": "Paolo",
+    "capo_rider": "Sara"
   }
 }

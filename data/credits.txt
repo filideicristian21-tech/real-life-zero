@@ -1,5 +1,5 @@
 REAL LIFE: ZERO - Crediti
-Build di test, non pubblicata. Gioco offline: nessuna pubblicita', nessun acquisto, nessun dato raccolto.
+Versione di prova (demo) — v0.3. Adatto a tutti (autovalutazione). Gioco offline: nessuna pubblicita', nessun acquisto, nessun dato raccolto.
 
 Motore: Godot Engine 4.7.2 (licenza MIT) - godotengine.org
 

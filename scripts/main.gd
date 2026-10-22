@@ -98,6 +98,21 @@ func _spawn_npcs() -> void:
 		["persona_fermata_bus", "res://assets/characters/pendolare.glb", [
 			{"from": "06:40", "to": "09:10", "path": [Vector3(-20.0, y, -5.2)], "stand_yaw": 0.0},
 			{"from": "17:00", "to": "19:30", "path": [Vector3(-20.0, y, -5.2)], "stand_yaw": 0.0}], {}, 1.72],
+		# v0.3 (Lumen/Spark): personale dei nuovi luoghi, davanti alle vetrine; outfit senza loghi
+		["impiegato_banca", "res://assets/characters/casual.glb", [
+			{"open_hours": Data.life["bank"]["hours"], "path": [Vector3(35.0, y, -6.1)], "stand_yaw": 0.0}], {"LightBrown": Color("#A9C8E8"), "LightBlue": Color("#1C2740"), "Red_Dark": Color("#141414"), "Hair": Color("#55504A")}, 1.77],
+		["commessa_vestiti", "res://assets/characters/cassiera.glb", [
+			{"open_hours": Data.life["clothes_shop"]["hours"], "path": [Vector3(53.4, y, -6.1)], "stand_yaw": 0.0}], {"Orange": Color("#7A2E3A")}, 1.65],
+		["istruttore_palestra", "res://assets/characters/hoodie.glb", [
+			{"open_hours": Data.life["gym"]["hours"], "path": [Vector3(67.4, y, -6.1), Vector3(62.0, y, -6.1)], "speed": 0.8}], {"Purple": Color("#18181A"), "LightBlue": Color("#18181A"), "Hair": Color("#2A2018")}, 1.82],
+		["cameriere_ristorante", "res://assets/characters/casual.glb", [
+			{"open_hours": Data.life["restaurant"]["hours_lunch"].merged({"closed_days": Data.life["restaurant"]["closed_days"]}), "path": [Vector3(32.0, y, 6.1), Vector3(38.5, y, 6.1)], "speed": 0.8},
+			{"open_hours": Data.life["restaurant"]["hours_dinner"].merged({"closed_days": Data.life["restaurant"]["closed_days"]}), "path": [Vector3(32.0, y, 6.1), Vector3(38.5, y, 6.1)], "speed": 0.8}], {"LightBrown": Color("#F4F2EC"), "LightBlue": Color("#141414"), "Red_Dark": Color("#141414"), "Hair": Color("#2B2420")}, 1.74],
+		["venditore_auto_usate", "res://assets/characters/padrone.glb", [
+			{"open_hours": Data.life["cars"]["dealer"]["hours"], "path": [Vector3(78.0, 0.05, 12.4), Vector3(66.0, 0.05, 12.4)], "speed": 0.7}], {}, 1.72],
+		["capo_rider", "res://assets/characters/hoodie.glb", [
+			{"from": "11:00", "to": "14:30", "path": [Vector3(-6.4, y, -25.6)], "stand_yaw": -PI / 2.0},
+			{"from": "18:00", "to": "22:30", "path": [Vector3(-6.4, y, -25.6)], "stand_yaw": -PI / 2.0}], {"Purple": Color("#D9662B"), "LightBlue": Color("#2A3340"), "Hair": Color("#5A3A22")}, 1.68],
 	]
 	for d in defs:
 		var n := NPC.new()

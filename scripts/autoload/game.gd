@@ -52,6 +52,9 @@ func _setup_input() -> void:
 			ev.physical_keycode = k
 			InputMap.action_add_event(a, ev)
 
+func privacy_text() -> String:
+	return Data.t("privacy_web") if OS.has_feature("web") else Data.t("privacy")
+
 func toast(text: String, kind: String = "info") -> void:
 	toast_requested.emit(text, kind)
 

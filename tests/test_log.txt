@@ -1,7 +1,7 @@
 Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
 
 [town] LOD automatico su 278 oggetti
-[town] elementi in MultiMesh: 6588 · box/cilindri statici uniti: 600
+[town] elementi in MultiMesh: 6620 · box/cilindri statici uniti: 600
 [toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (9,99 €). Da 500,00 € ti restano 400,01 €.
 [toast] Sei troppo stanco per correre. Riposati o mangia qualcosa.
 [PASS] T01 Il personaggio si muove e si ferma correttamente
@@ -123,7 +123,7 @@ Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
       OK  telefono: home + 6 app aperte
       OK  uscito di casa camminando (x=5.0)
       OK  3 turni lavorati e pagati (3)
-      OK  dialoghi con 2 NPC presenti
+      OK  dialoghi con 3 NPC presenti
       OK  salva/carica a fine sessione
       OK  denaro coerente dopo 4 giorni (saldo € 505,31)
       OK  errori di script/motore: verificati dal runner shell sul log (vedi TEST-REPORT)
@@ -642,9 +642,9 @@ Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
       OK  67 pulsanti controllati, senza azione: []
 [toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (9,99 €). Da 500,00 € ti restano 400,01 €.
 [PASS] X02 NPC con orari e dialoghi collegati ai dati
-      OK  martedì 08:30 in giro: Mimmo, Rosa, Sig. Bianchi, Signora Ada, Dario, Marta
+      OK  martedì 08:30 in giro: Mimmo, Rosa, Sig. Bianchi, Signora Ada, Dario, Marta, Dott. Ferri, Marco
       OK  alle 02:00 tutti a casa (0 visibili)
-      OK  32 blocchi di dialogo: segnaposto non risolti = 0
+      OK  64 blocchi di dialogo: segnaposto non risolti = 0
 [toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (9,99 €). Da 500,00 € ti restano 400,01 €.
 [PASS] X03 Mangiare dall'inventario (caso Hook 10)
       OK  pane: fame 40 → 55 (effetto dai dati +15)
@@ -903,14 +903,14 @@ Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
 [PASS] T10a Preparazione chiusura/riapertura: partita salvata, il processo ora si chiude
       OK  salvato in /home/box/.local/share/godot/app_userdata/REAL LIFE- ZERO/test_save.json
 RESULT: 31 test, 0 falliti
-WARNING: 18 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+WARNING: 20 ObjectDB instances were leaked at exit (run with `--verbose` for details).
    at: cleanup (core/object/object.cpp:2536)
-ERROR: 6 resources still in use at exit (run with --verbose for details).
+ERROR: 8 resources still in use at exit (run with --verbose for details).
    at: clear (core/io/resource.cpp:822)
 Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
 
 [town] LOD automatico su 278 oggetti
-[town] elementi in MultiMesh: 6588 · box/cilindri statici uniti: 600
+[town] elementi in MultiMesh: 6620 · box/cilindri statici uniti: 600
 [toast] Bentornato. È il giorno 3, ore 14:40. Hai 396,91 €.
 [PASS] T10b Chiusura e riapertura del gioco: i dati restano corretti (secondo processo)
       OK  Continua dal menu: caricamento riuscito in un nuovo processo
