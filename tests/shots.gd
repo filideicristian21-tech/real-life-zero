@@ -91,6 +91,21 @@ func _ready() -> void:
 	get_viewport().get_texture().get_image().save_png(out_dir + "/24_guida.png")
 	main.player_car.speed = 0.0
 	main.player_car.exit_car()
+	# v0.3: dialogo con il personale dei nuovi luoghi (Lumen)
+	GameTime.total_minutes = float(Data.hhmm_to_min("10:40"))
+	for n in main.npcs:
+		n._update_schedule(true)
+	for n in main.npcs:
+		if n.npc_id == "impiegato_banca":
+			main.player.teleport(n.global_position + Vector3(1.2, 0.1, 3.2), PI - 0.2)
+			main.player.cam_pitch_node.rotation.x = -0.12
+			main.day_night.update(true)
+			for i in 6: await get_tree().process_frame
+			n._talk()
+	for i in 10: await get_tree().process_frame
+	await RenderingServer.frame_post_draw
+	get_viewport().get_texture().get_image().save_png(out_dir + "/25_dialogo_banca.png")
+	main.ui.close_modal()
 	main.ui.show_main_menu()
 	for i in 6: await get_tree().process_frame
 	await RenderingServer.frame_post_draw
