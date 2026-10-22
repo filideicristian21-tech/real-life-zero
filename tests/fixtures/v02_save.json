@@ -1,0 +1,128 @@
+{
+	"checksum": "c12c01581ce71a3514d0c4dced90efc0",
+	"format": "reallifezero-save",
+	"game": {
+		"economy": {
+			"charged_periods": [
+				"rent:0",
+				"telefono:0",
+				"rent:1",
+				"telefono:1"
+			],
+			"evicted": false,
+			"history": [
+				{
+					"amount": -9000,
+					"day": 1,
+					"desc": "Affitto settimana 1",
+					"kind": "affitto",
+					"time": "07:00"
+				},
+				{
+					"amount": -500,
+					"day": 1,
+					"desc": "Ricarica telefono settimana 1",
+					"kind": "bolletta",
+					"time": "07:00"
+				},
+				{
+					"amount": -9000,
+					"day": 8,
+					"desc": "Affitto settimana 2",
+					"kind": "affitto",
+					"time": "00:30"
+				},
+				{
+					"amount": -500,
+					"day": 8,
+					"desc": "Ricarica telefono settimana 2",
+					"kind": "bolletta",
+					"time": "00:30"
+				},
+				{
+					"amount": 4500,
+					"day": 9,
+					"desc": "Stipendio turno Bar Centrale (giorno 9)",
+					"kind": "stipendio",
+					"time": "12:30"
+				},
+				{
+					"amount": 4500,
+					"day": 10,
+					"desc": "Stipendio turno Bar Centrale (giorno 10)",
+					"kind": "stipendio",
+					"time": "12:30"
+				}
+			],
+			"missed_rent_count": 0,
+			"money_cents": 40000,
+			"pending_bills": [],
+			"start_money_cents": 50000
+		},
+		"inventory": {
+			"last_tap_water_min": -9999.0,
+			"portions": {},
+			"shop_stock": {
+				"acqua_15l": 20,
+				"banane_1kg": 10,
+				"biscotti": 12,
+				"energy_drink": 10,
+				"latte_1l": 10,
+				"pane_500g": 10,
+				"panino_pronto": 6,
+				"pasta_500g": 15,
+				"pizza_surgelata": 6,
+				"sugo_pronto": 10,
+				"tonno_3x80": 8,
+				"uova_6": 8
+			}
+		},
+		"jobs": {
+			"employed": true,
+			"in_shift": false,
+			"orders_done": 10,
+			"paid_days": {
+				"10": 4500,
+				"9": 4500
+			},
+			"shift_day": 10,
+			"shifts_completed": 2,
+			"worked_days": [
+				"2",
+				"3",
+				"4",
+				"5",
+				"6",
+				"9",
+				"10"
+			]
+		},
+		"needs": {
+			"energy": 80.0,
+			"hunger": 70.0,
+			"sleep_quality_malus": 0.0,
+			"sonno": 85.0
+		},
+		"progress": {
+			"day_expense": 0,
+			"day_income": 0,
+			"flags": {
+				"last_shift_failed_day": 6
+			},
+			"met": [],
+			"player_pos": [
+				-52.5,
+				0.119999997317791,
+				-23.0
+			],
+			"player_yaw": 0.0,
+			"tutorial_done": true,
+			"tutorial_step": 0
+		},
+		"time": {
+			"total_minutes": 14520.0
+		}
+	},
+	"saved_unix": 1792685636,
+	"version": 1
+}

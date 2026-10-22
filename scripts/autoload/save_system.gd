@@ -135,6 +135,9 @@ func load_from(path: String) -> bool:
 		# i mesi già trascorsi nella v0.2 non generano addebiti retroattivi
 		for m in range(0, Life.month_of_day(GameTime.day())):
 			Life.processed["month:%d" % m] = true
+		# l'imprevisto del giovedì parte dalla settimana successiva al caricamento
+		for w in range(0, (GameTime.day() - 1) / 7 + 1):
+			Life.processed["thu:%d" % w] = true
 	else:
 		Life.from_dict(ld)
 	Game.progress_from_dict(g["progress"])

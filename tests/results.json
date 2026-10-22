@@ -349,6 +349,268 @@
   },
   {
     "checks": [
+      "OK  versati € 100 e prelevati € 40: conto e risparmi si spostano dello stesso importo",
+      "OK  nessuna moneta creata o persa (totale € 400,01)",
+      "OK  2 voci nello storico del conto, 2 nei risparmi",
+      "OK  prelievo e versamento oltre il disponibile rifiutati: «Nei risparmi hai solo 60,00 €.» / «Nel conto hai solo 340,01 €.»",
+      "OK  0, negativi e importo enorme rifiutati",
+      "OK  dopo i rifiuti niente cambia; saldo = storico"
+    ],
+    "id": "V-B2/B3/B5",
+    "pass": true,
+    "title": "Banca: versa/preleva, rifiuti oltre il saldo e importi non validi"
+  },
+  {
+    "checks": [
+      "OK  € 10.000 fermi per 28 giorni: € 12,33 netti (Ledger: 12,33)",
+      "OK  meno di un turno da barista (€ 45,00)",
+      "OK  versamento il giorno 28: interessi € 0,00 (non sfruttabile)",
+      "OK  canone del conto (€ 2) addebitato una volta a fine mese",
+      "OK  dopo salva/carica nessun accredito o canone ripetuto",
+      "OK  saldo = storico"
+    ],
+    "id": "V-B7",
+    "pass": true,
+    "title": "Interessi sul saldo minimo del mese (2% lordo, 26% ritenuta) e canone mensile"
+  },
+  {
+    "checks": [
+      "OK  mese 1: luce 1, gas 1 (attese 1 e 1)",
+      "OK  dopo salva/carica e un giorno in più: ancora 1 bolletta luce",
+      "OK  storico intatto (14 voci)",
+      "OK  saldo = storico, mai negativo"
+    ],
+    "id": "V-L1/L2/L6",
+    "pass": true,
+    "title": "Bollette luce/gas del monolocale: una volta per mese, anche dopo salva/carica"
+  },
+  {
+    "checks": [
+      "OK  bollette del mese 1 in sospeso, una per tipo",
+      "OK  mora applicata alle bollette scadute (8)",
+      "OK  luce sospesa con 2+ bollette non pagate (piastra non utilizzabile)",
+      "OK  saldo mai negativo e coerente"
+    ],
+    "id": "V-L3/L4",
+    "pass": true,
+    "title": "Bollette non pagate: mora una volta, luce sospesa dopo 2 bollette, si riparte pagando"
+  },
+  {
+    "checks": [
+      "OK  nessuna bolletta in sospeso, luce attiva"
+    ],
+    "id": "V-L4b",
+    "pass": true,
+    "title": "Dopo il pagamento la luce torna"
+  },
+  {
+    "checks": [
+      "OK  barista: € 45,00 (dati € 45,00) ",
+      "OK  cassiere: € 42,00 (dati € 42,00) ",
+      "OK  rider: 3 consegne = € 9,40 (3 × € 2,80 + mancia € 1,00) ",
+      "OK  bici (€ 140) e zaino termico (€ 35) comprati: requisiti del rider",
+      "OK  saldo = storico"
+    ],
+    "id": "V-J1",
+    "pass": true,
+    "title": "Tre lavori: un turno puntuale ciascuno, paga dai dati e una sola volta"
+  },
+  {
+    "checks": [
+      "OK  barista in ritardo di 20 min: € 36,00 (atteso € 36,00)",
+      "OK  cassiere mentre sei al bar: «Sei già in turno.»",
+      "OK  cassiere con 5 clienti su 12: paga € 0,00",
+      "OK  rider senza bici/zaino: «È presto: il turno inizia alle 11:30 (puoi timbrare dalle 11:15).»",
+      "OK  dopo le dimissioni: «Non lavori ancora per Market Il Girasole: candidati dal telefono (Lavori).»",
+      "OK  saldo = storico"
+    ],
+    "id": "V-J2/J3/J4",
+    "pass": true,
+    "title": "Ritardo −20%, turni sovrapposti impossibili, mezzo turno non pagato, dopo le dimissioni niente turni"
+  },
+  {
+    "checks": [
+      "OK  senza soldi: «Ti servono 199,00 €, ne hai 30,00.», niente cambia",
+      "OK  materasso comprato a € 199,00",
+      "OK  sonno 12.0→14.0 energia/ora, comfort 2→10",
+      "OK  5 cicli vendi+ricompra: perdita € 696,50",
+      "OK  ogni mobile e vestito si rivende sotto il prezzo (30%/20%)",
+      "OK  stanza piena: «Non c'è più spazio. Vendi un mobile o cerca una casa più grande.»",
+      "OK  saldo = storico"
+    ],
+    "id": "V-H1/H2/H4",
+    "pass": true,
+    "title": "Mobili: acquisto, rifiuto senza soldi, comfort→sonno, niente trucco compra-rivendi"
+  },
+  {
+    "checks": [
+      "OK  senza requisiti: «Non hai ancora i requisiti: entrate nette negli ultimi 28 giorni di almeno € 960,00 (ora € 0,00).»",
+      "OK  spesa netta € 1.260,00 = cauzione + primo canone − cauzione della stanza (€ 1.260,00)",
+      "OK  nessun affitto della stanza dopo il trasloco",
+      "OK  affitto del monolocale addebitato 1 volta in 17 giorni (periodo 28)",
+      "OK  saldo = storico"
+    ],
+    "id": "V-H6",
+    "pass": true,
+    "title": "Trasloco: cauzione restituita, nuovo affitto una volta, il vecchio si ferma"
+  },
+  {
+    "checks": [
+      "OK  senza soldi: «Ti servono 3.380,00 €, ne hai 400,01.»",
+      "OK  con i soldi: € 3.380,00 (prezzo + passaggio + bollo = € 3.380,00)",
+      "OK  senza assicurazione non si guida («Senza assicurazione non puoi guidare.»), dopo l'RC sì",
+      "OK  serbatoio vuoto: «Benzina finita. L'auto non parte.»",
+      "OK  10 L a € 1,85 = € 18,50",
+      "OK  senza soldi il rifornimento è rifiutato",
+      "OK  dopo salva/carica l'auto e la benzina restano",
+      "OK  saldo = storico"
+    ],
+    "id": "V-A1/A4",
+    "pass": true,
+    "title": "Auto: acquisto con e senza soldi, assicurazione obbligatoria, benzina e rifornimento"
+  },
+  {
+    "checks": [
+      "OK  bollo pagato all'acquisto e non ripetuto entro l'anno",
+      "OK  pass residenti: niente ticket",
+      "OK  senza pass serve il ticket; dopo il ticket da 2 h si può lasciare l'auto",
+      "OK  dopo le 20 le strisce blu sono gratis",
+      "OK  dopo 28 giorni l'assicurazione scade e va rinnovata",
+      "OK  saldo = storico"
+    ],
+    "id": "V-A5",
+    "pass": true,
+    "title": "Costi ricorrenti: bollo una volta l'anno, assicurazione 28 giorni, strisce blu"
+  },
+  {
+    "checks": [
+      "OK  4 imprevisti nei giovedì 4, 11, 18, 25",
+      "OK  due partite uguali danno gli stessi imprevisti",
+      "OK  saldo = storico"
+    ],
+    "id": "V-X5",
+    "pass": true,
+    "title": "Imprevisto del giovedì deterministico (Nova)"
+  },
+  {
+    "checks": [
+      "OK  abbonamento non comprabile due volte: «Hai già l'abbonamento fino al giorno 29.»",
+      "OK  3 sessioni in 3 giorni: energia massima 90→91",
+      "OK  corsa in bus € 1,50",
+      "OK  con l'abbonamento la corsa è gratis",
+      "OK  saldo = storico"
+    ],
+    "id": "V-X6",
+    "pass": true,
+    "title": "Palestra (energia massima 90→100) e bus (biglietto o abbonamento)"
+  },
+  {
+    "checks": [
+      "OK  60 giorni di affitti puntuali: 605 → 633",
+      "OK  crescita entro il tetto (25/mese)",
+      "OK  nei limiti"
+    ],
+    "id": "V-X7",
+    "pass": true,
+    "title": "Affidabilità: sale pagando in tempo, con tetto mensile, tra 300 e 850"
+  },
+  {
+    "checks": [
+      "OK  saldo = storico ogni sera per 30 giorni",
+      "OK  mai sotto zero",
+      "OK  nessun addebito o stipendio doppio",
+      "OK  giorno finale 30, € 5.713,02, 64 voci"
+    ],
+    "id": "V-X1",
+    "pass": true,
+    "title": "30 giorni con 2 lavori, auto, affitto e bollette (simulazione automatica)"
+  },
+  {
+    "checks": [
+      "OK  arretrati in sospeso: 2",
+      "OK  turno al bar raggiungibile a piedi, pagato € 45,00",
+      "OK  saldo mai negativo, coerente"
+    ],
+    "id": "V-X2",
+    "pass": true,
+    "title": "A zero euro: si lavora a piedi, si incassa, il debito resta lieve e recuperabile"
+  },
+  {
+    "checks": [
+      "OK  riconosciuto (versione 1) e migrato",
+      "OK  saldo identico: € 400,00",
+      "OK  storico identico (6 voci) e coerente",
+      "OK  nessun addebito retroattivo al caricamento",
+      "OK  nuovi sistemi ai valori iniziali di Ledger",
+      "OK  risalvato come versione 2"
+    ],
+    "id": "V-X3",
+    "pass": true,
+    "title": "Salvataggio v0.2 reale → v0.3: migrato senza perdere soldi né storico"
+  },
+  {
+    "checks": [
+      "OK  minimo € 391,15, fine € 760,22 (Ledger, modello Python: min 391,11 / fine 708,52)",
+      "OK  dopo 30 giorni si risparmia qualcosa"
+    ],
+    "id": "LEDGER-1",
+    "pass": true,
+    "title": "Nessun bug di soldi: scenario barista + stanza, 30 giorni"
+  },
+  {
+    "checks": [
+      "OK  ogni oggetto si rivende sotto il prezzo"
+    ],
+    "id": "LEDGER-2",
+    "pass": true,
+    "title": "Nessun ciclo compra/rivendi in guadagno"
+  },
+  {
+    "checks": [
+      "OK  € 10.000 per un mese = € 12,33 < un turno"
+    ],
+    "id": "LEDGER-3",
+    "pass": true,
+    "title": "Interesse non sfruttabile"
+  },
+  {
+    "checks": [
+      "OK  due fasce piene richiedono 103 di energia (massimo 100)"
+    ],
+    "id": "LEDGER-4",
+    "pass": true,
+    "title": "Rider: niente guadagno infinito (tetto consegne, energia insufficiente per due fasce piene)"
+  },
+  {
+    "checks": [
+      "OK  monolocale_garibaldi € 217,92, casa_bilocale_mulino € 388,30 (Ledger: 217,92 / 388,30)"
+    ],
+    "id": "LEDGER-5",
+    "pass": true,
+    "title": "Mutuo coerente: rata dai dati, rata × n > capitale"
+  },
+  {
+    "checks": [
+      "OK  senza lavoro non si riesce più a pagare il giorno 22 (Ledger: ~22)",
+      "OK  saldo mai negativo, coerente"
+    ],
+    "id": "LEDGER-6",
+    "pass": true,
+    "title": "Economia stretta: senza lavoro i soldi finiscono in circa 3 settimane"
+  },
+  {
+    "checks": [
+      "OK  etichetta: «Versione di prova (demo) — v0.3»",
+      "OK  privacy web",
+      "OK  avviso della banca inventata presente",
+      "OK  nessuna parola vietata (PEGI, azzardo, trading, marchi reali): []"
+    ],
+    "id": "V-G1",
+    "pass": true,
+    "title": "Regole di Guard nei testi del gioco"
+  },
+  {
+    "checks": [
       "OK  salvato in /home/box/.local/share/godot/app_userdata/REAL LIFE- ZERO/test_save.json"
     ],
     "id": "T10a",
@@ -363,8 +625,9 @@
       "OK  needs identico dopo la riapertura",
       "OK  inventory identico dopo la riapertura",
       "OK  jobs identico dopo la riapertura",
+      "OK  life identico dopo la riapertura",
       "OK  posizione del personaggio ripristinata (scarto 0.01 m)",
-      "OK  saldo € 396,91"
+      "OK  saldo € 1.308,91"
     ],
     "id": "T10b",
     "pass": true,

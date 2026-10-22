@@ -856,9 +856,11 @@ func _thursday_event(d: int) -> void:
 		return
 	processed[key] = true
 	var evs: Array = cfg()["thursday_events"]
-	var ev: Dictionary = evs[w % evs.size()]
-	if ev.get("requires_job", false) and not Jobs.any_employed():
-		ev = evs[(w + 1) % evs.size()]
+	var pool: Array = []
+	for e in evs:
+		if not (e.get("requires_job", false) and not Jobs.any_employed()):
+			pool.append(e)
+	var ev: Dictionary = pool[w % pool.size()]
 	var amt := int(ev["amount_cents"])
 	last_event = {"day": d, "text": ev["text"], "amount": amt}
 	if amt > 0:

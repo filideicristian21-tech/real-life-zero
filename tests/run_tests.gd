@@ -108,6 +108,7 @@ func run_all() -> void:
 	x_cooking()
 	x_long_arrears()
 	x_21_days()
+	await preload("res://tests/v03_tests.gd").new(self).run()
 	t10b_prepare_reopen()
 
 # ------------------------------------------------------------------ 1
@@ -513,6 +514,12 @@ func t10b_prepare_reopen() -> void:
 	Jobs.hire()
 	main.ui.buy("pasta_500g")
 	main.ui.buy("sugo_pronto")
+	# v0.3: risparmi, mobili, vestiti e auto devono sopravvivere alla chiusura del processo
+	Economy.earn(800000, "Test: fondi di prova", "test")
+	Life.deposit(25000)
+	Life.buy_furniture("tende_oscuranti")
+	Life.buy_car("compatta_corallo", false, Vector3(-20.0, 0.0, -44.0), 0.3)
+	Life.buy_insurance()
 	Needs.hunger = 37.0; Needs.energy = 58.0; Needs.sonno = 44.0
 	main.player.teleport(Vector3(-20.0, 0.13, -5.0), 0.5)
 	SaveSystem.save_game()
@@ -529,7 +536,7 @@ func t10b_reopen() -> void:
 	GameTime.running = false
 	await frames(3)
 	var snap := _snapshot()
-	var keys := ["time", "economy", "needs", "inventory", "jobs"]
+	var keys := ["time", "economy", "needs", "inventory", "jobs", "life"]
 	var checks := [[ok, "Continua dal menu: caricamento riuscito in un nuovo processo"]]
 	for k in keys:
 		checks.append([JSON.stringify(exp[k]) == JSON.stringify(snap[k]), "%s identico dopo la riapertura" % k])

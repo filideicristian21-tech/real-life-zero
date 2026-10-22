@@ -69,6 +69,7 @@ L["bus_v03"] = {"stops": [
   {"id": "fontana", "name": "Piazza della Fontana", "pos": [-21.0, -5.2]},
   {"id": "roma_est", "name": "Via Roma Est (Autosalone)", "pos": [64.0, 5.2]}
  ], "ride_minutes": 6}
+L["gambling"] = {"enabled": False, "note": "nessun gioco d'azzardo e nessuna speculazione: l'unica rendita passiva è il conto risparmio"}
 L["_source"] = "Ledger reallife-ledger-v03.md (STIME, centesimi). Correzioni: nomi auto inventati (Guard), nomi luoghi (Spark), luoghi/eventi/serbatoio aggiunti (STIMA) da tools/make_life_json.py"
 json.dump(L, open(sys.argv[1], "w"), ensure_ascii=False, indent=1)
 print("ok", len(json.dumps(L)))

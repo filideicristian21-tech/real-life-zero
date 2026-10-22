@@ -761,11 +761,11 @@ Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
 [toast] Affitto in ritardo: aggiunta una mora di 10,00 €.
 [toast] Non hai abbastanza soldi per l'affitto (90,00 €). Ti mancano 90,00 €. Puoi saldarlo dal telefono (Conto).
 [toast] Due affitti non pagati. Il Sig. Bianchi ti propone un piano di rientro: salda l'arretrato dal telefono appena puoi. L'affidabilità è scesa.
-[toast] Non hai abbastanza soldi per l'affitto (12,00 €). Ti mancano 12,00 €. Puoi saldarlo dal telefono (Conto).
-[toast] Affitto in ritardo: aggiunta una mora di 10,00 €.
-[toast] Non hai abbastanza soldi per l'affitto (90,00 €). Ti mancano 90,00 €. Puoi saldarlo dal telefono (Conto).
 [toast] Affitto in ritardo: aggiunta una mora di 10,00 €.
 [toast] Non hai abbastanza soldi per l'affitto (90,00 €). Ti mancano 70,00 €. Puoi saldarlo dal telefono (Conto).
+[toast] Addebitato: Imprevisto: Raffreddore: spesa in farmacia. −8,00 €.
+[toast] Affitto in ritardo: aggiunta una mora di 10,00 €.
+[toast] Non hai abbastanza soldi per l'affitto (90,00 €). Ti mancano 78,00 €. Puoi saldarlo dal telefono (Conto).
 [toast] Addebitato: Telefono (ricarica mensile) mese 2 −9,99 €.
 [toast] Addebitato: Canone Conto corrente Giovani (mese 1) −2,00 €.
 [PASS] X16 Arretrato lungo e stipendio con saldo a 0 (B6, caso Hook 28)
@@ -898,20 +898,375 @@ Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
       OK  bisogni sempre tra 0 e 100
       OK  turni pagati: 15 (mar-sab)
 [toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (9,99 €). Da 500,00 € ti restano 400,01 €.
+[PASS] V-B2/B3/B5 Banca: versa/preleva, rifiuti oltre il saldo e importi non validi
+      OK  versati € 100 e prelevati € 40: conto e risparmi si spostano dello stesso importo
+      OK  nessuna moneta creata o persa (totale € 400,01)
+      OK  2 voci nello storico del conto, 2 nei risparmi
+      OK  prelievo e versamento oltre il disponibile rifiutati: «Nei risparmi hai solo 60,00 €.» / «Nel conto hai solo 340,01 €.»
+      OK  0, negativi e importo enorme rifiutati
+      OK  dopo i rifiuti niente cambia; saldo = storico
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (9,99 €). Da 500,00 € ti restano 400,01 €.
+[toast] Addebitato: Imprevisto: Lo schermo dello Zero Phone si è crepato: riparazione dal tecnico. −25,00 €.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 15.
+[toast] Addebitato: Imprevisto: Si è scollata una scarpa: risuolatura dal calzolaio. −12,00 €.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 22.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 29.
+[toast] Addebitato: Imprevisto: Raffreddore: spesa in farmacia. −8,00 €.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 36.
+[toast] Addebitato: Telefono (ricarica mensile) mese 2 −9,99 €.
+[toast] Addebitato: Canone Conto corrente Giovani (mese 1) −2,00 €.
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (9,99 €). Da 500,00 € ti restano 400,01 €.
+[toast] Addebitato: Imprevisto: Lo schermo dello Zero Phone si è crepato: riparazione dal tecnico. −25,00 €.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 15.
+[toast] Addebitato: Imprevisto: Si è scollata una scarpa: risuolatura dal calzolaio. −12,00 €.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 22.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 29.
+[toast] Addebitato: Imprevisto: Raffreddore: spesa in farmacia. −8,00 €.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 36.
+[toast] Addebitato: Telefono (ricarica mensile) mese 2 −9,99 €.
+[toast] Addebitato: Canone Conto corrente Giovani (mese 1) −2,00 €.
+[PASS] V-B7 Interessi sul saldo minimo del mese (2% lordo, 26% ritenuta) e canone mensile
+      OK  € 10.000 fermi per 28 giorni: € 12,33 netti (Ledger: 12,33)
+      OK  meno di un turno da barista (€ 45,00)
+      OK  versamento il giorno 28: interessi € 0,00 (non sfruttabile)
+      OK  canone del conto (€ 2) addebitato una volta a fine mese
+      OK  dopo salva/carica nessun accredito o canone ripetuto
+      OK  saldo = storico
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (9,99 €). Da 500,00 € ti restano 400,01 €.
+[toast] Affitto pagato: −480,00 €. Prossima scadenza: giorno 29.
+[toast] Addebitato: Imprevisto: Lo schermo dello Zero Phone si è crepato: riparazione dal tecnico. −25,00 €.
+[toast] Addebitato: Imprevisto: Si è scollata una scarpa: risuolatura dal calzolaio. −12,00 €.
+[toast] Addebitato: Imprevisto: Raffreddore: spesa in farmacia. −8,00 €.
+[toast] Affitto pagato: −480,00 €. Prossima scadenza: giorno 57.
+[toast] Addebitato: Telefono (ricarica mensile) mese 2 −9,99 €.
+[toast] Addebitato: Canone Conto corrente Giovani (mese 1) −2,00 €.
+[toast] Addebitato: Bolletta luce mese 1 (110 kWh) −40,80 €.
+[toast] Addebitato: Bolletta gas mese 1 (12 Smc) −22,40 €.
+[toast] Addebitato: Tassa rifiuti (TARI) rata 1 −37,50 €.
+[PASS] V-L1/L2/L6 Bollette luce/gas del monolocale: una volta per mese, anche dopo salva/carica
+      OK  mese 1: luce 1, gas 1 (attese 1 e 1)
+      OK  dopo salva/carica e un giorno in più: ancora 1 bolletta luce
+      OK  storico intatto (14 voci)
+      OK  saldo = storico, mai negativo
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (9,99 €). Da 500,00 € ti restano 400,01 €.
+[toast] Non hai abbastanza soldi per l'affitto (480,00 €). Ti mancano 480,00 €. Puoi saldarlo dal telefono (Conto).
+[toast] Non hai abbastanza soldi per l'affitto (25,00 €). Ti mancano 25,00 €. Puoi saldarlo dal telefono (Conto).
+[toast] Affitto in ritardo: aggiunta una mora di 25,00 €.
+[toast] Non hai abbastanza soldi per l'affitto (12,00 €). Ti mancano 12,00 €. Puoi saldarlo dal telefono (Conto).
+[toast] Addebitato: Imprevisto: Raffreddore: spesa in farmacia. −8,00 €.
+[toast] Non hai abbastanza soldi per l'affitto (480,00 €). Ti mancano 468,00 €. Puoi saldarlo dal telefono (Conto).
+[toast] Addebitato: Telefono (ricarica mensile) mese 2 −9,99 €.
+[toast] Addebitato: Canone Conto corrente Giovani (mese 1) −2,00 €.
+[toast] Non hai abbastanza soldi per l'affitto (40,80 €). Ti mancano 40,79 €. Puoi saldarlo dal telefono (Conto).
+[toast] Non hai abbastanza soldi per l'affitto (22,40 €). Ti mancano 22,39 €. Puoi saldarlo dal telefono (Conto).
+[toast] Non hai abbastanza soldi per l'affitto (37,50 €). Ti mancano 37,49 €. Puoi saldarlo dal telefono (Conto).
+[toast] Affitti non pagati: torni nella stanza di Via dei Tigli. La cauzione ha coperto € 960,00 di arretrato.
+[toast] Non hai abbastanza soldi per l'affitto (25,00 €). Ti mancano 24,99 €. Puoi saldarlo dal telefono (Conto).
+[toast] Bolletta luce mese 1 (110 kWh) in ritardo: mora di 5,00 €. L'affidabilità scende un po'.
+[toast] Bolletta gas mese 1 (12 Smc) in ritardo: mora di 5,00 €. L'affidabilità scende un po'.
+[toast] Tassa rifiuti (TARI) rata 1 in ritardo: mora di 5,00 €. L'affidabilità scende un po'.
+[toast] Non hai abbastanza soldi per l'affitto (90,00 €). Ti mancano 89,99 €. Puoi saldarlo dal telefono (Conto).
+[toast] Non hai abbastanza soldi per l'affitto (12,00 €). Ti mancano 11,99 €. Puoi saldarlo dal telefono (Conto).
+[toast] Affitto in ritardo: aggiunta una mora di 10,00 €.
+[PASS] V-L3/L4 Bollette non pagate: mora una volta, luce sospesa dopo 2 bollette, si riparte pagando
+      OK  bollette del mese 1 in sospeso, una per tipo
+      OK  mora applicata alle bollette scadute (8)
+      OK  luce sospesa con 2+ bollette non pagate (piastra non utilizzabile)
+      OK  saldo mai negativo e coerente
+[toast] Addebitato: Imprevisto: Lo schermo dello Zero Phone si è crepato: riparazione dal tecnico. −25,00 €.
+[toast] Addebitato: Imprevisto: Si è scollata una scarpa: risuolatura dal calzolaio. −12,00 €.
+[toast] Addebitato: Bolletta luce mese 1 (110 kWh) −45,80 €.
+[toast] Addebitato: Bolletta gas mese 1 (12 Smc) −27,40 €.
+[toast] Addebitato: Tassa rifiuti (TARI) rata 1 −42,50 €.
+[toast] Addebitato: Arretrato affitto non coperto dalla cauzione −25,00 €.
+[toast] Addebitato: Imprevisto: Lo schermo dello Zero Phone si è crepato: riparazione dal tecnico. −25,00 €.
+[toast] Affitto pagato: −100,00 €. Prossima scadenza: giorno 43.
+[toast] Addebitato: Imprevisto: Si è scollata una scarpa: risuolatura dal calzolaio. −12,00 €.
+[PASS] V-L4b Dopo il pagamento la luce torna
+      OK  nessuna bolletta in sospeso, luce attiva
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (9,99 €). Da 500,00 € ti restano 400,01 €.
+[toast] Paga arrivata: +45,00 € per il turno (Bar Centrale). Saldo: 470,01 €.
+[toast] Paga arrivata: +42,00 € per il turno (Market Il Girasole). Saldo: 512,01 €.
+[toast] Paga arrivata: +9,40 € per il turno (ConsegnaGiù). Saldo: 521,41 €.
+[PASS] V-J1 Tre lavori: un turno puntuale ciascuno, paga dai dati e una sola volta
+      OK  barista: € 45,00 (dati € 45,00) 
+      OK  cassiere: € 42,00 (dati € 42,00) 
+      OK  rider: 3 consegne = € 9,40 (3 × € 2,80 + mancia € 1,00) 
+      OK  bici (€ 140) e zaino termico (€ 35) comprati: requisiti del rider
+      OK  saldo = storico
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (9,99 €). Da 500,00 € ti restano 400,01 €.
+[toast] Paga arrivata: +36,00 € per il turno (Bar Centrale). Saldo: 436,01 €.
+[toast] Paga arrivata: +45,00 € per il turno (Bar Centrale). Saldo: 481,01 €.
+[toast] Addebitato: Imprevisto: Lo schermo dello Zero Phone si è crepato: riparazione dal tecnico. −25,00 €.
+[toast] Turno non completato: niente paga per oggi. Clienti serviti: 5 su 12 richiesti.
+[PASS] V-J2/J3/J4 Ritardo −20%, turni sovrapposti impossibili, mezzo turno non pagato, dopo le dimissioni niente turni
+      OK  barista in ritardo di 20 min: € 36,00 (atteso € 36,00)
+      OK  cassiere mentre sei al bar: «Sei già in turno.»
+      OK  cassiere con 5 clienti su 12: paga € 0,00
+      OK  rider senza bici/zaino: «È presto: il turno inizia alle 11:30 (puoi timbrare dalle 11:15).»
+      OK  dopo le dimissioni: «Non lavori ancora per Market Il Girasole: candidati dal telefono (Lavori).»
+      OK  saldo = storico
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (9,99 €). Da 500,00 € ti restano 400,01 €.
+[PASS] V-H1/H2/H4 Mobili: acquisto, rifiuto senza soldi, comfort→sonno, niente trucco compra-rivendi
+      OK  senza soldi: «Ti servono 199,00 €, ne hai 30,00.», niente cambia
+      OK  materasso comprato a € 199,00
+      OK  sonno 12.0→14.0 energia/ora, comfort 2→10
+      OK  5 cicli vendi+ricompra: perdita € 696,50
+      OK  ogni mobile e vestito si rivende sotto il prezzo (30%/20%)
+      OK  stanza piena: «Non c'è più spazio. Vendi un mobile o cerca una casa più grande.»
+      OK  saldo = storico
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (9,99 €). Da 500,00 € ti restano 400,01 €.
+[toast] Affitto pagato: −480,00 €. Prossima scadenza: giorno 31.
+[toast] Addebitato: Imprevisto: Lo schermo dello Zero Phone si è crepato: riparazione dal tecnico. −25,00 €.
+[toast] Addebitato: Imprevisto: Si è scollata una scarpa: risuolatura dal calzolaio. −12,00 €.
+[PASS] V-H6 Trasloco: cauzione restituita, nuovo affitto una volta, il vecchio si ferma
+      OK  senza requisiti: «Non hai ancora i requisiti: entrate nette negli ultimi 28 giorni di almeno € 960,00 (ora € 0,00).»
+      OK  spesa netta € 1.260,00 = cauzione + primo canone − cauzione della stanza (€ 1.260,00)
+      OK  nessun affitto della stanza dopo il trasloco
+      OK  affitto del monolocale addebitato 1 volta in 17 giorni (periodo 28)
+      OK  saldo = storico
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (9,99 €). Da 500,00 € ti restano 400,01 €.
+[PASS] V-A1/A4 Auto: acquisto con e senza soldi, assicurazione obbligatoria, benzina e rifornimento
+      OK  senza soldi: «Ti servono 3.380,00 €, ne hai 400,01.»
+      OK  con i soldi: € 3.380,00 (prezzo + passaggio + bollo = € 3.380,00)
+      OK  senza assicurazione non si guida («Senza assicurazione non puoi guidare.»), dopo l'RC sì
+      OK  serbatoio vuoto: «Benzina finita. L'auto non parte.»
+      OK  10 L a € 1,85 = € 18,50
+      OK  senza soldi il rifornimento è rifiutato
+      OK  dopo salva/carica l'auto e la benzina restano
+      OK  saldo = storico
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (9,99 €). Da 500,00 € ti restano 400,01 €.
+[toast] Addebitato: Imprevisto: Lo schermo dello Zero Phone si è crepato: riparazione dal tecnico. −25,00 €.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 15.
+[toast] Addebitato: Imprevisto: Si è scollata una scarpa: risuolatura dal calzolaio. −12,00 €.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 22.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 29.
+[toast] Addebitato: Imprevisto: Raffreddore: spesa in farmacia. −8,00 €.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 36.
+[toast] Addebitato: Telefono (ricarica mensile) mese 2 −9,99 €.
+[toast] Addebitato: Canone Conto corrente Giovani (mese 1) −2,00 €.
+[toast] Addebitato: Imprevisto: Lo schermo dello Zero Phone si è crepato: riparazione dal tecnico. −25,00 €.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 43.
+[toast] Addebitato: Imprevisto: Si è scollata una scarpa: risuolatura dal calzolaio. −12,00 €.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 50.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 57.
+[toast] Addebitato: Imprevisto: Raffreddore: spesa in farmacia. −8,00 €.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 64.
+[toast] Addebitato: Telefono (ricarica mensile) mese 3 −9,99 €.
+[toast] Addebitato: Canone Conto corrente Giovani (mese 2) −2,00 €.
+[toast] Addebitato: Imprevisto: Lo schermo dello Zero Phone si è crepato: riparazione dal tecnico. −25,00 €.
+[PASS] V-A5 Costi ricorrenti: bollo una volta l'anno, assicurazione 28 giorni, strisce blu
+      OK  bollo pagato all'acquisto e non ripetuto entro l'anno
+      OK  pass residenti: niente ticket
+      OK  senza pass serve il ticket; dopo il ticket da 2 h si può lasciare l'auto
+      OK  dopo le 20 le strisce blu sono gratis
+      OK  dopo 28 giorni l'assicurazione scade e va rinnovata
+      OK  saldo = storico
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (9,99 €). Da 500,00 € ti restano 400,01 €.
+[toast] Addebitato: Imprevisto: Lo schermo dello Zero Phone si è crepato: riparazione dal tecnico. −25,00 €.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 15.
+[toast] Addebitato: Imprevisto: Si è scollata una scarpa: risuolatura dal calzolaio. −12,00 €.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 22.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 29.
+[toast] Addebitato: Imprevisto: Raffreddore: spesa in farmacia. −8,00 €.
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (9,99 €). Da 500,00 € ti restano 400,01 €.
+[toast] Addebitato: Imprevisto: Lo schermo dello Zero Phone si è crepato: riparazione dal tecnico. −25,00 €.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 15.
+[toast] Addebitato: Imprevisto: Si è scollata una scarpa: risuolatura dal calzolaio. −12,00 €.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 22.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 29.
+[toast] Addebitato: Imprevisto: Raffreddore: spesa in farmacia. −8,00 €.
+[PASS] V-X5 Imprevisto del giovedì deterministico (Nova)
+      OK  4 imprevisti nei giovedì 4, 11, 18, 25
+      OK  due partite uguali danno gli stessi imprevisti
+      OK  saldo = storico
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (9,99 €). Da 500,00 € ti restano 400,01 €.
+[PASS] V-X6 Palestra (energia massima 90→100) e bus (biglietto o abbonamento)
+      OK  abbonamento non comprabile due volte: «Hai già l'abbonamento fino al giorno 29.»
+      OK  3 sessioni in 3 giorni: energia massima 90→91
+      OK  corsa in bus € 1,50
+      OK  con l'abbonamento la corsa è gratis
+      OK  saldo = storico
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (9,99 €). Da 500,00 € ti restano 400,01 €.
+[toast] Addebitato: Imprevisto: Lo schermo dello Zero Phone si è crepato: riparazione dal tecnico. −25,00 €.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 15.
+[toast] Addebitato: Imprevisto: Si è scollata una scarpa: risuolatura dal calzolaio. −12,00 €.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 22.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 29.
+[toast] Addebitato: Imprevisto: Raffreddore: spesa in farmacia. −8,00 €.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 36.
+[toast] Addebitato: Telefono (ricarica mensile) mese 2 −9,99 €.
+[toast] Addebitato: Canone Conto corrente Giovani (mese 1) −2,00 €.
+[toast] Addebitato: Imprevisto: Lo schermo dello Zero Phone si è crepato: riparazione dal tecnico. −25,00 €.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 43.
+[toast] Addebitato: Imprevisto: Si è scollata una scarpa: risuolatura dal calzolaio. −12,00 €.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 50.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 57.
+[toast] Addebitato: Imprevisto: Raffreddore: spesa in farmacia. −8,00 €.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 64.
+[toast] Addebitato: Telefono (ricarica mensile) mese 3 −9,99 €.
+[toast] Addebitato: Canone Conto corrente Giovani (mese 2) −2,00 €.
+[toast] Addebitato: Imprevisto: Lo schermo dello Zero Phone si è crepato: riparazione dal tecnico. −25,00 €.
+[PASS] V-X7 Affidabilità: sale pagando in tempo, con tetto mensile, tra 300 e 850
+      OK  60 giorni di affitti puntuali: 605 → 633
+      OK  crescita entro il tetto (25/mese)
+      OK  nei limiti
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (9,99 €). Da 500,00 € ti restano 400,01 €.
+[toast] Paga arrivata: +42,00 € per il turno (Market Il Girasole). Saldo: 3.985,01 €.
+[toast] Paga arrivata: +45,00 € per il turno (Bar Centrale). Saldo: 4.030,01 €.
+[toast] Paga arrivata: +42,00 € per il turno (Market Il Girasole). Saldo: 4.072,01 €.
+[toast] Paga arrivata: +45,00 € per il turno (Bar Centrale). Saldo: 4.117,01 €.
+[toast] Paga arrivata: +42,00 € per il turno (Market Il Girasole). Saldo: 4.159,01 €.
+[toast] Addebitato: Imprevisto: Lo schermo dello Zero Phone si è crepato: riparazione dal tecnico. −25,00 €.
+[toast] Paga arrivata: +45,00 € per il turno (Bar Centrale). Saldo: 4.179,01 €.
+[toast] Paga arrivata: +42,00 € per il turno (Market Il Girasole). Saldo: 4.221,01 €.
+[toast] Paga arrivata: +45,00 € per il turno (Bar Centrale). Saldo: 4.266,01 €.
+[toast] Paga arrivata: +42,00 € per il turno (Market Il Girasole). Saldo: 4.308,01 €.
+[toast] Paga arrivata: +45,00 € per il turno (Bar Centrale). Saldo: 4.353,01 €.
+[toast] Paga arrivata: +42,00 € per il turno (Market Il Girasole). Saldo: 4.395,01 €.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 15.
+[toast] Paga arrivata: +42,00 € per il turno (Market Il Girasole). Saldo: 4.347,01 €.
+[toast] Paga arrivata: +45,00 € per il turno (Bar Centrale). Saldo: 4.392,01 €.
+[toast] Paga arrivata: +42,00 € per il turno (Market Il Girasole). Saldo: 4.434,01 €.
+[toast] Paga arrivata: +45,00 € per il turno (Bar Centrale). Saldo: 4.479,01 €.
+[toast] Paga arrivata: +42,00 € per il turno (Market Il Girasole). Saldo: 4.521,01 €.
+[toast] Paga arrivata: +45,00 € per il turno (Bar Centrale). Saldo: 4.581,01 €.
+[toast] Paga arrivata: +42,00 € per il turno (Market Il Girasole). Saldo: 4.623,01 €.
+[toast] Paga arrivata: +45,00 € per il turno (Bar Centrale). Saldo: 4.668,01 €.
+[toast] Paga arrivata: +42,00 € per il turno (Market Il Girasole). Saldo: 4.710,01 €.
+[toast] Paga arrivata: +45,00 € per il turno (Bar Centrale). Saldo: 4.755,01 €.
+[toast] Promozione! Ora sei Barista esperto. Nuova paga: 50,00 € a turno.
+[toast] Paga arrivata: +42,00 € per il turno (Market Il Girasole). Saldo: 4.797,01 €.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 22.
+[toast] Paga arrivata: +42,00 € per il turno (Market Il Girasole). Saldo: 4.749,01 €.
+[toast] Promozione! Ora sei Cassiere esperto. Nuova paga: 46,00 € a turno.
+[toast] Paga arrivata: +50,00 € per il turno (Bar Centrale). Saldo: 4.799,01 €.
+[toast] Paga arrivata: +46,00 € per il turno (Market Il Girasole). Saldo: 4.845,01 €.
+[toast] Paga arrivata: +50,00 € per il turno (Bar Centrale). Saldo: 4.895,01 €.
+[toast] Paga arrivata: +46,00 € per il turno (Market Il Girasole). Saldo: 4.941,01 €.
+[toast] Addebitato: Imprevisto: Si è scollata una scarpa: risuolatura dal calzolaio. −12,00 €.
+[toast] Paga arrivata: +50,00 € per il turno (Bar Centrale). Saldo: 4.979,01 €.
+[toast] Paga arrivata: +46,00 € per il turno (Market Il Girasole). Saldo: 5.025,01 €.
+[toast] Paga arrivata: +50,00 € per il turno (Bar Centrale). Saldo: 5.075,01 €.
+[toast] Paga arrivata: +46,00 € per il turno (Market Il Girasole). Saldo: 5.121,01 €.
+[toast] Paga arrivata: +50,00 € per il turno (Bar Centrale). Saldo: 5.171,01 €.
+[toast] Paga arrivata: +46,00 € per il turno (Market Il Girasole). Saldo: 5.217,01 €.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 29.
+[toast] Paga arrivata: +46,00 € per il turno (Market Il Girasole). Saldo: 5.173,01 €.
+[toast] Paga arrivata: +50,00 € per il turno (Bar Centrale). Saldo: 5.223,01 €.
+[toast] Paga arrivata: +46,00 € per il turno (Market Il Girasole). Saldo: 5.269,01 €.
+[toast] Paga arrivata: +50,00 € per il turno (Bar Centrale). Saldo: 5.319,01 €.
+[toast] Paga arrivata: +46,00 € per il turno (Market Il Girasole). Saldo: 5.365,01 €.
+[toast] Paga arrivata: +50,00 € per il turno (Bar Centrale). Saldo: 5.435,01 €.
+[toast] Paga arrivata: +46,00 € per il turno (Market Il Girasole). Saldo: 5.481,01 €.
+[toast] Paga arrivata: +50,00 € per il turno (Bar Centrale). Saldo: 5.531,01 €.
+[toast] Paga arrivata: +46,00 € per il turno (Market Il Girasole). Saldo: 5.577,01 €.
+[toast] Paga arrivata: +50,00 € per il turno (Bar Centrale). Saldo: 5.627,01 €.
+[toast] Paga arrivata: +46,00 € per il turno (Market Il Girasole). Saldo: 5.673,01 €.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 36.
+[toast] Addebitato: Telefono (ricarica mensile) mese 2 −9,99 €.
+[toast] Addebitato: Canone Conto corrente Giovani (mese 1) −2,00 €.
+[toast] Paga arrivata: +46,00 € per il turno (Market Il Girasole). Saldo: 5.617,02 €.
+[toast] Paga arrivata: +50,00 € per il turno (Bar Centrale). Saldo: 5.667,02 €.
+[toast] Paga arrivata: +46,00 € per il turno (Market Il Girasole). Saldo: 5.713,02 €.
+[PASS] V-X1 30 giorni con 2 lavori, auto, affitto e bollette (simulazione automatica)
+      OK  saldo = storico ogni sera per 30 giorni
+      OK  mai sotto zero
+      OK  nessun addebito o stipendio doppio
+      OK  giorno finale 30, € 5.713,02, 64 voci
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (9,99 €). Da 500,00 € ti restano 400,01 €.
+[toast] Non hai abbastanza soldi per l'affitto (25,00 €). Ti mancano 25,00 €. Puoi saldarlo dal telefono (Conto).
+[toast] Non hai abbastanza soldi per l'affitto (90,00 €). Ti mancano 90,00 €. Puoi saldarlo dal telefono (Conto).
+[toast] Paga arrivata: +45,00 € per il turno (Bar Centrale). Saldo: 45,00 €.
+[PASS] V-X2 A zero euro: si lavora a piedi, si incassa, il debito resta lieve e recuperabile
+      OK  arretrati in sospeso: 2
+      OK  turno al bar raggiungibile a piedi, pagato € 45,00
+      OK  saldo mai negativo, coerente
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (9,99 €). Da 500,00 € ti restano 400,01 €.
+[PASS] V-X3 Salvataggio v0.2 reale → v0.3: migrato senza perdere soldi né storico
+      OK  riconosciuto (versione 1) e migrato
+      OK  saldo identico: € 400,00
+      OK  storico identico (6 voci) e coerente
+      OK  nessun addebito retroattivo al caricamento
+      OK  nuovi sistemi ai valori iniziali di Ledger
+      OK  risalvato come versione 2
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (9,99 €). Da 500,00 € ti restano 400,01 €.
+[toast] Paga arrivata: +45,00 € per il turno (Bar Centrale). Saldo: 436,15 €.
+[toast] Paga arrivata: +45,00 € per il turno (Bar Centrale). Saldo: 472,29 €.
+[toast] Addebitato: Imprevisto: Lo schermo dello Zero Phone si è crepato: riparazione dal tecnico. −25,00 €.
+[toast] Paga arrivata: +45,00 € per il turno (Bar Centrale). Saldo: 483,43 €.
+[toast] Paga arrivata: +45,00 € per il turno (Bar Centrale). Saldo: 519,57 €.
+[toast] Paga arrivata: +45,00 € per il turno (Bar Centrale). Saldo: 555,71 €.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 15.
+[toast] Paga arrivata: +45,00 € per il turno (Bar Centrale). Saldo: 484,13 €.
+[toast] Paga arrivata: +45,00 € per il turno (Bar Centrale). Saldo: 520,27 €.
+[toast] Paga arrivata: +45,00 € per il turno (Bar Centrale). Saldo: 571,41 €.
+[toast] Paga arrivata: +45,00 € per il turno (Bar Centrale). Saldo: 607,55 €.
+[toast] Paga arrivata: +45,00 € per il turno (Bar Centrale). Saldo: 643,69 €.
+[toast] Promozione! Ora sei Barista esperto. Nuova paga: 50,00 € a turno.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 22.
+[toast] Paga arrivata: +50,00 € per il turno (Bar Centrale). Saldo: 577,11 €.
+[toast] Paga arrivata: +50,00 € per il turno (Bar Centrale). Saldo: 618,25 €.
+[toast] Addebitato: Imprevisto: Si è scollata una scarpa: risuolatura dal calzolaio. −12,00 €.
+[toast] Paga arrivata: +50,00 € per il turno (Bar Centrale). Saldo: 647,39 €.
+[toast] Paga arrivata: +50,00 € per il turno (Bar Centrale). Saldo: 688,53 €.
+[toast] Paga arrivata: +50,00 € per il turno (Bar Centrale). Saldo: 729,67 €.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 29.
+[toast] Paga arrivata: +50,00 € per il turno (Bar Centrale). Saldo: 663,09 €.
+[toast] Paga arrivata: +50,00 € per il turno (Bar Centrale). Saldo: 704,23 €.
+[toast] Paga arrivata: +50,00 € per il turno (Bar Centrale). Saldo: 765,37 €.
+[toast] Paga arrivata: +50,00 € per il turno (Bar Centrale). Saldo: 806,51 €.
+[toast] Paga arrivata: +50,00 € per il turno (Bar Centrale). Saldo: 847,65 €.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 36.
+[toast] Addebitato: Telefono (ricarica mensile) mese 2 −9,99 €.
+[toast] Addebitato: Canone Conto corrente Giovani (mese 1) −2,00 €.
+[toast] Paga arrivata: +50,00 € per il turno (Bar Centrale). Saldo: 769,08 €.
+[PASS] LEDGER-1 Nessun bug di soldi: scenario barista + stanza, 30 giorni
+      OK  minimo € 391,15, fine € 760,22 (Ledger, modello Python: min 391,11 / fine 708,52)
+      OK  dopo 30 giorni si risparmia qualcosa
+[PASS] LEDGER-2 Nessun ciclo compra/rivendi in guadagno
+      OK  ogni oggetto si rivende sotto il prezzo
+[PASS] LEDGER-3 Interesse non sfruttabile
+      OK  € 10.000 per un mese = € 12,33 < un turno
+[PASS] LEDGER-4 Rider: niente guadagno infinito (tetto consegne, energia insufficiente per due fasce piene)
+      OK  due fasce piene richiedono 103 di energia (massimo 100)
+[PASS] LEDGER-5 Mutuo coerente: rata dai dati, rata × n > capitale
+      OK  monolocale_garibaldi € 217,92, casa_bilocale_mulino € 388,30 (Ledger: 217,92 / 388,30)
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (9,99 €). Da 500,00 € ti restano 400,01 €.
+[toast] Addebitato: Imprevisto: Lo schermo dello Zero Phone si è crepato: riparazione dal tecnico. −25,00 €.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 15.
+[toast] Addebitato: Imprevisto: Si è scollata una scarpa: risuolatura dal calzolaio. −12,00 €.
+[toast] Affitto pagato: −90,00 €. Prossima scadenza: giorno 22.
+[toast] Non hai abbastanza soldi per l'affitto (90,00 €). Ti mancano 73,05 €. Puoi saldarlo dal telefono (Conto).
+[toast] Addebitato: Imprevisto: Raffreddore: spesa in farmacia. −8,00 €.
+[toast] Affitto in ritardo: aggiunta una mora di 10,00 €.
+[toast] Non hai abbastanza soldi per l'affitto (90,00 €). Ti mancano 89,91 €. Puoi saldarlo dal telefono (Conto).
+[toast] Non hai abbastanza soldi per l'affitto (9,99 €). Ti mancano 9,90 €. Puoi saldarlo dal telefono (Conto).
+[toast] Non hai abbastanza soldi per l'affitto (2,00 €). Ti mancano 1,91 €. Puoi saldarlo dal telefono (Conto).
+[toast] Due affitti non pagati. Il Sig. Bianchi ti propone un piano di rientro: salda l'arretrato dal telefono appena puoi. L'affidabilità è scesa.
+[PASS] LEDGER-6 Economia stretta: senza lavoro i soldi finiscono in circa 3 settimane
+      OK  senza lavoro non si riesce più a pagare il giorno 22 (Ledger: ~22)
+      OK  saldo mai negativo, coerente
+[PASS] V-G1 Regole di Guard nei testi del gioco
+      OK  etichetta: «Versione di prova (demo) — v0.3»
+      OK  privacy web
+      OK  avviso della banca inventata presente
+      OK  nessuna parola vietata (PEGI, azzardo, trading, marchi reali): []
+[toast] Primo giorno: pagati affitto settimana 1 (90,00 €) e ricarica telefono (9,99 €). Da 500,00 € ti restano 400,01 €.
 [toast] Hai comprato Pasta «Molino Antico» 500 g per 1,20 €. Saldo: 398,81 €.
 [toast] Hai comprato Sugo al pomodoro 400 g per 1,90 €. Saldo: 396,91 €.
 [PASS] T10a Preparazione chiusura/riapertura: partita salvata, il processo ora si chiude
       OK  salvato in /home/box/.local/share/godot/app_userdata/REAL LIFE- ZERO/test_save.json
-RESULT: 31 test, 0 falliti
-WARNING: 20 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+RESULT: 55 test, 0 falliti
+WARNING: 18 ObjectDB instances were leaked at exit (run with `--verbose` for details).
    at: cleanup (core/object/object.cpp:2536)
-ERROR: 8 resources still in use at exit (run with --verbose for details).
+ERROR: 6 resources still in use at exit (run with --verbose for details).
    at: clear (core/io/resource.cpp:822)
 Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
 
 [town] LOD automatico su 278 oggetti
 [town] elementi in MultiMesh: 6620 · box/cilindri statici uniti: 600
-[toast] Bentornato. È il giorno 3, ore 14:40. Hai 396,91 €.
+[toast] Bentornato. È il giorno 3, ore 14:40. Hai 1.308,91 €.
 [PASS] T10b Chiusura e riapertura del gioco: i dati restano corretti (secondo processo)
       OK  Continua dal menu: caricamento riuscito in un nuovo processo
       OK  time identico dopo la riapertura
@@ -919,6 +1274,7 @@ Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
       OK  needs identico dopo la riapertura
       OK  inventory identico dopo la riapertura
       OK  jobs identico dopo la riapertura
+      OK  life identico dopo la riapertura
       OK  posizione del personaggio ripristinata (scarto 0.01 m)
-      OK  saldo € 396,91
+      OK  saldo € 1.308,91
 RESULT: 1 test, 0 falliti
